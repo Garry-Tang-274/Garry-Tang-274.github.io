@@ -42,7 +42,7 @@ I'm currently diving into:
 ## 📫 Get in Touch
 
 - **GitHub**: [Garry-Tang-274](https://github.com/Garry-Tang-274)
-- **Email**: [your.email@example.com](mailto:your.email@example.com)
+- **Email**: [zhi.25@intl.zju.edu.cn](mailto:zhi.25@intl.zju.edu.cn)
 
 ---
 
