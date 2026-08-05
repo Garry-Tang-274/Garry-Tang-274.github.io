@@ -1,37 +1,55 @@
-.hero-photo {
+.hero-photographic {
   position: relative;
-  margin: 0;
-  min-height: 100%;
-  background: #07111f;
+  display: block;
+  min-height: 650px;
+  isolation: isolate;
 }
 
-.hero-photo::after {
+.hero-photographic::after {
   content: "";
   position: absolute;
+  z-index: 1;
   inset: 0;
-  background: linear-gradient(180deg, transparent 58%, rgba(4, 9, 16, 0.72));
+  background: linear-gradient(90deg, rgba(4, 9, 16, 0.96) 0%, rgba(4, 9, 16, 0.78) 42%, rgba(4, 9, 16, 0.12) 76%, rgba(4, 9, 16, 0.18) 100%);
   pointer-events: none;
+}
+
+.hero-photographic .hero-copy {
+  position: relative;
+  z-index: 3;
+  width: min(720px, 66%);
+  min-height: 650px;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  min-height: 100%;
+  border: 0;
+  background: #07111f;
 }
 
 .hero-photo img {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 620px;
+  min-height: 650px;
   object-fit: cover;
-  object-position: 68% center;
+  object-position: center center;
 }
 
 .hero-photo figcaption {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   right: 26px;
   bottom: 22px;
   margin: 0;
   color: #eef2f7;
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .photo-feature {
@@ -58,7 +76,7 @@
   width: 100%;
   height: 590px;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   transition: transform 300ms ease;
 }
 
@@ -94,7 +112,7 @@
 }
 
 .page-shell {
-  width: min(1050px, calc(100vw - 40px));
+  width: min(1180px, calc(100vw - 40px));
   margin: 0 auto;
   padding: 36px 0 80px;
 }
@@ -104,6 +122,12 @@
   border: 1px solid var(--line);
   border-radius: 25px;
   background: linear-gradient(135deg, rgba(15, 29, 48, 0.98), rgba(6, 15, 27, 0.96));
+}
+
+.photography-hero {
+  background:
+    linear-gradient(90deg, rgba(4, 9, 16, 0.92), rgba(4, 9, 16, 0.64)),
+    url("../photography/hero-rock-silhouette.webp") center/cover no-repeat;
 }
 
 .page-kicker {
@@ -141,14 +165,63 @@
   margin-top: 26px;
 }
 
-.gallery-contact-sheet {
+.gallery-intro {
+  margin: 34px 0 0;
+  padding: 28px 32px;
+  border-left: 3px solid var(--gold);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.gallery-intro p {
+  margin: 7px 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.gallery-intro .cn {
+  color: var(--text);
+}
+
+.photo-masonry {
+  columns: 3 320px;
+  column-gap: 18px;
+  margin-top: 30px;
+}
+
+.photo-card {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 18px;
+  overflow: hidden;
+  break-inside: avoid;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(13, 26, 43, 0.82);
+}
+
+.photo-card img {
   display: block;
   width: 100%;
   height: auto;
-  margin: 34px 0 0;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: #0d1a2b;
+  background: #07111f;
+}
+
+.photo-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 17px 18px 19px;
+}
+
+.photo-card figcaption strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.photo-card figcaption span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .gallery-notes,
@@ -176,29 +249,6 @@
 .gallery-notes .cn,
 .cv-section .cn {
   color: var(--text);
-}
-
-.collection-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 28px;
-}
-
-.collection-card {
-  padding: 25px;
-  border-top: 1px solid var(--line);
-}
-
-.collection-card h3 {
-  margin: 0 0 12px;
-  color: #ffffff;
-}
-
-.collection-card p {
-  margin: 7px 0;
-  color: var(--muted);
-  line-height: 1.62;
 }
 
 .cv-header {
@@ -236,6 +286,11 @@
   color: #ffffff;
 }
 
+.cv-entry h4 {
+  margin-top: 5px;
+  color: var(--gold-soft);
+}
+
 .cv-entry .meta {
   color: var(--gold-soft);
   text-align: right;
@@ -252,6 +307,10 @@
   line-height: 1.68;
 }
 
+.cv-project-list a {
+  color: var(--gold-soft);
+}
+
 .cv-disclosure {
   margin: 26px 0 0;
   padding: 22px 24px;
@@ -265,20 +324,25 @@
 }
 
 @media (max-width: 900px) {
-  .hero-photo img {
-    min-height: 360px;
-    height: 360px;
-    object-position: center;
+  .hero-photographic .hero-copy {
+    width: 78%;
+    min-height: 600px;
+    padding: 52px 34px;
   }
 
-  .collection-grid {
-    grid-template-columns: 1fr;
+  .hero-photographic,
+  .hero-photo img {
+    min-height: 600px;
+  }
+
+  .hero-photographic::after {
+    background: linear-gradient(90deg, rgba(4, 9, 16, 0.96), rgba(4, 9, 16, 0.68) 64%, rgba(4, 9, 16, 0.24));
   }
 }
 
 @media (max-width: 680px) {
   .page-shell {
-    width: min(100% - 24px, 1050px);
+    width: min(100% - 24px, 1180px);
     padding-top: 18px;
   }
 
@@ -288,10 +352,40 @@
     padding: 28px 22px;
   }
 
+  .hero-photographic .hero-copy {
+    width: 100%;
+    min-height: 640px;
+    padding: 40px 24px;
+    justify-content: flex-end;
+  }
+
+  .hero-photographic,
+  .hero-photo img {
+    min-height: 640px;
+  }
+
+  .hero-photographic::after {
+    background: linear-gradient(180deg, rgba(4, 9, 16, 0.28) 0%, rgba(4, 9, 16, 0.72) 55%, rgba(4, 9, 16, 0.97) 100%);
+  }
+
+  .hero-photo img {
+    object-position: 55% center;
+  }
+
+  .hero-photo figcaption {
+    left: 24px;
+    right: 24px;
+    bottom: 18px;
+  }
+
   .photo-feature,
   .photo-feature img {
     min-height: 470px;
     height: 470px;
+  }
+
+  .photo-masonry {
+    columns: 1;
   }
 
   .cv-entry-header {
