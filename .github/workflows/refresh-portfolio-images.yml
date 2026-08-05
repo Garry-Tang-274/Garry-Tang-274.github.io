@@ -21,25 +21,23 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p assets/photography
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-c18c-820b-bac1-3d8aef396179/raw?se=2026-08-05T17:55:30Z&sp=r&sv=2026-02-06&sr=b&scid=1fd923ef-8565-5295-8dd8-c34fd3723d4d&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T01:26:54Z&ske=2026-08-06T01:26:54Z&sks=b&skv=2026-02-06&sig=XA9SXV3WWj25kSnuKjomvMDFKavEFcNpZhhsooNe4cY%3D' -o assets/photography/hangzhou-rental-wall.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-a480-820b-ab0c-773ff827ac91/raw?se=2026-08-05T17:55:35Z&sp=r&sv=2026-02-06&sr=b&scid=b45809c5-85b5-5ff4-9547-3a2938fb41f4&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:16:24Z&ske=2026-08-06T02:16:24Z&sks=b&skv=2026-02-06&sig=PECxvKxyBSTVyEBR4qZVp2RQQbv9YbkRwLAVjKdexP8%3D' -o assets/photography/chengdu-elder-umbrella.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-442c-820b-87f9-b7107502ac69/raw?se=2026-08-05T17:55:42Z&sp=r&sv=2026-02-06&sr=b&scid=5a1dd297-2b02-5b87-8172-31964a0ce129&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-04T23:30:03Z&ske=2026-08-05T23:30:03Z&sks=b&skv=2026-02-06&sig=QyAPoah3VMz0GYaj3vjq2UTMtwVqQgpQCdUnDYpqM04%3D' -o assets/photography/haining-tidal-flat-worker.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-ab7c-81fa-ab4a-4c04127b53e9/raw?se=2026-08-05T17:55:48Z&sp=r&sv=2026-02-06&sr=b&scid=6b297046-e716-5014-910d-5e86320f8d49&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:16:06Z&ske=2026-08-06T02:16:06Z&sks=b&skv=2026-02-06&sig=vgoC0sF/4JiJyOb%2BjudM89U7N0fEXVBRQs9cUAUtb7g%3D' -o assets/photography/chengdu-yellow-riders.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-225c-820b-bf56-ea777be962c7/raw?se=2026-08-05T17:55:56Z&sp=r&sv=2026-02-06&sr=b&scid=596b7c18-568e-5873-a3a1-fdcd03fd1ad8&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-04T20:30:11Z&ske=2026-08-05T20:30:11Z&sks=b&skv=2026-02-06&sig=LtrSnB07YT0ISgSHDOTEjz8PtISCnJmo989LTQd9KJk%3D' -o assets/photography/haining-lakeside-dusk.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-8ee0-820b-a799-def75d2ce8bc/raw?se=2026-08-05T17:56:03Z&sp=r&sv=2026-02-06&sr=b&scid=db4d9a68-7f38-5d8e-b66d-f1b2c928afef&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T01:27:24Z&ske=2026-08-06T01:27:24Z&sks=b&skv=2026-02-06&sig=ZFx7VW1UPlQDo%2BDIIwyIecMd0pkhPm5kgCMWdd0290I%3D' -o assets/photography/haining-autumn-sky.webp
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprcentralindia.oaiusercontent.com/files/00000000-4108-8208-a1cd-eeae4e979cdd/raw?se=2026-08-05T17:57:21Z&sp=r&sv=2026-02-06&sr=b&scid=63eb5a05-88d9-508e-baa1-6f5a57590273&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-04T20:37:04Z&ske=2026-08-05T20:37:04Z&sks=b&skv=2026-02-06&sig=px/BuvbKR7J0fvGfjgDy6J6V//8DojTBeoXDsXSIyqg%3D' -o assets/photography/libo-karst-panorama.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-c2cc-820b-8f60-f746fc577877/raw?se=2026-08-05T17:58:16Z&sp=r&sv=2026-02-06&sr=b&scid=46237172-0858-559f-8fa2-372e94cf990d&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T00:28:54Z&ske=2026-08-06T00:28:54Z&sks=b&skv=2026-02-06&sig=YE4lR1SbN/l3zhJRLjLYu1ff0flACBx/lDtA%2BAkrk2w%3D' -o assets/photography/chengdu-rain-biker.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-3100-81fa-a5c2-f89d1b279c08/raw?se=2026-08-05T17:58:23Z&sp=r&sv=2026-02-06&sr=b&scid=d8bd7413-6ada-5826-b7ce-13bd18827345&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T01:49:45Z&ske=2026-08-06T01:49:45Z&sks=b&skv=2026-02-06&sig=dDSi7Nf%2BW7QS6XJhfJQ7BrSS8FtDFmrcga8b%2Bj6WVaw%3D' -o assets/photography/photography-contact-sheet.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-48f8-820b-95e9-2a262d178ef3/raw?se=2026-08-05T17:58:29Z&sp=r&sv=2026-02-06&sr=b&scid=3e020de7-a399-5dfd-ab12-e107963a8768&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:15:40Z&ske=2026-08-06T02:15:40Z&sks=b&skv=2026-02-06&sig=YrhJa/bLlIi%2BtXCuxg9/iyPUxDqO8Kf1H6xByxa7U6o%3D' -o assets/photography/hangzhou-atrium.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-1578-81fa-afea-ec5ab4c251d8/raw?se=2026-08-05T17:58:34Z&sp=r&sv=2026-02-06&sr=b&scid=8fe79d14-795a-518a-8c6c-9bb0d229691c&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:56:21Z&ske=2026-08-06T02:56:21Z&sks=b&skv=2026-02-06&sig=LTDXLxiCbhL5f3O4oaM0rLzlzo9EQ56MO10Qz6pS2lo%3D' -o assets/photography/haining-autumn-light.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-894c-820b-8dc7-4cb3f3bc55d5/raw?se=2026-08-05T17:58:39Z&sp=r&sv=2026-02-06&sr=b&scid=75fe9c4b-886d-5403-ad01-4e28bccbcbd4&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T00:33:17Z&ske=2026-08-06T00:33:17Z&sks=b&skv=2026-02-06&sig=U/Nz2VwG0IUZi%2B9nGCsvLG9aGelb0fey7GPBVdvac3k%3D' -o assets/photography/haining-autumn-leaf.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-e82c-820b-9663-cf2f7e452770/raw?se=2026-08-05T17:58:45Z&sp=r&sv=2026-02-06&sr=b&scid=7df9ce90-e0c0-5453-b2b6-20e3393498ec&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:15:41Z&ske=2026-08-06T02:15:41Z&sks=b&skv=2026-02-06&sig=wo37QCm6hmAwTdB4obzKa79gK4kXuzqHBzRp2tJ4uso%3D' -o assets/photography/xinjiang-lake-road.webp
 
       - name: Verify exact file sizes
         shell: bash
         run: |
           set -euo pipefail
-          test "$(stat -c%s assets/photography/hangzhou-rental-wall.webp)" -eq 201648
-          test "$(stat -c%s assets/photography/chengdu-elder-umbrella.webp)" -eq 255376
-          test "$(stat -c%s assets/photography/haining-tidal-flat-worker.webp)" -eq 334158
-          test "$(stat -c%s assets/photography/chengdu-yellow-riders.webp)" -eq 603500
-          test "$(stat -c%s assets/photography/haining-lakeside-dusk.webp)" -eq 154432
-          test "$(stat -c%s assets/photography/haining-autumn-sky.webp)" -eq 163742
-          test "$(stat -c%s assets/photography/libo-karst-panorama.webp)" -eq 259926
+          test "$(stat -c%s assets/photography/chengdu-rain-biker.webp)" -eq 188406
+          test "$(stat -c%s assets/photography/photography-contact-sheet.webp)" -eq 232800
+          test "$(stat -c%s assets/photography/hangzhou-atrium.webp)" -eq 182324
+          test "$(stat -c%s assets/photography/haining-autumn-light.webp)" -eq 205274
+          test "$(stat -c%s assets/photography/haining-autumn-leaf.webp)" -eq 649134
+          test "$(stat -c%s assets/photography/xinjiang-lake-road.webp)" -eq 392064
 
       - name: Commit refreshed images
         shell: bash
@@ -52,5 +50,5 @@ jobs:
             echo 'No image changes to commit.'
             exit 0
           fi
-          git commit -m 'Replace second image batch with high-resolution copies'
+          git commit -m 'Replace final image batch with high-resolution copies'
           git push
