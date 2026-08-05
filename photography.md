@@ -48,9 +48,11 @@ permalink: /photography/
     </figure>
   </div>
 
-  <figure class="panorama-showcase">
-    <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama.webp?v=20260806-hq' | relative_url }}" alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
-    <figcaption><strong>Qianjiang Century City · 钱江世纪新城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II</span></figcaption>
+  <figure class="panorama-showcase qianjiang-original">
+    <a href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the original Qianjiang Century City panorama">
+      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
+    </a>
+    <figcaption><strong>Qianjiang Century City · 钱江世纪新城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Open original</span></figcaption>
   </figure>
 
   <div class="photo-grid-editorial">
