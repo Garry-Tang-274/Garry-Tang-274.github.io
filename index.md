@@ -7,7 +7,11 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 
 <div class="portfolio-shell">
 
-<section class="hero-panel">
+<section class="hero-panel hero-photographic">
+  <figure class="hero-art hero-photo">
+    <img src="{{ '/assets/photography/hero-rock-silhouette.webp' | relative_url }}" alt="新疆岩壁之间的一道人物剪影，由唐直拍摄">
+    <figcaption>岩壁之间 · Figure Between Rocks · Xinjiang, 2023</figcaption>
+  </figure>
   <div class="hero-copy">
     <p class="eyebrow">BIOMEDICAL INFORMATICS · COMPUTATIONAL IMMUNOLOGY · VISUAL STORYTELLING</p>
     <h1>Tang Zhi <span>唐直</span></h1>
@@ -20,10 +24,6 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
       <a class="button secondary" href="mailto:zhi.25@intl.zju.edu.cn">联系我 · Contact</a>
     </div>
   </div>
-  <figure class="hero-art hero-photo">
-    <img src="{{ '/assets/images/hero-rain-crossing.webp' | relative_url }}" alt="雨天城市斑马线上共撑一把伞的行人，由唐直拍摄">
-    <figcaption>雨中过街 · Rain Crossing</figcaption>
-  </figure>
 </section>
 
 <section class="manifesto">
@@ -107,8 +107,8 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
   </div>
   <div class="interest-layout">
     <a class="photo-feature" href="{{ '/photography' | relative_url }}">
-      <img src="{{ '/assets/images/photography-contact-sheet.webp' | relative_url }}" alt="唐直摄影作品墙，包含城市人文、自然风景和空间结构作品">
-      <span class="photo-feature-label">17 张作品 · 17 photographs</span>
+      <img src="{{ '/assets/photography/photography-contact-sheet.webp' | relative_url }}" alt="唐直摄影作品拼贴，包含城市人文、自然风景和空间结构作品">
+      <span class="photo-feature-label">18 张作品 · 18 photographs</span>
       <strong>查看完整摄影作品 · View the full collection</strong>
     </a>
     <div class="interest-copy">
@@ -116,8 +116,8 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
         <h3>摄影 · Photography</h3>
         <p class="cn">主要使用尼康相机与航拍设备记录自然、城市、建筑与街头瞬间。我偏爱大环境中的小主体、雨雾、人物剪影、重复结构和具有叙事感的现实痕迹。</p>
         <p class="en">I use Nikon cameras and aerial platforms to document nature, cities, architecture, and street moments, with a preference for small subjects within large environments, rain, silhouettes, repeated structures, and traces of everyday narrative.</p>
-        <p class="cn privacy-note">公开网页中的车牌、电话号码等可识别信息已做不可逆模糊；作品构图与整体色彩保持不变。</p>
-        <p class="en privacy-note">Identifiable details such as license plates and phone numbers are irreversibly blurred in the public web copies; composition and overall color are preserved.</p>
+        <p class="cn privacy-note">公开网页中的车牌、电话号码等可识别信息已做不可逆模糊；展示副本同时移除了 EXIF 与 GPS 元数据。</p>
+        <p class="en privacy-note">Identifiable details such as license plates and phone numbers are irreversibly blurred in the public copies, which also have EXIF and GPS metadata removed.</p>
       </div>
       <div class="interest-item">
         <h3>声音 · Music</h3>
