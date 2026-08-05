@@ -1,127 +1,118 @@
 ---
 layout: default
-title: Tang Zhi | Biomedical Informatics
+title: 唐直 · Tang Zhi
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/portfolio-media.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/portfolio-fullbleed.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/portfolio-music.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
 
-<div class="portfolio-shell">
-
-<section class="hero-stage">
-  <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="A figure standing between rock formations in Xinjiang">
-  <div class="hero-stage-copy">
-    <p class="eyebrow">BIOMEDICAL INFORMATICS · COMPUTATIONAL IMMUNOLOGY</p>
-    <h1>Tang Zhi <span>唐直</span></h1>
-    <p class="hero-en">Biomedical Informatics undergraduate at the Zhejiang University–University of Edinburgh Institute. I work on computational immunology, biological sequence analysis, and research workflows.</p>
-    <p class="hero-cn">浙江大学—爱丁堡大学联合学院生物医学信息学本科生。</p>
-    <div class="hero-actions">
-      <a class="button primary" href="#selected-work">Selected work</a>
-      <a class="button secondary" href="{{ '/photography' | relative_url }}">Photography</a>
-      <a class="button secondary" href="{{ '/music' | relative_url }}">Music</a>
-      <a class="button secondary" href="{{ '/cv' | relative_url }}">Academic CV</a>
-    </div>
-  </div>
-  <p class="hero-stage-caption">Figure Between Rocks · Xinjiang, 2023</p>
-</section>
-
-<section class="section-block">
-  <div class="section-heading">
-    <p class="section-index">01</p>
-    <div><h2>Research interests</h2><p>研究方向</p></div>
-  </div>
-  <div class="focus-grid">
-    <article class="focus-card">
-      <p class="card-kicker">COMPUTATIONAL IMMUNOLOGY</p>
-      <h3>TCR sequence analysis</h3>
-      <p class="en">I study T-cell receptor sequences and the limits of representation-based approaches to alpha–beta pairing compatibility.</p>
-      <p class="cn">TCR 序列与 αβ 配对兼容性分析。</p>
-    </article>
-    <article class="focus-card">
-      <p class="card-kicker">MACHINE LEARNING</p>
-      <h3>Evaluation for biological data</h3>
-      <p class="en">My current work includes matched negative sampling, leakage checks, ranking evaluation, cross-validation, and residual analysis.</p>
-      <p class="cn">关注负样本、数据泄漏、排序评估与交叉验证。</p>
-    </article>
-    <article class="focus-card">
-      <p class="card-kicker">RESEARCH COMPUTING</p>
-      <h3>Practical research workflows</h3>
-      <p class="en">I use Python, Linux, Git, remote servers, and lightweight automation in day-to-day research work.</p>
-      <p class="cn">使用 Python、Linux、Git 与远程服务器开展科研。</p>
-    </article>
-  </div>
-</section>
-
-<section id="selected-work" class="section-block">
-  <div class="section-heading">
-    <p class="section-index">02</p>
-    <div><h2>Selected public work</h2><p>公开项目</p></div>
-  </div>
-  <div class="project-grid">
-    <a class="project-card featured" href="https://github.com/Garry-Tang-274/bioinformatics-paper-reading-workflow">
-      <div class="project-topline"><span>RESEARCH WORKFLOW</span><span>↗</span></div>
-      <h3>Bioinformatics Paper Reading Workflow</h3>
-      <p class="en">Templates and checklists for reading methods papers, checking evidence, and preparing journal-club presentations.</p>
-    </a>
-    <a class="project-card" href="https://github.com/Garry-Tang-274/windows-remote-research-playbook">
-      <div class="project-topline"><span>RESEARCH ENGINEERING</span><span>↗</span></div>
-      <h3>Windows Remote Research Playbook</h3>
-      <p class="en">Practical notes on SSH, VPN routing, Python environments, remote editors, and GitHub publishing.</p>
-    </a>
-    <a class="project-card" href="https://github.com/Garry-Tang-274/student-calendar-coordinator">
-      <div class="project-topline"><span>WORKFLOW DESIGN</span><span>↗</span></div>
-      <h3>Student Calendar Coordinator</h3>
-      <p class="en">A human-in-the-loop workflow for merging schedules, deadlines, email updates, and calendar records.</p>
-    </a>
-    <a class="project-card" href="https://github.com/Garry-Tang-274/battlefield-web-fps-prototype">
-      <div class="project-topline"><span>INTERACTIVE PROTOTYPE</span><span>↗</span></div>
-      <h3>Archipelago Frontline Web FPS</h3>
-      <p class="en">A browser FPS prototype built with vanilla JavaScript and Three.js.</p>
-    </a>
-  </div>
-</section>
-
-<section class="section-block split-section">
-  <div class="section-heading">
-    <p class="section-index">03</p>
-    <div><h2>Outside the lab</h2><p>科研之外</p></div>
-  </div>
-  <div class="interest-layout">
-    <a class="photo-feature" href="{{ '/photography' | relative_url }}">
-      <img src="{{ '/assets/photography/photography-contact-sheet.webp?v=20260806-hq' | relative_url }}" alt="Photography contact sheet">
-      <span class="photo-feature-label">PHOTOGRAPHY</span>
-      <strong>View the gallery</strong>
-    </a>
-    <div class="interest-copy">
-      <div class="interest-item">
-        <h3>Photography</h3>
-        <p class="en">I photograph streets, architecture, landscapes, and aerial views with Nikon cameras and DJI drones.</p>
-        <p class="cn">拍摄城市、建筑、风景与航拍影像。</p>
-      </div>
-      <div class="interest-item">
-        <h3>Music</h3>
-        <p class="en">My listening is centered on rock: British classics, progressive and alternative rock, punk, metal, folk, country, and Chinese indie. Long-time favorites include The Beatles, Pink Floyd, Bob Dylan, Green Day, Suede, Radiohead, Guns N' Roses, 万能青年旅店, and David Bowie.</p>
-        <p class="cn">以摇滚为主，也听民谣、乡村与华语独立音乐。</p>
-      </div>
-      <div class="interest-item">
-        <h3>Reading and games</h3>
-        <p class="en">I read history, philosophy, religion, and literature, and follow independent games and interactive storytelling.</p>
-        <p class="cn">喜欢历史、哲学、宗教、文学与互动叙事。</p>
+<div class="home-shell">
+  <section class="home-hero">
+    <div class="home-hero-copy">
+      <p class="home-kicker">PERSONAL WEBSITE · 个人主页</p>
+      <h1>唐直 <span>Tang Zhi</span></h1>
+      <p class="home-lead">我是一名生物信息学本科生，也长期拍照、听摇滚、玩游戏和收藏模型。这个网站不是一份只谈科研的简历，而是把这些彼此不同、但都属于我的东西放在一起。</p>
+      <div class="home-actions">
+        <a class="button primary" href="#rooms">浏览主页</a>
+        <a class="button secondary" href="{{ '/notes' | relative_url }}">随笔与记录</a>
       </div>
     </div>
-  </div>
-</section>
+    <figure class="home-hero-photo">
+      <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="新疆岩壁之间的人物剪影">
+      <figcaption>《岩壁之间》· 新疆 · 2023</figcaption>
+    </figure>
+  </section>
 
-<section class="closing-panel">
-  <h2>Research, photography, and things I keep returning to.</h2>
-  <div class="contact-row">
-    <a href="{{ '/photography' | relative_url }}">Photography ↗</a>
-    <a href="{{ '/music' | relative_url }}">Music ↗</a>
-    <a href="{{ '/cv' | relative_url }}">Academic CV ↗</a>
-    <a href="https://github.com/Garry-Tang-274">GitHub ↗</a>
-    <a href="mailto:zhi.25@intl.zju.edu.cn">Email ↗</a>
-  </div>
-</section>
+  <section class="home-intro">
+    <div>
+      <p class="home-kicker">ABOUT</p>
+      <h2>我在做什么</h2>
+    </div>
+    <div class="home-intro-copy">
+      <p>目前的科研兴趣集中在计算免疫学、TCR 序列分析和机器学习方法审计。我更关心模型到底学到了什么、结论能不能经得住对照，而不只是最后的分数。</p>
+      <p>科研之外，我拍摄城市、建筑、自然与航拍景观；音乐以摇滚为主，也听民谣、乡村和华语独立；游戏方面更在意机制、叙事和具体的游玩记忆。</p>
+    </div>
+  </section>
 
+  <section id="rooms" class="home-section">
+    <div class="home-section-head">
+      <div><p class="home-kicker">FIVE ROOMS</p><h2>这个网站的几个入口</h2></div>
+      <p>主页负责介绍和展示；短更新、随笔和长文统一放进独立的记录区。</p>
+    </div>
+    <div class="room-grid">
+      <a class="room-card room-photo" href="{{ '/photography' | relative_url }}">
+        <span>01</span><div><small>PHOTOGRAPHY</small><h3>摄影</h3><p>城市、建筑、自然风光与航拍作品。</p></div><b>进入画廊 ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/music' | relative_url }}">
+        <span>02</span><div><small>MUSIC</small><h3>音乐</h3><p>长期喜欢的乐队、专辑和听歌记录。</p></div><b>查看音乐页 ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/games' | relative_url }}">
+        <span>03</span><div><small>GAMES</small><h3>游戏</h3><p>单机叙事、多人机制与游玩档案。</p></div><b>查看游戏页 ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/cv' | relative_url }}">
+        <span>04</span><div><small>RESEARCH</small><h3>科研与学习</h3><p>研究方向、公开项目和学术经历。</p></div><b>查看 CV ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/notes' | relative_url }}">
+        <span>05</span><div><small>NOTES</small><h3>随笔与记录</h3><p>短更新、科研复盘、摄影手记和游戏感想。</p></div><b>进入记录区 ↗</b>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section home-panorama-section">
+    <div class="home-section-head">
+      <div><p class="home-kicker">FEATURED PANORAMA</p><h2>钱江世纪城</h2></div>
+      <p>杭州 · 2026 · Nikon Z6 II。点击查看大图。</p>
+    </div>
+    <a class="home-panorama" href="{{ '/assets/photography/hangzhou-qianjiang-panorama-2026.svg?v=20260806-new' | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-2026.svg?v=20260806-new' | relative_url }}" alt="钱江世纪城夜景全景图">
+    </a>
+  </section>
+
+  <section class="home-section">
+    <div class="home-section-head">
+      <div><p class="home-kicker">SELECTED PHOTOGRAPHY</p><h2>主页精选图片</h2></div>
+      <p>这里由一个单独的数据文件控制，你可以自己添加图片、标题和注脚。</p>
+    </div>
+    <div class="home-gallery">
+      {% for photo in site.data.home_gallery %}
+        {% unless photo.visible == false %}
+        <figure class="home-gallery-item {{ photo.size | default: 'standard' }}">
+          <a href="{{ photo.original | default: photo.image | relative_url }}" target="_blank" rel="noopener">
+            <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
+          </a>
+          <figcaption><strong>{{ photo.title }}</strong><span>{{ photo.caption }}</span></figcaption>
+        </figure>
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <div class="home-gallery-actions">
+      <a class="button secondary" href="{{ '/photography' | relative_url }}">查看完整摄影页</a>
+      <a class="button secondary" href="{{ '/manage' | relative_url }}">自己维护主页图片</a>
+    </div>
+  </section>
+
+  <section class="home-section latest-notes">
+    <div class="home-section-head">
+      <div><p class="home-kicker">RECENT NOTES</p><h2>最近记录</h2></div>
+      <p>这里只显示最新几条，不让主页变成信息流。</p>
+    </div>
+    <div class="note-preview-grid">
+      {% for post in site.posts limit:3 %}
+      <a class="note-preview" href="{{ post.url | relative_url }}">
+        <div><span>{{ post.category | default: '记录' }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      </a>
+      {% endfor %}
+    </div>
+    <a class="text-link" href="{{ '/notes' | relative_url }}">查看全部随笔与记录 →</a>
+  </section>
+
+  <section class="home-closing">
+    <p class="home-kicker">ONGOING</p>
+    <h2>这个网站会随着内容慢慢长出来。</h2>
+    <p>先把真正想留下来的东西放进来，再决定它最终应该长成什么样。</p>
+  </section>
 </div>
