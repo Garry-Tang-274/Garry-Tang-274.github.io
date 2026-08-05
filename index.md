@@ -4,15 +4,13 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/portfolio-fullbleed.css' | relative_url }}">
 
 <div class="portfolio-shell">
 
-<section class="hero-panel hero-photographic">
-  <figure class="hero-art hero-photo">
-    <img src="{{ '/assets/photography/hero-rock-silhouette.webp' | relative_url }}" alt="新疆岩壁之间的一道人物剪影，由唐直拍摄">
-    <figcaption>岩壁之间 · Figure Between Rocks · Xinjiang, 2023</figcaption>
-  </figure>
-  <div class="hero-copy">
+<section class="hero-stage">
+  <img src="{{ '/assets/photography/hero-rock-silhouette.webp' | relative_url }}" alt="新疆岩壁之间的一道人物剪影，由唐直拍摄">
+  <div class="hero-stage-copy">
     <p class="eyebrow">BIOMEDICAL INFORMATICS · COMPUTATIONAL IMMUNOLOGY · VISUAL STORYTELLING</p>
     <h1>Tang Zhi <span>唐直</span></h1>
     <p class="hero-cn">浙江大学—爱丁堡大学联合学院生物医学信息学本科生，关注计算免疫学、生物序列机器学习与可复现科研工作流。</p>
@@ -24,6 +22,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
       <a class="button secondary" href="mailto:zhi.25@intl.zju.edu.cn">联系我 · Contact</a>
     </div>
   </div>
+  <p class="hero-stage-caption">岩壁之间 · Figure Between Rocks · Xinjiang, 2023</p>
 </section>
 
 <section class="manifesto">
@@ -34,10 +33,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 <section class="section-block">
   <div class="section-heading">
     <p class="section-index">01</p>
-    <div>
-      <h2>我正在关注什么</h2>
-      <p>What I am exploring</p>
-    </div>
+    <div><h2>我正在关注什么</h2><p>What I am exploring</p></div>
   </div>
   <div class="focus-grid">
     <article class="focus-card">
@@ -64,10 +60,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 <section id="selected-work" class="section-block">
   <div class="section-heading">
     <p class="section-index">02</p>
-    <div>
-      <h2>公开项目</h2>
-      <p>Selected public work</p>
-    </div>
+    <div><h2>公开项目</h2><p>Selected public work</p></div>
   </div>
   <div class="project-grid">
     <a class="project-card featured" href="https://github.com/Garry-Tang-274/bioinformatics-paper-reading-workflow">
@@ -90,7 +83,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
     </a>
     <a class="project-card" href="https://github.com/Garry-Tang-274/battlefield-web-fps-prototype">
       <div class="project-topline"><span>INTERACTIVE PROTOTYPE</span><span>↗</span></div>
-      <h3>Battlefield Web FPS Prototype</h3>
+      <h3>Archipelago Frontline Web FPS Prototype</h3>
       <p class="cn">用于学习浏览器交互、游戏循环和快速原型设计的轻量 Web FPS 实验。</p>
       <p class="en">A lightweight Web FPS experiment for learning browser interaction, game loops, and rapid prototyping.</p>
     </a>
@@ -100,10 +93,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 <section class="section-block split-section">
   <div class="section-heading">
     <p class="section-index">03</p>
-    <div>
-      <h2>镜头之外</h2>
-      <p>Beyond the terminal</p>
-    </div>
+    <div><h2>镜头之外</h2><p>Beyond the terminal</p></div>
   </div>
   <div class="interest-layout">
     <a class="photo-feature" href="{{ '/photography' | relative_url }}">
@@ -116,8 +106,6 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
         <h3>摄影 · Photography</h3>
         <p class="cn">主要使用尼康相机与航拍设备记录自然、城市、建筑与街头瞬间。我偏爱大环境中的小主体、雨雾、人物剪影、重复结构和具有叙事感的现实痕迹。</p>
         <p class="en">I use Nikon cameras and aerial platforms to document nature, cities, architecture, and street moments, with a preference for small subjects within large environments, rain, silhouettes, repeated structures, and traces of everyday narrative.</p>
-        <p class="cn privacy-note">公开网页中的车牌、电话号码等可识别信息已做不可逆模糊；展示副本同时移除了 EXIF 与 GPS 元数据。</p>
-        <p class="en privacy-note">Identifiable details such as license plates and phone numbers are irreversibly blurred in the public copies, which also have EXIF and GPS metadata removed.</p>
       </div>
       <div class="interest-item">
         <h3>声音 · Music</h3>
@@ -126,8 +114,8 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
       </div>
       <div class="interest-item">
         <h3>人文与游戏 · Humanities & Games</h3>
-        <p class="cn">持续阅读历史、哲学、宗教与严肃文学，也关注独立游戏和小岛秀夫式的互动叙事。</p>
-        <p class="en">I read history, philosophy, religion, and serious literature, and I am also interested in independent games and Hideo Kojima–style interactive storytelling.</p>
+        <p class="cn">持续阅读历史、哲学、宗教与严肃文学，也关注独立游戏和互动叙事。</p>
+        <p class="en">I read history, philosophy, religion, and serious literature, and I am also interested in independent games and interactive storytelling.</p>
       </div>
     </div>
   </div>
