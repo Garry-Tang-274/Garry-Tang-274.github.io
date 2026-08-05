@@ -16,25 +16,53 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download original PNG
+      - name: Update panorama markup and sizing
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p assets/photography
-          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-54b4-820b-90fd-68be8a4cf834/raw?se=2026-08-05T18:32:25Z&sp=r&sv=2026-02-06&sr=b&scid=1b6aeb38-ac25-520e-aee5-927913da6493&skoid=b7fc319f-b93c-4fac-ba5f-14fdc3f9209f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T03:28:21Z&ske=2026-08-06T03:28:21Z&sks=b&skv=2026-02-06&sig=ln5KBJgkRTp5N2cSQehvaPPMx1cE23nvAUsdmgra4jY%3D' -o assets/photography/hangzhou-qianjiang-panorama-hq.png
+          python3 - <<'PY'
+          from pathlib import Path
 
-      - name: Verify exact file size
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(stat -c%s assets/photography/hangzhou-qianjiang-panorama-hq.png)" -eq 1186461
+          page = Path('photography.md')
+          text = page.read_text(encoding='utf-8')
+          old = '''  <figure class="panorama-showcase">
+            <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama.webp?v=20260806-hq' | relative_url }}" alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
+            <figcaption><strong>Qianjiang Century City · 钱江世纪新城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II</span></figcaption>
+          </figure>'''
+          new = '''  <figure class="panorama-showcase qianjiang-original">
+            <a href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the original Qianjiang Century City panorama">
+              <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
+            </a>
+            <figcaption><strong>Qianjiang Century City · 钱江世纪新城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Open original</span></figcaption>
+          </figure>'''
+          if old not in text:
+              raise SystemExit('Expected Qianjiang panorama block not found')
+          page.write_text(text.replace(old, new, 1), encoding='utf-8')
 
-      - name: Commit original panorama
+          css = Path('assets/css/portfolio-fullbleed.css')
+          css_text = css.read_text(encoding='utf-8')
+          marker = '/* Original-resolution Qianjiang panorama */'
+          if marker not in css_text:
+              css_text += '''\n\n/* Original-resolution Qianjiang panorama */
+          .qianjiang-original > a {
+            display: block;
+            cursor: zoom-in;
+          }
+
+          .qianjiang-original img {
+            width: min(100%, 2048px);
+            margin: 0 auto;
+          }
+          '''
+          css.write_text(css_text, encoding='utf-8')
+          PY
+
+      - name: Commit display changes
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/photography/hangzhou-qianjiang-panorama-hq.png
-          git commit -m 'Add original-quality Qianjiang panorama'
+          git add photography.md assets/css/portfolio-fullbleed.css
+          git commit -m 'Display original Qianjiang panorama without upscaling'
           git push
