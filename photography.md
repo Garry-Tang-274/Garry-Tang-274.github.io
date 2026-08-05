@@ -6,6 +6,7 @@ permalink: /photography/
 
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/portfolio-media.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/portfolio-fullbleed.css' | relative_url }}">
 
 <div class="page-shell">
   <section class="page-hero photography-hero">
@@ -21,11 +22,11 @@ permalink: /photography/
   </section>
 
   <section class="gallery-intro">
-    <p class="cn">当前收录 18 张作品。年份、地点与设备作为注脚保留，但作品顺序依据视觉节奏和主题关系安排。</p>
-    <p>All 18 photographs are included. Year, location, and camera are retained as notes, while the sequence follows visual rhythm and thematic relationships.</p>
+    <p class="cn">当前收录 18 张作品。两幅全景作品独立铺满页面，其余作品按视觉节奏与主题关系编排。</p>
+    <p>All 18 photographs are included. The two panoramic works occupy their own full-width sections, while the remaining photographs follow visual rhythm and thematic relationships.</p>
   </section>
 
-  <div class="photo-masonry">
+  <div class="photo-grid-editorial">
     <figure class="photo-card photo-wide">
       <img src="{{ '/assets/photography/hero-rock-silhouette.webp' | relative_url }}" alt="新疆岩壁之间的人物剪影" loading="eager">
       <figcaption><strong>岩壁之间 · Figure Between Rocks</strong><span>2023 · 新疆 Xinjiang · DJI Mini 2</span></figcaption>
@@ -46,14 +47,18 @@ permalink: /photography/
       <img src="{{ '/assets/photography/chengdu-elder-umbrella.webp' | relative_url }}" alt="成都雨中撑伞的老人" loading="lazy">
       <figcaption><strong>伞下 · Under the Umbrella</strong><span>2026 · 四川成都 Chengdu, Sichuan · Nikon Z6 II</span></figcaption>
     </figure>
-    <figure class="photo-card">
+    <figure class="photo-card photo-wide">
       <img src="{{ '/assets/photography/chengdu-rain-biker.webp' | relative_url }}" alt="雨中城市道路上的骑车背影" loading="lazy">
       <figcaption><strong>向前 · Forward Through Rain</strong><span>2026 · 四川成都 Chengdu, Sichuan · Nikon Z6 II</span></figcaption>
     </figure>
-    <figure class="photo-card photo-panorama">
-      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama.webp' | relative_url }}" alt="杭州钱江世纪新城城市全景" loading="lazy">
-      <figcaption><strong>钱江世纪新城 · Qianjiang Century City</strong><span>2026 · 浙江杭州 Hangzhou, Zhejiang · Nikon Z6 II</span></figcaption>
-    </figure>
+  </div>
+
+  <figure class="panorama-showcase">
+    <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama.webp' | relative_url }}" alt="杭州钱江世纪新城城市全景" loading="lazy">
+    <figcaption><strong>钱江世纪新城 · Qianjiang Century City</strong><span>2026 · 浙江杭州 Hangzhou, Zhejiang · Nikon Z6 II</span></figcaption>
+  </figure>
+
+  <div class="photo-grid-editorial">
     <figure class="photo-card">
       <img src="{{ '/assets/photography/hangzhou-atrium.webp' | relative_url }}" alt="杭州建筑天井与玻璃连廊" loading="lazy">
       <figcaption><strong>天井 · Atrium</strong><span>2026 · 浙江杭州 Hangzhou, Zhejiang · Nikon Z6 II</span></figcaption>
@@ -78,7 +83,7 @@ permalink: /photography/
       <img src="{{ '/assets/photography/haining-autumn-light.webp' | relative_url }}" alt="阳光照亮的秋叶" loading="lazy">
       <figcaption><strong>秋光 · Autumn Light</strong><span>2025 · 浙江海宁 Haining, Zhejiang · Nikon Z6 II</span></figcaption>
     </figure>
-    <figure class="photo-card">
+    <figure class="photo-card photo-wide">
       <img src="{{ '/assets/photography/haining-autumn-sky.webp' | relative_url }}" alt="蓝天下的秋日枝条" loading="lazy">
       <figcaption><strong>秋日天空 · Autumn Sky</strong><span>2025 · 浙江海宁 Haining, Zhejiang · Nikon Z6 II</span></figcaption>
     </figure>
@@ -86,10 +91,14 @@ permalink: /photography/
       <img src="{{ '/assets/photography/yangshuo-xianggong-river.webp' | relative_url }}" alt="广西阳朔相公山俯瞰河流与群峰" loading="lazy">
       <figcaption><strong>相公山 · Xianggong Mountain</strong><span>2025 · 广西阳朔相公山 Xianggong Mountain, Yangshuo · DJI Mini 4 Pro</span></figcaption>
     </figure>
-    <figure class="photo-card photo-panorama">
-      <img src="{{ '/assets/photography/libo-karst-panorama.webp' | relative_url }}" alt="贵州荔波喀斯特地貌航拍全景" loading="lazy">
-      <figcaption><strong>荔波喀斯特 · Libo Karst</strong><span>2026 · 贵州荔波 Libo, Guizhou · DJI Mini 4 Pro</span></figcaption>
-    </figure>
+  </div>
+
+  <figure class="panorama-showcase">
+    <img src="{{ '/assets/photography/libo-karst-panorama.webp' | relative_url }}" alt="贵州荔波喀斯特地貌航拍全景" loading="lazy">
+    <figcaption><strong>荔波喀斯特 · Libo Karst</strong><span>2026 · 贵州荔波 Libo, Guizhou · DJI Mini 4 Pro</span></figcaption>
+  </figure>
+
+  <div class="photo-grid-editorial">
     <figure class="photo-card photo-wide">
       <img src="{{ '/assets/photography/xinjiang-lake-road.webp' | relative_url }}" alt="新疆湖泊旁蜿蜒的公路" loading="lazy">
       <figcaption><strong>湖泊公路 · Road by the Lake</strong><span>2023 · 新疆 Xinjiang · DJI Mini 2</span></figcaption>
