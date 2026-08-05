@@ -17,7 +17,8 @@ permalink: /photography/
     <div class="page-actions">
       <a class="button primary" href="{{ '/' | relative_url }}">Home</a>
       <a class="button secondary" href="{{ '/music' | relative_url }}">Music</a>
-      <a class="button secondary" href="{{ '/cv' | relative_url }}">Academic CV</a>
+      <a class="button secondary" href="{{ '/games' | relative_url }}">Games</a>
+      <a class="button secondary" href="{{ '/notes' | relative_url }}">Notes</a>
     </div>
   </section>
 
@@ -49,10 +50,10 @@ permalink: /photography/
   </div>
 
   <figure class="panorama-showcase qianjiang-original">
-    <a href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the original Qianjiang Century City panorama">
-      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-original' | relative_url }}" alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
+    <a href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-link target="_blank" rel="noopener" aria-label="Open the Qianjiang Century City panorama">
+      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-image alt="Panorama of Qianjiang Century City in Hangzhou" loading="lazy">
     </a>
-    <figcaption><strong>Qianjiang Century City · 钱江世纪新城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Open original</span></figcaption>
+    <figcaption><strong>Qianjiang Century City · 钱江世纪城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Open original</span></figcaption>
   </figure>
 
   <div class="photo-grid-editorial">
@@ -108,3 +109,9 @@ permalink: /photography/
 
   <p class="privacy-note">Some license plates and contact details have been blurred in the web copies.</p>
 </div>
+<script src="{{ '/assets/data/qianjiang/chunk-00.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-01.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-02.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-03.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-04.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/qianjiang-panorama.js' | relative_url }}"></script>
