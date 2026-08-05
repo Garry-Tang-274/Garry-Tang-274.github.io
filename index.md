@@ -10,7 +10,7 @@ title: Tang Zhi | Biomedical Informatics
 <div class="portfolio-shell">
 
 <section class="hero-stage">
-  <img src="{{ '/assets/photography/hero-rock-silhouette.webp' | relative_url }}" alt="A figure standing between rock formations in Xinjiang">
+  <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="A figure standing between rock formations in Xinjiang">
   <div class="hero-stage-copy">
     <p class="eyebrow">BIOMEDICAL INFORMATICS · COMPUTATIONAL IMMUNOLOGY</p>
     <h1>Tang Zhi <span>唐直</span></h1>
@@ -89,7 +89,7 @@ title: Tang Zhi | Biomedical Informatics
   </div>
   <div class="interest-layout">
     <a class="photo-feature" href="{{ '/photography' | relative_url }}">
-      <img src="{{ '/assets/photography/photography-contact-sheet.webp' | relative_url }}" alt="Photography contact sheet">
+      <img src="{{ '/assets/photography/photography-contact-sheet.webp?v=20260806-hq' | relative_url }}" alt="Photography contact sheet">
       <span class="photo-feature-label">PHOTOGRAPHY</span>
       <strong>View the gallery</strong>
     </a>
