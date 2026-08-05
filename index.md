@@ -5,6 +5,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
 
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/portfolio-fullbleed.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/portfolio-music.css' | relative_url }}">
 
 <div class="portfolio-shell">
 
@@ -18,8 +19,8 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
     <div class="hero-actions">
       <a class="button primary" href="#selected-work">查看项目 · View projects</a>
       <a class="button secondary" href="{{ '/photography' | relative_url }}">摄影作品 · Photography</a>
+      <a class="button secondary" href="{{ '/music' | relative_url }}">音乐图谱 · Listening map</a>
       <a class="button secondary" href="{{ '/cv' | relative_url }}">学术 CV · Academic CV</a>
-      <a class="button secondary" href="mailto:zhi.25@intl.zju.edu.cn">联系我 · Contact</a>
     </div>
   </div>
   <p class="hero-stage-caption">岩壁之间 · Figure Between Rocks · Xinjiang, 2023</p>
@@ -108,16 +109,33 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
         <p class="en">I use Nikon cameras and aerial platforms to document nature, cities, architecture, and street moments, with a preference for small subjects within large environments, rain, silhouettes, repeated structures, and traces of everyday narrative.</p>
       </div>
       <div class="interest-item">
-        <h3>声音 · Music</h3>
-        <p class="cn">喜欢摇滚与民谣，尤其是 Bob Dylan、Leonard Cohen 和 The Beatles；音乐让我关注节奏、结构和表达中的留白。</p>
-        <p class="en">I enjoy rock and folk music, especially Bob Dylan, Leonard Cohen, and The Beatles; music shapes how I think about rhythm, structure, and restraint.</p>
+        <h3>人文阅读 · Humanities</h3>
+        <p class="cn">持续阅读历史、哲学、宗教与严肃文学，并关注这些领域如何塑造对社会、个体与叙事的理解。</p>
+        <p class="en">I read history, philosophy, religion, and serious literature, and consider how they shape interpretations of society, individuals, and narrative.</p>
       </div>
       <div class="interest-item">
-        <h3>人文与游戏 · Humanities & Games</h3>
-        <p class="cn">持续阅读历史、哲学、宗教与严肃文学，也关注独立游戏和互动叙事。</p>
-        <p class="en">I read history, philosophy, religion, and serious literature, and I am also interested in independent games and interactive storytelling.</p>
+        <h3>游戏与互动叙事 · Games & Interactive Narrative</h3>
+        <p class="cn">关注独立游戏、系统设计和小岛秀夫式的互动叙事，尤其在意环境、规则与玩家经验如何共同表达主题。</p>
+        <p class="en">I am interested in independent games, systems design, and Hideo Kojima–style interactive storytelling, especially how environment, rules, and player experience communicate themes together.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <p class="section-index">04</p>
+    <div><h2>音乐图谱</h2><p>Listening map</p></div>
+  </div>
+  <div class="listening-panel">
+    <p class="card-kicker">FROM BRITISH INVASION TO CHINESE INDIE</p>
+    <h3>以摇滚为中心，但不被一种年代或流派限制。</h3>
+    <p class="cn">特别喜爱 The Beatles、Pink Floyd、Bob Dylan、Green Day、Suede、Radiohead、Guns N' Roses、万能青年旅店与 David Bowie。更广泛的关注横跨英伦经典、迷幻与前卫、另类与 Britpop、朋克、重金属、民谣、乡村和华语独立音乐。</p>
+    <p>Particular favorites include The Beatles, Pink Floyd, Bob Dylan, Green Day, Suede, Radiohead, Guns N' Roses, 万能青年旅店, and David Bowie. The wider listening map spans British classics, psychedelia and progressive rock, alternative and Britpop, punk, metal, folk, country, and Chinese independent music.</p>
+    <div class="artist-cloud">
+      <span class="artist-pill">The Beatles</span><span class="artist-pill">Pink Floyd</span><span class="artist-pill">Bob Dylan</span><span class="artist-pill">Green Day</span><span class="artist-pill">Suede</span><span class="artist-pill">Radiohead</span><span class="artist-pill">Guns N' Roses</span><span class="artist-pill">万能青年旅店</span><span class="artist-pill">David Bowie</span>
+    </div>
+    <a class="listening-link" href="{{ '/music' | relative_url }}">查看完整音乐图谱与 105 组关注列表 · View the full map and all 105 followed artists ↗</a>
   </div>
 </section>
 
@@ -127,6 +145,7 @@ title: Tang Zhi | Biomedical Informatics & Computational Research
   <p>Making research questions more testable—and everyday observation more precise.</p>
   <div class="contact-row">
     <a href="{{ '/photography' | relative_url }}">Photography ↗</a>
+    <a href="{{ '/music' | relative_url }}">Listening Map ↗</a>
     <a href="{{ '/cv' | relative_url }}">Academic CV ↗</a>
     <a href="https://github.com/Garry-Tang-274">GitHub ↗</a>
     <a href="mailto:zhi.25@intl.zju.edu.cn">zhi.25@intl.zju.edu.cn ↗</a>
