@@ -1,0 +1,54 @@
+name: Refresh high-resolution portfolio images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-portfolio-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download high-resolution image batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-2114-81fa-abe2-8c8cb3241948/raw?se=2026-08-05T17:53:38Z&sp=r&sv=2026-02-06&sr=b&scid=f26ad753-76b9-58f0-b7de-f90acd096885&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:16:03Z&ske=2026-08-06T02:16:03Z&sks=b&skv=2026-02-06&sig=muP0zcA%2BrFGiV0dEpB4YNsGFOEgLgXJtvC6UNWpNVXQ%3D' -o assets/photography/hero-rock-silhouette.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-3a3c-820b-b17f-908d72648a76/raw?se=2026-08-05T17:53:48Z&sp=r&sv=2026-02-06&sr=b&scid=5791a342-40ac-5f87-a971-2bade8d07fbc&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T02:56:12Z&ske=2026-08-06T02:56:12Z&sks=b&skv=2026-02-06&sig=PDlwO0gqa/YptPVf0LffK2%2BluMPh7iEQdcy3B98AZFw%3D' -o assets/photography/chengdu-heron-rain.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprseasia.oaiusercontent.com/files/00000000-366c-8207-afd4-9ce7aa88b7b9/raw?se=2026-08-05T17:53:58Z&sp=r&sv=2026-02-06&sr=b&scid=124e895e-7d95-50f9-a105-62db930d5458&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-04T20:24:03Z&ske=2026-08-05T20:24:03Z&sks=b&skv=2026-02-06&sig=E0r2aZoQ5ewz%2B2aQHpdZut2TvCyM%2BdsQRvBy7A4AFGk%3D' -o assets/photography/hangzhou-qianjiang-panorama.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-352c-820b-85e7-de56263b0c0b/raw?se=2026-08-05T17:54:04Z&sp=r&sv=2026-02-06&sr=b&scid=bad1e219-44cf-58dc-9e2b-013bf8eec964&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T00:25:05Z&ske=2026-08-06T00:25:05Z&sks=b&skv=2026-02-06&sig=KHfcDqAKHsYl2KMvROr1a8lRq6CUEFCRVLigQHnG5A8%3D' -o assets/photography/yangshuo-xianggong-river.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-fe94-820b-b13f-647f625fb40c/raw?se=2026-08-05T17:54:12Z&sp=r&sv=2026-02-06&sr=b&scid=59041076-f6e8-5daa-90be-28fb85a3774f&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-04T22:37:57Z&ske=2026-08-05T22:37:57Z&sks=b&skv=2026-02-06&sig=DqG%2B8F51RxMb%2BeaonznyQ0%2BNvTkoqfQ5O3M9Cbjg15g%3D' -o assets/photography/xinjiang-desert-road.webp
+          curl -fL --retry 3 --connect-timeout 20 'https://sdmntprwestus2.oaiusercontent.com/files/00000000-6c10-81f8-8e63-37250cd4af28/raw?se=2026-08-05T17:54:22Z&sp=r&sv=2026-02-06&sr=b&scid=a8876c6d-6399-5557-b868-c73586d6794d&skoid=d5627e4c-566b-4761-a954-54993b0ed17b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-05T00:28:55Z&ske=2026-08-06T00:28:55Z&sks=b&skv=2026-02-06&sig=Owf2UQZmDB7l4JN4iMuP3%2B2b/oc4PB1wLKWtQp5sfzA%3D' -o assets/photography/chengdu-rain-couple.webp
+
+      - name: Verify exact file sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(stat -c%s assets/photography/hero-rock-silhouette.webp)" -eq 40342
+          test "$(stat -c%s assets/photography/chengdu-heron-rain.webp)" -eq 153634
+          test "$(stat -c%s assets/photography/hangzhou-qianjiang-panorama.webp)" -eq 67802
+          test "$(stat -c%s assets/photography/yangshuo-xianggong-river.webp)" -eq 401670
+          test "$(stat -c%s assets/photography/xinjiang-desert-road.webp)" -eq 443290
+          test "$(stat -c%s assets/photography/chengdu-rain-couple.webp)" -eq 363268
+
+      - name: Commit refreshed images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/photography
+          if git diff --cached --quiet; then
+            echo 'No image changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Replace compressed portfolio images with high-resolution copies'
+          git push
