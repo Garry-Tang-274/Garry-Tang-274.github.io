@@ -63,10 +63,10 @@ title: 唐直 · Tang Zhi
   <section class="home-section home-panorama-section">
     <div class="home-section-head">
       <div><p class="home-kicker">FEATURED PANORAMA</p><h2>钱江世纪城</h2></div>
-      <p>杭州 · 2026 · Nikon Z6 II。点击查看大图。</p>
+      <p>杭州 · 2026 · Nikon Z6 II。点击查看原图。</p>
     </div>
-    <a class="home-panorama" href="{{ '/assets/photography/hangzhou-qianjiang-panorama-2026.svg?v=20260806-new' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-2026.svg?v=20260806-new' | relative_url }}" alt="钱江世纪城夜景全景图">
+    <a class="home-panorama" href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-link target="_blank" rel="noopener">
+      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-image alt="钱江世纪城夜景全景图">
     </a>
   </section>
 
@@ -116,3 +116,9 @@ title: 唐直 · Tang Zhi
     <p>先把真正想留下来的东西放进来，再决定它最终应该长成什么样。</p>
   </section>
 </div>
+<script src="{{ '/assets/data/qianjiang/chunk-00.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-01.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-02.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-03.js' | relative_url }}"></script>
+<script src="{{ '/assets/data/qianjiang/chunk-04.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/qianjiang-panorama.js' | relative_url }}"></script>
