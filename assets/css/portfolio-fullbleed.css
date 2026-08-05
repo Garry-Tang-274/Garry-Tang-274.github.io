@@ -137,6 +137,16 @@
   font-size: 0.82rem;
 }
 
+.qianjiang-original > a {
+  display: block;
+  cursor: zoom-in;
+}
+
+.qianjiang-original img {
+  width: min(100%, 2048px);
+  margin: 0 auto;
+}
+
 @media (max-width: 760px) {
   .hero-stage {
     width: 100vw;
