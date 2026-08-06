@@ -1,0 +1,55 @@
+name: Sync Steam library
+
+on:
+  schedule:
+    # GitHub cron uses UTC. Run every six hours, away from the busiest minute.
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: steam-library-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read the public Steam library
+        env:
+          # Optional. The workflow works without this secret by reading the
+          # public Steam Community XML list. Adding a Steam key later upgrades
+          # the source to the official Web API and refreshes last-played times.
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_ID64: "76561199869016456"
+        run: python scripts/sync_steam_games.py
+
+      - name: Commit changed game data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/js/steam-games-data.js; then
+            echo "Steam library has not changed; nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/steam-games-data.js
+          git commit -m "Sync Steam library"
+          git pull --rebase origin main
+          git push origin HEAD:main
