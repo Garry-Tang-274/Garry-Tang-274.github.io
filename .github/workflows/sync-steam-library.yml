@@ -1,6 +1,11 @@
 name: Sync Steam library
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/sync_steam_games.py"
+      - ".github/workflows/sync-steam-library.yml"
   schedule:
     # GitHub cron uses UTC. Run every six hours, away from the busiest minute.
     - cron: "17 */6 * * *"
