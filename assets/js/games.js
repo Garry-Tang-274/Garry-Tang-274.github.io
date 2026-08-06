@@ -3,8 +3,8 @@
   const games = rows.map(([id, name, hours, recent, installed, recommendation, steamPositive, lastPlayed, tags], index) => ({
     id,
     name,
-    hours,
-    recent,
+    hours: Number(hours || 0),
+    recent: Number(recent || 0),
     installed: Boolean(installed),
     recommendation: recommendation === "R" ? "Recommended" : recommendation === "N" ? "Not Recommended" : null,
     steamPositive,
@@ -21,80 +21,135 @@
   const officialBase = (id) => `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${id}`;
   const legacyBase = (id) => `https://cdn.cloudflare.steamstatic.com/steam/apps/${id}`;
 
-  const reviewExcerpts = {
-    1238810: "对我这种 FPS 新手来说，它的上手很慢。前面经常根本看不到人就被杀了，但我依然很爱《战地 V》。沉浸感、使命感、悲壮感和残酷感，是战地独有的魅力。",
-    1174180: "第一次打开一个小时后就放弃了。后来返校那天外面下着雨，随机歌单放到 That's the Way It Is，我重新把它下载回来。那一刻我知道，这次不会再浅尝辄止。",
-    2531310: "这不是一款可以随随便便玩的游戏。它有争议，但正因为如此，亲身经历以后一定会留下自己的判断。最后愤怒也好、赞叹也好，它带来的情绪体验很难被替代。",
-    2358720: "最打动我的不只是战斗，而是它打破了很单一的‘中式美学’，把泥塑、怪物和民间视觉元素真正融进了世界。它有瑕疵，但能感到制作上的诚意。",
-    1659420: "画面、演出和爽快剧情彻底压过了跑路与战斗的重复。简单但有温情的故事、扎实的地图设计和流畅动作，已经足够组成一部难得的佳作。",
-    3035570: "它最让我失望的不是情怀没兑现，而是跑酷、战斗和镜头共同造成的迟滞。地图和画质变好了，但操作与关卡设计让我第一次差点放弃一部刺客信条。",
-  };
-
-  const memoryChapters = [
+  const featuredDefinitions = [
     {
       id: 1174180,
-      label: "一段生活与一款游戏重合",
-      title: "有些作品需要等到合适的时候",
-      text: "《荒野大镖客 2》第一次只玩了一个小时。真正进入它，是后来一个下雨的返校日。游戏本身没有变，变化的是我当时愿意给它的时间。",
+      label: "开放世界 · 慢速沉浸",
+      title: "有些游戏需要等到合适的时候",
+      text: "《荒野大镖客 2》第一次打开一个小时我就放弃了。后来在一个下雨的返校日重新下载，它才真正开始。它让我意识到，作品没有变，变化的是我终于愿意把自己的节奏交给它。",
+    },
+    {
+      id: 1888930,
+      label: "线性叙事 · 情感",
+      title: "我第一次如此确定地把游戏称作第九艺术",
+      text: "《最后生还者 Part I》对我来说不是“电影化游戏”的简单胜利，而是故事、操作、音乐和结尾同时抵达同一个情绪。成就声与片尾音乐一起响起时，形式和情感真正合在了一起。",
     },
     {
       id: 2531310,
-      label: "叙事不一定让人舒服",
-      title: "留下来的往往不是圆满",
-      text: "我很在意游戏能不能制造真正的情绪和思考。它可以让我愤怒、迟疑甚至反感，但只要这些感受来自完整的体验，就比一段安全的剧情更难忘。",
+      label: "线性叙事 · 冲突",
+      title: "我不要求剧情让我舒服",
+      text: "《最后生还者 Part II》最重要的价值，是它让我带着愤怒行动，再强迫我面对另一套完整的动机。它不替任何人洗白，也没有把矛盾轻易解决；我喜欢的正是这种不圆满和争议。",
     },
     {
-      id: 1238810,
-      label: "多人游戏的临场变化",
-      title: "无法复刻的一局，比胜负更重要",
-      text: "战地吸引我的不是竞技排名，而是前线突然崩开、小队临时改变路线、原本陌生的人自然完成配合。那种现场感每一局都不一样。",
+      id: 1811040,
+      label: "独立游戏 · 互动叙事",
+      title: "选择不一定要改变结局，也可以只是让我感受",
+      text: "《极圈以南》的情绪图形几乎不改变剧情，却让慌张、坚定、温暖和低落变得可以被操作。它让我明白，游戏的交互不只负责分支，也可以负责把一个人的情感交到玩家手里。",
     },
     {
-      id: 753640,
-      label: "探索与理解",
-      title: "世界不是地图上的任务清单",
-      text: "我喜欢那些不急着把答案塞给玩家的游戏。探索、观察和自己建立联系的过程，比不断清图和领取奖励更容易让我真正进入一个世界。",
+      id: 683320,
+      label: "独立游戏 · 视觉表达",
+      title: "简约不是空白，而是繁复之后仍有分寸",
+      text: "《GRIS》的画面、音乐和玩法都很丰满，却从不互相争抢。它让我重新理解所谓“艺术游戏”：不是少说话、少画几笔，而是每一种表达都知道自己应该停在哪里。",
+    },
+    {
+      id: 609320,
+      label: "独立游戏 · 空间感",
+      title: "我会对狭小、熟悉、完全可控的空间产生依恋",
+      text: "《FAR: Lone Sails》里的车像一层移动的保护壳。我收集燃料、摆放小物件，也把安全感一点点放进去。旅程结束时失去这层外壳，反而让我更清楚地感到：人总要学会在没有保护的时候继续往前。",
+    },
+    {
+      id: 2358720,
+      label: "动作冒险 · 中式美学",
+      title: "中式美学不该只是洁净、漂亮和古风",
+      text: "《黑神话：悟空》让我在泥塑、怪物和民间视觉里感到一种非常具体的亲切。它有不少瑕疵，但它证明了中式美学可以粗粝、怪异、可怖，也仍然让中国玩家一眼认出自己文化里的东西。",
+    },
+    {
+      id: 287390,
+      label: "线性剧情 · 氛围生存",
+      title: "好的机制会把我从“完成任务”带进世界",
+      text: "《地铁：最后的曙光》里的道德点一开始只是通往好结局的条件，后来却让我认真听完对话、观察开放区域、理解黑暗族和不同阵营。机制没有单独说教，而是逐渐改变了我的游玩方式。",
+    },
+    {
+      id: 911400,
+      label: "历史动作 · 后劲",
+      title: "我愿意承认一部游戏的后劲推翻了第一印象",
+      text: "《刺客信条 3》刚结束时让我愤怒，很多系统和演出至今仍然糟糕。但康纳、海尔森和那段历史慢慢留了下来。最后我改成好评，不是忘记缺点，而是承认人物和叙事后来真的压过了它们。",
+    },
+    {
+      id: 1341820,
+      label: "互动电影 · 人物弧光",
+      title: "分支数量不是互动叙事最重要的东西",
+      text: "《日落黄昏时》真正打动我的是杰·霍尔特和其他人物如何带着缺陷活下去。公路片与选择系统只是形式，人物能否承担自己的过去、走出自己的阴影，才决定一段互动故事有没有重量。",
     },
   ];
 
-  const seriesDefinitions = [
+  const principles = [
     {
-      label: "ASSASSIN'S CREED",
-      title: "刺客信条",
-      test: /刺客信条|Assassin/i,
-      text: "从艾吉奥到神话三部曲，再到对《幻景》的强烈失望。这个系列几乎完整记录了我对历史城市、跑酷和开放世界设计的偏好。",
+      number: "01",
+      title: "我不把“让我不舒服”当成叙事失败",
+      text: "只要冲突来自人物和世界本身，我愿意接受愤怒、压抑、遗憾甚至反感。比起安全地取悦玩家，我更看重作品有没有勇气把矛盾真正推到底。",
+      games: "《最后生还者 Part II》 · 《极圈以南》 · 《日落黄昏时》",
     },
     {
-      label: "BATTLEFIELD",
-      title: "战地",
-      test: /战地|Battlefield/i,
-      text: "我并不是传统 FPS 玩家，但大战场、历史氛围和偶然形成的团队协作，让它成为少数会长期回去的多人游戏。",
+      number: "02",
+      title: "我需要世界允许我慢下来",
+      text: "开放世界对我来说不是任务数量，而是我是否愿意不看地图地走一段路、观察一个地方、在没有奖励的时候仍然留下。地图很大并不等于世界成立。",
+      games: "《荒野大镖客 2》 · 《黑神话：悟空》",
     },
     {
-      label: "METRO",
-      title: "地铁",
-      test: /地铁|Metro/i,
-      text: "压抑的空间、有限资源和缓慢建立起来的末世氛围。它吸引我的不是单纯射击，而是人在地下世界里怎样继续生活。",
+      number: "03",
+      title: "我相信小体量也能容纳完整经验",
+      text: "五六个小时足够建立一种美术语言、一种空间感和一段明确的情绪。独立游戏最吸引我的，不是“以小博大”，而是它们往往更清楚自己到底想表达什么。",
+      games: "《GRIS》 · 《孤帆远航》 · 《极圈以南》",
     },
     {
-      label: "RUSTY LAKE",
-      title: "锈湖",
-      test: /Rusty Lake|Cube Escape|The Past Within|White Door/i,
-      text: "体量不大，却一直保持自己的视觉、谜题和叙事方式。它像一套不断补全的私人暗号。",
-    },
-    {
-      label: "TOMB RAIDER",
-      title: "古墓丽影",
-      test: /Tomb Raider|古墓丽影/i,
-      text: "它代表的是更直接的冒险乐趣：探索遗迹、穿越环境、解谜和一段足够顺畅的电影式旅程。",
-    },
-    {
-      label: "WARHAMMER 40,000",
-      title: "战锤 40K",
-      test: /Warhammer 40,000|战锤/i,
-      text: "桌面模型和电子游戏在这里连到了一起。比起单一作品，我更在意这个庞大世界怎样在不同媒介里继续展开。",
+      number: "04",
+      title: "我允许自己的评价在通关后继续变化",
+      text: "刚结束时的感受很重要，但不是最后裁决。人物的后劲、重新理解的细节和一段时间后的回想，都可以让我推翻原来的结论。",
+      games: "《刺客信条 3》 · 《荒野大镖客 2》",
     },
   ];
+
+  const categoryDefinitions = [
+    {
+      label: "OPEN WORLD",
+      title: "开放世界",
+      text: "我需要的不是更大的地图，而是一个值得停留的地方。世界应该能在任务之外继续成立，让赶路、观察和偶然相遇本身也有意义。",
+      ids: [1174180, 2358720, 911400],
+    },
+    {
+      label: "LINEAR NARRATIVE",
+      title: "线性剧情",
+      text: "我不排斥作者替我控制节奏。相反，当演出、关卡和人物弧光能够精确配合时，线性结构往往比无限自由更有力量。",
+      ids: [1888930, 2531310, 287390],
+    },
+    {
+      label: "INDEPENDENT GAMES",
+      title: "独立游戏",
+      text: "我会被明确的美术语言、克制的机制和完整的小型表达吸引。体量不是价值，表达是否集中才是。",
+      ids: [1811040, 683320, 609320],
+    },
+    {
+      label: "INTERACTIVE DRAMA",
+      title: "互动叙事",
+      text: "我在意的不是有多少条分支，而是选择有没有让我更接近人物。即使结局不变，交互也可以改变我理解一段关系的方式。",
+      ids: [1341820, 1811040, 1222140],
+    },
+  ];
+
+  const voiceDefinitions = [
+    { id: 1174180, quote: "买了吃灰、玩不下去都没关系。有些游戏只是还没有等到你真正想进入它的那一天。" },
+    { id: 2531310, quote: "没有人真正原谅了对方的所作所为，大家在做的只不过是与自己和解。" },
+    { id: 1811040, quote: "我们的意义，就是那样存在过，有过情感，有过挣扎，有过爱与痛。" },
+    { id: 609320, quote: "我总要学会怎么前进，不管是坐在车里，还是走在路上。" },
+    { id: 287390, quote: "了解越多，越是会珍惜；每一个善意的举动，其实也是对自己行为的审视。" },
+    { id: 1341820, quote: "自我救赎或和解，也许正是我们大多数人终其一生循环往复的过程。" },
+  ];
+
+  const featuredGames = featuredDefinitions
+    .map((definition) => games.find((game) => game.id === definition.id))
+    .filter(Boolean);
 
   function escapeHTML(value = "") {
     return String(value).replace(/[&<>"']/g, (char) => ({
@@ -161,30 +216,21 @@
     return new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
   }
 
-  function shortHours(value) {
-    const n = Number(value || 0);
-    if (n < 1) return "不到 1 小时";
-    return `${n.toLocaleString("zh-CN", { maximumFractionDigits: 1 })} 小时`;
-  }
-
   function setupHeroCycle() {
     const layers = [...document.querySelectorAll(".hero-art-layer")];
-    if (layers.length < 2) return;
+    if (layers.length < 2 || !featuredGames.length) return;
 
-    const ordered = [...games].sort((a, b) => b.hours - a.hours || a.archiveIndex - b.archiveIndex);
-    let gameIndex = 0;
+    let index = 0;
     let activeLayer = 0;
-
-    setAsset(layers[0], ordered[0], "hero", true);
-    layers[0].classList.add("is-active");
-    setAsset(layers[1], ordered[1], "hero", true);
+    setAsset(layers[0], featuredGames[0], "hero", true);
+    if (featuredGames[1]) setAsset(layers[1], featuredGames[1], "hero", true);
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    window.setInterval(() => {
-      gameIndex = (gameIndex + 1) % ordered.length;
+    window.gameHeroTimer = window.setInterval(() => {
+      index = (index + 1) % featuredGames.length;
       const nextLayer = 1 - activeLayer;
-      const nextGame = ordered[gameIndex];
+      const nextGame = featuredGames[index];
       const preload = new Image();
       const urls = candidates(nextGame, "hero");
       let candidateIndex = 0;
@@ -203,31 +249,29 @@
       };
       preload.onerror = tryLoad;
       tryLoad();
-    }, 9000);
+    }, 10000);
   }
 
   function setupCoverRibbon() {
     const track = $("#game-cover-track");
     if (!track) return;
 
-    const batchSize = 14;
+    const batchSize = Math.min(16, games.length);
     let offset = 0;
 
     function renderBatch() {
       const batch = Array.from({ length: batchSize }, (_, i) => games[(offset + i) % games.length]);
       track.innerHTML = "";
 
-      const appendBatch = () => {
+      for (let copy = 0; copy < 2; copy += 1) {
         batch.forEach((game) => {
           const item = document.createElement("div");
           item.className = "cover-ribbon-item";
+          item.title = game.name;
           item.append(createImage(game, "cover"));
           track.append(item);
         });
-      };
-
-      appendBatch();
-      appendBatch();
+      }
     }
 
     renderBatch();
@@ -243,61 +287,85 @@
     });
   }
 
-  function renderMemories() {
-    const container = $("#memory-grid");
+  function renderFeatured() {
+    const container = $("#featured-game-grid");
+    if (!container) return;
     container.innerHTML = "";
 
-    memoryChapters.forEach((chapter) => {
-      const game = games.find((item) => item.id === chapter.id);
+    featuredDefinitions.forEach((definition) => {
+      const game = games.find((item) => item.id === definition.id);
       if (!game) return;
+
       const card = document.createElement("article");
-      card.className = "memory-card";
+      card.className = "memory-card featured-game-card";
       card.append(createImage(game, "hero"));
+
       const copy = document.createElement("div");
       copy.className = "memory-card-copy";
       copy.innerHTML = `
-        <span>${escapeHTML(chapter.label)}</span>
-        <h3>${escapeHTML(chapter.title)}</h3>
-        <p>${escapeHTML(chapter.text)}</p>
+        <span>${escapeHTML(definition.label)}</span>
+        <h3>${escapeHTML(game.name)}</h3>
+        <h4>${escapeHTML(definition.title)}</h4>
+        <p>${escapeHTML(definition.text)}</p>
+        <div class="featured-game-links">
+          <a href="${game.store}" target="_blank" rel="noopener">Steam ↗</a>
+          ${game.reviewUrl ? `<a href="${game.reviewUrl}" target="_blank" rel="noopener">我的完整评测 ↗</a>` : ""}
+        </div>
       `;
       card.append(copy);
       container.append(card);
     });
   }
 
-  function renderRecent() {
-    const container = $("#recent-game-grid");
-    const recent = games
-      .filter((game) => game.recent > 0)
-      .sort((a, b) => b.recent - a.recent || b.hours - a.hours)
-      .slice(0, 8);
+  function renderPrinciples() {
+    const container = $("#principle-grid");
+    if (!container) return;
+    container.innerHTML = principles.map((item) => `
+      <article class="principle-card">
+        <span>${item.number}</span>
+        <h3>${escapeHTML(item.title)}</h3>
+        <p>${escapeHTML(item.text)}</p>
+        <small>${escapeHTML(item.games)}</small>
+      </article>
+    `).join("");
+  }
 
+  function renderCategories() {
+    const container = $("#category-grid");
+    if (!container) return;
     container.innerHTML = "";
-    recent.forEach((game) => {
+
+    categoryDefinitions.forEach((category) => {
+      const matched = category.ids.map((id) => games.find((game) => game.id === id)).filter(Boolean);
       const card = document.createElement("article");
-      card.className = "recent-card";
-      const art = document.createElement("div");
-      art.className = "recent-card-art";
-      art.append(createImage(game, "hero"));
-      const copy = document.createElement("div");
-      copy.className = "recent-card-copy";
-      copy.innerHTML = `
-        <h3>${escapeHTML(game.name)}</h3>
-        <p>${game.installed ? "现在仍装在电脑里" : `最近游玩于 ${formatDate(game.lastPlayed)}`} · 近两周 ${shortHours(game.recent)}</p>
+      card.className = "series-card category-card";
+      card.innerHTML = `
+        <span>${escapeHTML(category.label)}</span>
+        <h3>${escapeHTML(category.title)}</h3>
+        <p>${escapeHTML(category.text)}</p>
+        <div class="category-games">${matched.map((game) => `<a href="${game.store}" target="_blank" rel="noopener">${escapeHTML(game.name)}</a>`).join("")}</div>
       `;
-      card.append(art, copy);
       container.append(card);
     });
   }
 
-  function renderReviews() {
-    const container = $("#featured-review-list");
-    const reviewIds = [1174180, 2531310, 1238810, 2358720, 1659420, 3035570];
+  function renderRevisionCover() {
+    const container = $("#revision-cover");
+    const game = games.find((item) => item.id === 911400);
+    if (!container || !game) return;
+    container.innerHTML = "";
+    container.append(createImage(game, "cover", "", true));
+  }
+
+  function renderVoices() {
+    const container = $("#voice-list");
+    if (!container) return;
     container.innerHTML = "";
 
-    reviewIds.forEach((id) => {
-      const game = games.find((item) => item.id === id);
+    voiceDefinitions.forEach((definition) => {
+      const game = games.find((item) => item.id === definition.id);
       if (!game) return;
+
       const story = document.createElement("article");
       story.className = "review-story";
       story.append(createImage(game, "hero", "review-story-art"));
@@ -306,65 +374,42 @@
       copy.className = "review-story-copy";
       copy.innerHTML = `
         <h3>${escapeHTML(game.name)}</h3>
-        <blockquote>${escapeHTML(reviewExcerpts[id] || "")}</blockquote>
+        <blockquote>“${escapeHTML(definition.quote)}”</blockquote>
       `;
 
       const meta = document.createElement("div");
       meta.className = "review-story-meta";
-      const statusClass = game.recommendation === "Not Recommended" ? "bad" : "good";
-      const statusText = game.recommendation === "Not Recommended" ? "不推荐" : "推荐";
-      meta.innerHTML = `
-        <span class="${statusClass}">${statusText}</span>
-        ${game.reviewUrl ? `<a href="${game.reviewUrl}" target="_blank" rel="noopener">读完整评测 ↗</a>` : ""}
-      `;
+      meta.innerHTML = game.reviewUrl
+        ? `<a href="${game.reviewUrl}" target="_blank" rel="noopener">读完整评测 ↗</a>`
+        : `<a href="${game.store}" target="_blank" rel="noopener">Steam ↗</a>`;
 
       story.append(copy, meta);
       container.append(story);
     });
   }
 
-  function renderSeries() {
-    const container = $("#series-grid");
-    container.innerHTML = "";
-
-    seriesDefinitions.forEach((series) => {
-      const matched = games.filter((game) => series.test.test(game.name));
-      if (!matched.length) return;
-      const card = document.createElement("article");
-      card.className = "series-card";
-      card.innerHTML = `
-        <span>${series.label}</span>
-        <h3>${series.title}</h3>
-        <p>${series.text}</p>
-        <small>${matched.length} 部已记录作品</small>
-      `;
-      container.append(card);
-    });
-  }
-
   let visibleLimit = 20;
   let installedOnly = false;
   let reviewedOnly = false;
+  let libraryInitialized = false;
 
   function setupGenres() {
-    const counts = new Map();
-    games.forEach((game) => game.tags.forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
     const select = $("#genre-filter");
-    [...counts.entries()]
-      .filter(([tag]) => tag)
-      .sort((a, b) => a[0].localeCompare(b[0], "zh-CN"))
-      .forEach(([tag, count]) => {
-        const option = document.createElement("option");
-        option.value = tag;
-        option.textContent = `${tag}（${count}）`;
-        select.append(option);
-      });
+    if (!select || select.options.length > 1) return;
+
+    const tags = [...new Set(games.flatMap((game) => game.tags))].filter(Boolean).sort((a, b) => a.localeCompare(b, "zh-CN"));
+    tags.forEach((tag) => {
+      const option = document.createElement("option");
+      option.value = tag;
+      option.textContent = tag;
+      select.append(option);
+    });
   }
 
   function filteredGames() {
-    const query = $("#game-search-input").value.trim().toLowerCase();
-    const genre = $("#genre-filter").value;
-    const sort = $("#game-sort").value;
+    const query = $("#game-search-input")?.value.trim().toLowerCase() || "";
+    const genre = $("#genre-filter")?.value || "all";
+    const sort = $("#game-sort")?.value || "memory";
 
     const result = games.filter((game) => {
       if (installedOnly && !game.installed) return false;
@@ -376,8 +421,7 @@
 
     result.sort((a, b) => {
       if (sort === "recent") return String(b.lastPlayed || "").localeCompare(String(a.lastPlayed || ""));
-      if (sort === "hours") return b.hours - a.hours;
-      if (sort === "steamPositive") return (b.steamPositive || 0) - (a.steamPositive || 0) || b.hours - a.hours;
+      if (sort === "reviewed") return Number(Boolean(b.reviewUrl)) - Number(Boolean(a.reviewUrl)) || a.archiveIndex - b.archiveIndex;
       if (sort === "name") return a.name.localeCompare(b.name, "zh-CN");
       return a.archiveIndex - b.archiveIndex;
     });
@@ -386,16 +430,17 @@
   }
 
   function renderLibrary(reset = false) {
+    if (!libraryInitialized) return;
     if (reset) visibleLimit = 20;
+
     const filtered = filteredGames();
     const displayed = filtered.slice(0, visibleLimit);
     const container = $("#game-library-grid");
     const resultLine = $("#library-result-line");
-    container.innerHTML = "";
+    if (!container || !resultLine) return;
 
-    resultLine.textContent = filtered.length === games.length
-      ? `这份书架里目前有 ${games.length} 款实际游戏。`
-      : `当前筛选显示 ${filtered.length} 款游戏。`;
+    container.innerHTML = "";
+    resultLine.textContent = `当前显示 ${Math.min(displayed.length, filtered.length)} / ${filtered.length} 项。`;
 
     if (!displayed.length) {
       container.innerHTML = `<div class="empty-library">没有找到符合条件的游戏。</div>`;
@@ -419,7 +464,6 @@
           <h3>${escapeHTML(game.name)}</h3>
           <p>${escapeHTML(game.tags.slice(0, 4).join(" · ") || "Steam 游戏")}</p>
           <div class="library-game-meta">
-            <span>${shortHours(game.hours)}</span>
             <span>${formatDate(game.lastPlayed)}</span>
           </div>
           <div class="library-game-links">
@@ -434,35 +478,65 @@
     });
 
     const loadMore = $("#load-more-games");
-    loadMore.hidden = visibleLimit >= filtered.length;
-    loadMore.textContent = `继续往下翻（还有 ${Math.max(0, filtered.length - visibleLimit)} 款）`;
+    if (loadMore) {
+      loadMore.hidden = visibleLimit >= filtered.length;
+      loadMore.textContent = `继续往下翻（还有 ${Math.max(0, filtered.length - visibleLimit)} 项）`;
+    }
   }
 
-  function toggleFilter(button, setter) {
-    const next = button.getAttribute("aria-pressed") !== "true";
-    button.setAttribute("aria-pressed", String(next));
-    setter(next);
-    renderLibrary(true);
+  function setupLibrary() {
+    const details = $("#library-details");
+    if (!details) return;
+
+    details.addEventListener("toggle", () => {
+      if (!details.open || libraryInitialized) return;
+      libraryInitialized = true;
+      setupGenres();
+      renderLibrary(true);
+    });
+
+    $("#game-search-input")?.addEventListener("input", () => renderLibrary(true));
+    $("#game-sort")?.addEventListener("change", () => renderLibrary(true));
+    $("#genre-filter")?.addEventListener("change", () => renderLibrary(true));
+
+    $("#installed-filter")?.addEventListener("click", (event) => {
+      installedOnly = event.currentTarget.getAttribute("aria-pressed") !== "true";
+      event.currentTarget.setAttribute("aria-pressed", String(installedOnly));
+      renderLibrary(true);
+    });
+
+    $("#reviewed-filter")?.addEventListener("click", (event) => {
+      reviewedOnly = event.currentTarget.getAttribute("aria-pressed") !== "true";
+      event.currentTarget.setAttribute("aria-pressed", String(reviewedOnly));
+      renderLibrary(true);
+    });
+
+    $("#load-more-games")?.addEventListener("click", () => {
+      visibleLimit += 20;
+      renderLibrary();
+    });
   }
 
-  $("#archive-note").textContent = `Steam 游玩记录更新于 2026 年 8 月。完整书架收录 ${games.length} 款实际游戏。`;
+  function setupMotionToggle() {
+    const button = $("#game-motion-toggle");
+    const backdrop = $("#game-world-backdrop");
+    if (!button || !backdrop) return;
+
+    button.addEventListener("click", () => {
+      const paused = button.getAttribute("aria-pressed") !== "true";
+      button.setAttribute("aria-pressed", String(paused));
+      backdrop.classList.toggle("motion-paused", paused);
+      button.textContent = paused ? "继续流动背景" : "暂停流动背景";
+    });
+  }
 
   setupHeroCycle();
   setupCoverRibbon();
-  renderMemories();
-  renderRecent();
-  renderReviews();
-  renderSeries();
-  setupGenres();
-  renderLibrary();
-
-  $("#game-search-input").addEventListener("input", () => renderLibrary(true));
-  $("#game-sort").addEventListener("change", () => renderLibrary(true));
-  $("#genre-filter").addEventListener("change", () => renderLibrary(true));
-  $("#installed-filter").addEventListener("click", (event) => toggleFilter(event.currentTarget, (value) => installedOnly = value));
-  $("#reviewed-filter").addEventListener("click", (event) => toggleFilter(event.currentTarget, (value) => reviewedOnly = value));
-  $("#load-more-games").addEventListener("click", () => {
-    visibleLimit += 20;
-    renderLibrary();
-  });
+  renderFeatured();
+  renderPrinciples();
+  renderCategories();
+  renderRevisionCover();
+  renderVoices();
+  setupLibrary();
+  setupMotionToggle();
 })();
