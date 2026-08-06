@@ -1,0 +1,220 @@
+/* 2026-08-06: content-first refresh while preserving the existing game-page visual language. */
+
+.hero-art-layer.is-active {
+  opacity: .72;
+  filter: brightness(1.12) saturate(1.08) contrast(1.02);
+}
+
+.game-cover-ribbon {
+  opacity: .96;
+}
+
+.game-world-shade {
+  background:
+    linear-gradient(180deg, rgba(8,10,14,.06), rgba(8,10,14,.18) 36%, rgba(8,10,14,.52) 76%, #080a0e 98%),
+    linear-gradient(90deg, rgba(8,10,14,.52), transparent 29%, transparent 72%, rgba(8,10,14,.5));
+}
+
+.games-hero {
+  background: linear-gradient(120deg, rgba(8,11,16,.86), rgba(8,11,16,.38) 64%, rgba(8,11,16,.12));
+}
+
+.game-world-backdrop.motion-paused .game-cover-track,
+.game-world-backdrop.motion-paused .hero-art-layer {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+.featured-game-grid {
+  gap: 18px;
+}
+
+.featured-game-card {
+  min-height: 470px;
+}
+
+.featured-game-card img {
+  opacity: .62;
+}
+
+.featured-game-card:hover img {
+  opacity: .72;
+}
+
+.featured-game-card .memory-card-copy {
+  left: 30px;
+  right: 30px;
+  bottom: 28px;
+}
+
+.featured-game-card h4 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.featured-game-card p {
+  max-width: 680px;
+}
+
+.featured-game-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 15px;
+}
+
+.featured-game-links a {
+  color: #f0eee9;
+  font-size: .72rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.46);
+}
+
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.principle-card {
+  min-height: 285px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border: 1px solid var(--game-line);
+  background:
+    linear-gradient(145deg, rgba(212,164,91,.08), transparent 55%),
+    rgba(255,255,255,.025);
+}
+
+.principle-card > span {
+  color: var(--game-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .72rem;
+}
+
+.principle-card h3 {
+  margin: 24px 0 13px;
+  color: #fff;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.principle-card p {
+  margin: 0;
+  color: var(--game-muted);
+  line-height: 1.78;
+}
+
+.principle-card small {
+  margin-top: auto;
+  padding-top: 22px;
+  color: rgba(240,238,233,.62);
+  line-height: 1.6;
+}
+
+.category-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.category-card {
+  min-height: 310px;
+}
+
+.category-games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.category-games a {
+  padding: 6px 9px;
+  border: 1px solid rgba(255,255,255,.14);
+  color: #e6e2da;
+  background: rgba(255,255,255,.035);
+  font-size: .68rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.revision-cover {
+  overflow: hidden;
+  border: 1px solid var(--game-line);
+  background: #11161e;
+}
+
+.revision-cover img {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  display: block;
+  object-fit: cover;
+}
+
+.voice-list {
+  border-top: 1px solid var(--game-line);
+}
+
+.review-story-copy blockquote {
+  font-size: .94rem;
+}
+
+.library-details > summary {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .principle-grid,
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-game-card {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-art-layer.is-active {
+    opacity: .62;
+  }
+
+  .game-world-shade {
+    background: linear-gradient(180deg, rgba(8,10,14,.12), rgba(8,10,14,.36) 48%, #080a0e 94%);
+  }
+
+  .featured-game-card {
+    min-height: 470px;
+  }
+
+  .featured-game-card .memory-card-copy {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+
+  .review-story {
+    grid-template-columns: 1fr;
+  }
+
+  .review-story-art {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .review-story-meta {
+    justify-items: start;
+  }
+
+  .revision-cover img {
+    min-height: 420px;
+  }
+}
