@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,12 +7,65 @@
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <title>{{ page.title | default: site.title }}</title>
   <style>
-    html { scroll-behavior: smooth; background: #07111f; }
-    body { margin: 0; min-height: 100vh; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    img { max-width: 100%; }
+    :root { --site-bg:#07111f; --site-text:#eef2f7; --site-muted:#a7b2c2; --site-line:rgba(255,255,255,.12); --site-gold:#d8aa56; }
+    html { scroll-behavior:smooth; background:var(--site-bg); }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--site-bg); color:var(--site-text); }
+    img { max-width:100%; }
+    a { color:inherit; }
+    .site-header { display:block !important; position:sticky; top:0; z-index:100; border-bottom:1px solid var(--site-line); background:rgba(7,17,31,.88); backdrop-filter:blur(18px); }
+    .site-nav { width:min(1180px,calc(100vw - 40px)); min-height:68px; margin:0 auto; display:grid; grid-template-columns:1fr auto; align-items:center; gap:22px; }
+    .site-brand { display:flex; align-items:center; gap:11px; color:#fff; text-decoration:none; }
+    .site-brand-mark { width:36px; height:36px; display:grid; place-items:center; border:1px solid rgba(216,170,86,.72); border-radius:50%; color:var(--site-gold); font-family:Georgia,"Songti SC",serif; }
+    .site-brand strong,.site-brand small { display:block; }
+    .site-brand strong { font-family:Georgia,"Songti SC",serif; font-size:.98rem; }
+    .site-brand small { margin-top:1px; color:var(--site-muted); font-size:.66rem; letter-spacing:.05em; }
+    .site-menu { display:flex; align-items:center; gap:22px; }
+    .site-menu a { color:var(--site-muted); text-decoration:none; font-size:.82rem; }
+    .site-menu a:hover { color:#fff; }
+    .site-menu-toggle { display:none; border:1px solid var(--site-line); border-radius:8px; background:transparent; color:#fff; padding:7px 10px; }
+    .site-footer { border-top:1px solid var(--site-line); }
+    .site-footer-inner { width:min(1180px,calc(100vw - 40px)); margin:0 auto; padding:26px 0 38px; display:flex; justify-content:space-between; gap:18px; color:var(--site-muted); font-size:.75rem; }
+    .site-footer a { color:var(--site-muted); text-decoration:none; }
+    .site-footer a:hover { color:#fff; }
+    @media(max-width:820px){
+      .site-nav{grid-template-columns:1fr auto;}
+      .site-menu-toggle{display:block;}
+      .site-menu{position:absolute; left:0; right:0; top:68px; display:none; flex-direction:column; align-items:flex-start; gap:0; padding:12px 20px 18px; border-bottom:1px solid var(--site-line); background:#07111f;}
+      .site-menu.open{display:flex;}
+      .site-menu a{width:100%; padding:11px 0; border-bottom:1px solid rgba(255,255,255,.06);}
+      .site-footer-inner{flex-direction:column;}
+    }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="site-nav">
+      <a class="site-brand" href="{{ '/' | relative_url }}">
+        <span class="site-brand-mark">直</span>
+        <span><strong>唐直 · Tang Zhi</strong><small>RESEARCH · PHOTOGRAPHY · MUSIC · GAMES</small></span>
+      </a>
+      <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">菜单</button>
+      <nav class="site-menu" id="site-menu" aria-label="Primary navigation">
+        <a href="{{ '/' | relative_url }}">主页</a>
+        <a href="{{ '/photography' | relative_url }}">摄影</a>
+        <a href="{{ '/music' | relative_url }}">音乐</a>
+        <a href="{{ '/games' | relative_url }}">游戏</a>
+        <a href="{{ '/notes' | relative_url }}">随笔与记录</a>
+        <a href="{{ '/cv' | relative_url }}">CV</a>
+      </nav>
+    </div>
+  </header>
   <main>{{ content }}</main>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>© {{ 'now' | date: '%Y' }} 唐直 · Tang Zhi</span>
+      <span><a href="{{ '/manage' | relative_url }}">网站维护入口</a> · <a href="https://github.com/Garry-Tang-274">GitHub</a> · <a href="mailto:zhi.25@intl.zju.edu.cn">Email</a></span>
+    </div>
+  </footer>
+  <script>
+    const toggle=document.querySelector('.site-menu-toggle');
+    const menu=document.querySelector('.site-menu');
+    if(toggle&&menu){toggle.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});}
+  </script>
 </body>
 </html>

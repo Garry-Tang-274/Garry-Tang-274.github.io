@@ -1,0 +1,34 @@
+# 主页精选图片。新增图片时，复制一段并修改 image/title/caption/alt。
+# visible: false 可以暂时隐藏；size 可填 standard、wide 或 tall。
+
+- image: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
+  original: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
+  title: 雨中过街
+  caption: 成都，四川 · 2026 · Nikon Z6 II
+  alt: 成都雨天街道上两人共撑一把伞过街
+  size: standard
+  visible: true
+
+- image: /assets/photography/haining-tidal-flat-worker.webp?v=20260806-hq
+  original: /assets/photography/haining-tidal-flat-worker.webp?v=20260806-hq
+  title: 滩涂归途
+  caption: 观海园，海宁 · 2025 · Nikon Z6 II
+  alt: 一名工人从海宁滩涂上走过
+  size: standard
+  visible: true
+
+- image: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
+  original: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
+  title: 相公山
+  caption: 阳朔，广西 · 2025 · DJI Mini 4 Pro
+  alt: 从相公山俯瞰漓江与喀斯特山峰
+  size: wide
+  visible: true
+
+- image: /assets/photography/hangzhou-atrium.webp?v=20260806-hq
+  original: /assets/photography/hangzhou-atrium.webp?v=20260806-hq
+  title: 天井
+  caption: 杭州，浙江 · 2026 · Nikon Z6 II
+  alt: 玻璃连廊围绕的室内天井
+  size: standard
+  visible: true
