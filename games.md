@@ -8,8 +8,8 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/portfolio-media.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/games.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/games-refresh.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/games.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<link rel="stylesheet" href="{{ '/assets/css/games-refresh.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="game-world-backdrop" id="game-world-backdrop" aria-hidden="true">
   <div class="game-hero-art">
@@ -152,5 +152,5 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
   </section>
 </div>
 
-<script src="{{ '/assets/js/steam-games-data.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/games.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/steam-games-data.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+<script src="{{ '/assets/js/games.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
