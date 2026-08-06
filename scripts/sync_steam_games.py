@@ -152,6 +152,10 @@ def normalize_existing_row(row: list[Any]) -> list[Any]:
     return padded
 
 
+def sort_rows(rows: list[list[Any]]) -> list[list[Any]]:
+    return sorted(rows, key=lambda row: (-float(row[2] or 0), str(row[1]).casefold()))
+
+
 def merge_rows(existing_rows: list[list[Any]], remote_games: list[dict[str, Any]]) -> list[list[Any]]:
     existing = {int(row[0]): normalize_existing_row(row) for row in existing_rows if row}
     remote_ids: set[int] = set()
@@ -185,7 +189,7 @@ def merge_rows(existing_rows: list[list[Any]], remote_games: list[dict[str, Any]
         if app_id not in remote_ids:
             row[3] = 0.0
 
-    return sorted(existing.values(), key=lambda row: (-float(row[2] or 0), str(row[1]).casefold()))
+    return sort_rows(list(existing.values()))
 
 
 def validate(remote_games: list[dict[str, Any]], existing_rows: list[list[Any]]) -> None:
@@ -198,37 +202,24 @@ def validate(remote_games: list[dict[str, Any]], existing_rows: list[list[Any]])
         )
 
 
-def write_dataset(rows: list[list[Any]], source: str, remote_count: int) -> bool:
-    timestamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    meta = {
-        "steamId": STEAM_ID,
-        "profile": PROFILE_URL,
-        "source": source,
-        "syncedAt": timestamp,
-        "remotePlayedGames": remote_count,
-        "archiveRows": len(rows),
-        "automatic": True,
-        "aiApiUsed": False,
-    }
+def write_dataset(rows: list[list[Any]]) -> None:
     output = (
         "// Generated automatically by scripts/sync_steam_games.py.\n"
-        f"window.STEAM_SYNC_META={json.dumps(meta, ensure_ascii=False, separators=(',', ':'))};\n"
         f"window.STEAM_GAME_ROWS={json.dumps(rows, ensure_ascii=False, separators=(',', ':'))};\n"
     )
-    previous = DATA_PATH.read_text(encoding="utf-8") if DATA_PATH.exists() else ""
-    if previous == output:
-        return False
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     DATA_PATH.write_text(output, encoding="utf-8")
-    return True
 
 
 def main() -> int:
     existing_rows = read_existing_rows()
+    normalized_existing = sort_rows([normalize_existing_row(row) for row in existing_rows if row])
     remote_games, source = fetch_via_web_api() if API_KEY else fetch_via_xml()
     validate(remote_games, existing_rows)
     merged_rows = merge_rows(existing_rows, remote_games)
-    changed = write_dataset(merged_rows, source, len(remote_games))
+    changed = merged_rows != normalized_existing
+    if changed:
+        write_dataset(merged_rows)
     print(
         json.dumps(
             {
@@ -236,6 +227,7 @@ def main() -> int:
                 "source": source,
                 "remote_played_games": len(remote_games),
                 "archive_rows": len(merged_rows),
+                "ai_api_used": False,
             },
             ensure_ascii=False,
         )
