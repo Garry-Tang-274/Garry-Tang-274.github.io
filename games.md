@@ -9,13 +9,14 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
 <link rel="stylesheet" href="{{ '/assets/css/portfolio-media.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/games.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/games-refresh.css' | relative_url }}">
 
 <div class="game-world-backdrop" id="game-world-backdrop" aria-hidden="true">
-  <div class="game-art-cycle">
-    <img class="game-art-layer is-active" alt="">
-    <img class="game-art-layer" alt="">
+  <div class="game-hero-art">
+    <img class="hero-art-layer is-active" alt="">
+    <img class="hero-art-layer" alt="">
   </div>
-  <div class="game-cover-stream">
+  <div class="game-cover-ribbon">
     <div class="game-cover-track" id="game-cover-track"></div>
   </div>
   <div class="game-world-shade"></div>
@@ -25,83 +26,86 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
   <section class="games-hero">
     <div class="games-hero-copy">
       <p class="games-eyebrow">PLAYED WORLDS · 游戏档案</p>
-      <h1>我不是在给游戏排榜，<br>而是在整理自己为什么会被它们打动。</h1>
+      <h1>我留下的不是游玩时长，<br>而是游戏改变判断的方式。</h1>
       <p class="games-lead">
-        类型、时长和完成度只能说明我打开过什么，不能说明它为什么留下来。
-        我更在意世界是否值得进入，操作是否愿意让我相信这个世界，
-        以及一段体验结束以后，我的判断有没有继续变化。
+        我喜欢的作品不一定属于同一种类型。它们可能是一片愿意让我慢下来的开放世界，
+        一段不怕让我难受的线性叙事，也可能只是五六个小时、却把一种情绪讲得足够完整的独立游戏。
+        这里记录的是我为什么会记住它们。
       </p>
       <div class="games-hero-actions">
-        <a class="games-button primary" href="#principles">从我的游戏观开始</a>
+        <a class="games-button primary" href="#featured-games">看重点作品</a>
+        <a class="games-button" href="#game-categories">按体验方式浏览</a>
         <a class="games-button" href="#library">打开完整书架</a>
         <a class="games-button" href="https://steamcommunity.com/id/Tang0630paradise/recommended/" target="_blank" rel="noopener">Steam 评测 ↗</a>
         <button class="games-button motion-button" id="game-motion-toggle" type="button" aria-pressed="false">暂停流动背景</button>
       </div>
-      <p class="archive-note">封面与背景使用 Steam 官方素材；页面每次只加载一小批，所有游戏会在循环中依次出现。</p>
+      <p class="archive-note" id="archive-note">
+        背景循环使用我玩过的游戏的 Steam 官方封面与商店艺术图；内容感悟由我自己的评测与游玩记录整理。
+      </p>
     </div>
+  </section>
+
+  <section class="games-section featured-games-section" id="featured-games">
+    <div class="games-section-heading">
+      <div>
+        <p class="games-eyebrow">GAMES THAT STAYED WITH ME</p>
+        <h2>真正留下来的十部作品</h2>
+      </div>
+      <p>我不按分数排榜。每一张卡片只回答一个问题：它具体改变了我对游戏的哪一种理解。</p>
+    </div>
+    <div class="memory-grid featured-game-grid" id="featured-game-grid"></div>
   </section>
 
   <section class="games-section principle-section" id="principles">
     <div class="games-section-heading">
       <div>
-        <p class="games-eyebrow">WHAT THE RECORDS ACTUALLY SAY</p>
-        <h2>这些记录真正暴露的是我的判断方式</h2>
+        <p class="games-eyebrow">HOW I JUDGE A GAME</p>
+        <h2>我现在更在意这些事情</h2>
       </div>
-      <p>不是“我玩得最多的类型”，而是我一次次用什么标准决定一款游戏值不值得留下。</p>
+      <p>不是画质、地图大小或流程长度的单项比较，而是作品有没有建立自己的节奏、世界和表达。</p>
     </div>
     <div class="principle-grid" id="principle-grid"></div>
   </section>
 
-  <section class="games-section current-section">
+  <section class="games-section category-section" id="game-categories">
     <div class="games-section-heading">
       <div>
-        <p class="games-eyebrow">WHY I SWITCH BETWEEN GAMES</p>
-        <h2>我最近不是在追一个类型，而是在切换几种状态</h2>
+        <p class="games-eyebrow">WAYS OF PLAYING</p>
+        <h2>类型对我来说，是不同的进入方式</h2>
       </div>
-      <p>不同游戏承担的不是同一种娱乐功能：有时我想进入一个世界，有时只想获得直接反馈，有时则需要一场不可复刻的现场。</p>
+      <p>同一个作品可以跨越多个标签。这里不是商店分类，而是我实际体验游戏时最明显的几种状态。</p>
     </div>
-    <div class="current-world-grid" id="current-world-grid"></div>
+    <div class="series-grid category-grid" id="category-grid"></div>
   </section>
 
   <section class="games-section revision-section">
     <div class="games-section-heading">
       <div>
         <p class="games-eyebrow">A REVIEW CAN KEEP CHANGING</p>
-        <h2>我允许自己推翻刚刚写下的结论</h2>
+        <h2>《刺客信条 3》：我愿意推翻刚写下的结论</h2>
       </div>
-      <p>《刺客信条 3》是最极端的一次：从愤怒差评，到重新理解人物，再到 DLC 结束后的彻底改观。</p>
+      <p>从最初的愤怒差评，到重新理解人物和叙事野心，再到 DLC 结束后的彻底改观。</p>
     </div>
     <div class="revision-story">
       <div class="revision-cover" id="revision-cover"></div>
       <ol class="revision-timeline">
-        <li><span>第一遍</span><strong>“系统、任务和演出几乎把沉浸感全部破坏了。”</strong><p>刚通关时，我只看见它相对艾吉奥三部曲的巨大倒退。</p></li>
-        <li><span>冷静以后</span><strong>“双阵营叙事和历史人物嵌入，其实很有野心。”</strong><p>我开始把剧情 ambition 与糟糕的执行分开评价。</p></li>
-        <li><span>后劲出现</span><strong>康纳、海尔森和华盛顿之间的关系重新压过了最初的愤怒。</strong><p>一款游戏结束后的回响，改变了我对它的整体判断。</p></li>
-        <li><span>DLC 结束</span><strong>我最终把它改成了好评。</strong><p>这不是“客观分数回归正常”，而是承认自己的评价本来就可能随理解继续生长。</p></li>
+        <li><span>第一遍通关</span><strong>我几乎只看见系统、演出和任务设计相对前作的倒退。</strong><p>当时的情绪是真实的，但它不是这部作品的全部。</p></li>
+        <li><span>冷静以后</span><strong>我开始把剧情的野心和执行上的问题分开评价。</strong><p>双阵营叙事、历史人物的嵌入，以及康纳的处境都比第一印象更有分量。</p></li>
+        <li><span>后劲出现</span><strong>杀父、烧村和最后那杯酒，慢慢压过了最初的愤怒。</strong><p>游戏结束后的回响，重新改变了我对人物的理解。</p></li>
+        <li><span>DLC 结束</span><strong>我最终把差评改成了好评。</strong><p>评价不是一次性盖章。我可以承认设计上的糟糕，也可以承认它后来真正打动了我。</p></li>
       </ol>
     </div>
-  </section>
-
-  <section class="games-section returning-section">
-    <div class="games-section-heading">
-      <div>
-        <p class="games-eyebrow">RETURNING PLACES</p>
-        <h2>我反复回去的，不只是几个系列</h2>
-      </div>
-      <p>同一个系列会不断检验我对历史城市、开放世界、团队协作和叙事节奏的期待。</p>
-    </div>
-    <div class="returning-grid" id="returning-grid"></div>
   </section>
 
   <section class="games-section voice-section">
     <div class="games-section-heading">
       <div>
         <p class="games-eyebrow">IN MY OWN WORDS</p>
-        <h2>几段最能说明我为什么玩游戏的话</h2>
+        <h2>几段最接近我原始感受的话</h2>
       </div>
-      <p>不是重新包装过的宣传文案，而是我在真正玩完之后留下的原意。</p>
+      <p>这些不是客观介绍，而是我在真正玩完以后，愿意为一部作品留下的判断。</p>
     </div>
-    <div class="voice-list" id="voice-list"></div>
+    <div class="featured-review-list voice-list" id="voice-list"></div>
   </section>
 
   <section class="games-section library-section" id="library">
@@ -110,7 +114,7 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
         <p class="games-eyebrow">THE COMPLETE SHELF</p>
         <h2>完整游戏书架</h2>
       </div>
-      <p>它留在页面底部，作为可检索的档案，而不是拿来制造“玩了多少”的成就感。</p>
+      <p>它是可检索的档案，不是用来证明“玩得多”。封面只有在展开后才开始加载。</p>
     </div>
 
     <details class="library-details" id="library-details">
@@ -119,7 +123,7 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
         <div class="library-controls">
           <label class="game-search">
             <span>⌕</span>
-            <input id="game-search-input" type="search" placeholder="搜索游戏或类型">
+            <input id="game-search-input" type="search" placeholder="搜索游戏或 Steam 类型标签">
           </label>
           <select id="game-sort" aria-label="游戏排序">
             <option value="memory">按我的档案顺序</option>
@@ -128,7 +132,7 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
             <option value="name">按名称</option>
           </select>
           <select id="genre-filter" aria-label="类型筛选">
-            <option value="all">全部类型</option>
+            <option value="all">全部 Steam 类型</option>
           </select>
           <button class="filter-toggle" id="installed-filter" type="button" aria-pressed="false">当前已安装</button>
           <button class="filter-toggle" id="reviewed-filter" type="button" aria-pressed="false">我写过评测</button>
@@ -143,7 +147,7 @@ description: 唐直关于游戏、叙事、手感、世界与游玩记忆的个�
   <section class="games-closing">
     <p class="games-eyebrow">STILL PLAYING</p>
     <h2>我会继续记录判断，而不只是增加清单。</h2>
-    <p>以后这里更适合加入截图、通关后的长文、系列比较，以及几年以后重新打开同一款游戏时发生的变化。</p>
+    <p>以后这里会继续加入截图、完整长文、系列比较，以及多年后重新打开同一款游戏时发生的变化。</p>
     <a class="games-button" href="{{ '/notes' | relative_url }}">查看游戏随笔与长文 →</a>
   </section>
 </div>
