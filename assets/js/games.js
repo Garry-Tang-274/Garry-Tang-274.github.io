@@ -1,6 +1,6 @@
 (() => {
   const rows = Array.isArray(window.STEAM_GAME_ROWS) ? window.STEAM_GAME_ROWS : [];
-  const games = rows.map(([id, name, hours, recent, installed, recommendation, steamPositive, lastPlayed, tags]) => ({
+  const games = rows.map(([id, name, hours, recent, installed, recommendation, steamPositive, lastPlayed, tags], index) => ({
     id,
     name,
     hours,
@@ -10,25 +10,101 @@
     steamPositive,
     lastPlayed,
     tags: tags ? tags.split("|").filter(Boolean) : [],
+    archiveIndex: index,
     store: `https://store.steampowered.com/app/${id}/`,
     reviewUrl: recommendation ? `https://steamcommunity.com/id/Tang0630paradise/recommended/${id}/` : null,
   }));
+
   if (!games.length) return;
 
-  const featuredReviews = {
-    1238810: "快100小时了，多人模式快60小时了，终于到了40级，不再是薯条了。对我这种 FPS 废物来说，这是一个上手很慢的游戏，前面根本看不到人就被杀了。就算这样我依然很爱战地五。沉浸感、使命感、悲壮感、残酷感——这是战地独有的浪漫魅力。",
-    1174180: "初次玩是在高考完的暑假，打开一个小时后放弃。大一下返校报道日，外面下着雨，随机歌单切到了 That's the Way It Is，于是一时兴起下了回来。天正半黑，雨声刚好能透过耳机听见——我知道，这次我不会再浅尝辄止了。",
-    2483190: "手感很棒，比四五代都提升了不少，玩法依旧优秀。主要问题是城市风景的塑料感、光追优化和远景 LOD。建议放下期待来玩：缺点不少，但依然算得上八十分左右的良作。",
-    2358720: "作为我玩的第一款以战斗为主的动作游戏，它对新手相当友好。最打动我的不是难度，而是它打破了早年间单一的‘中式美学’，把泥塑、怪物和民间视觉元素真正融进了世界里。",
-    1659420: "目前为止玩过最好的寻宝游戏。跑路和干架的重复当然存在，但画面、演出和爽快剧情彻底压过了这些短板。简单却有温情的故事、扎实的地图设计和流畅动作，已经足以组成一部难得的佳作。",
-    3035570: "噱头是回归老刺客，但除了地图大小，实际体验和老作品没有多少可比性。最难接受的是跑酷、战斗和镜头共同造成的迟滞感；情怀无法抵消操作和关卡设计上的问题。",
-  };
-
   const $ = (selector, scope = document) => scope.querySelector(selector);
-  const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-
   const officialBase = (id) => `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${id}`;
   const legacyBase = (id) => `https://cdn.cloudflare.steamstatic.com/steam/apps/${id}`;
+
+  const reviewExcerpts = {
+    1238810: "对我这种 FPS 新手来说，它的上手很慢。前面经常根本看不到人就被杀了，但我依然很爱《战地 V》。沉浸感、使命感、悲壮感和残酷感，是战地独有的魅力。",
+    1174180: "第一次打开一个小时后就放弃了。后来返校那天外面下着雨，随机歌单放到 That's the Way It Is，我重新把它下载回来。那一刻我知道，这次不会再浅尝辄止。",
+    2531310: "这不是一款可以随随便便玩的游戏。它有争议，但正因为如此，亲身经历以后一定会留下自己的判断。最后愤怒也好、赞叹也好，它带来的情绪体验很难被替代。",
+    2358720: "最打动我的不只是战斗，而是它打破了很单一的‘中式美学’，把泥塑、怪物和民间视觉元素真正融进了世界。它有瑕疵，但能感到制作上的诚意。",
+    1659420: "画面、演出和爽快剧情彻底压过了跑路与战斗的重复。简单但有温情的故事、扎实的地图设计和流畅动作，已经足够组成一部难得的佳作。",
+    3035570: "它最让我失望的不是情怀没兑现，而是跑酷、战斗和镜头共同造成的迟滞。地图和画质变好了，但操作与关卡设计让我第一次差点放弃一部刺客信条。",
+  };
+
+  const memoryChapters = [
+    {
+      id: 1174180,
+      label: "一段生活与一款游戏重合",
+      title: "有些作品需要等到合适的时候",
+      text: "《荒野大镖客 2》第一次只玩了一个小时。真正进入它，是后来一个下雨的返校日。游戏本身没有变，变化的是我当时愿意给它的时间。",
+    },
+    {
+      id: 2531310,
+      label: "叙事不一定让人舒服",
+      title: "留下来的往往不是圆满",
+      text: "我很在意游戏能不能制造真正的情绪和思考。它可以让我愤怒、迟疑甚至反感，但只要这些感受来自完整的体验，就比一段安全的剧情更难忘。",
+    },
+    {
+      id: 1238810,
+      label: "多人游戏的临场变化",
+      title: "无法复刻的一局，比胜负更重要",
+      text: "战地吸引我的不是竞技排名，而是前线突然崩开、小队临时改变路线、原本陌生的人自然完成配合。那种现场感每一局都不一样。",
+    },
+    {
+      id: 753640,
+      label: "探索与理解",
+      title: "世界不是地图上的任务清单",
+      text: "我喜欢那些不急着把答案塞给玩家的游戏。探索、观察和自己建立联系的过程，比不断清图和领取奖励更容易让我真正进入一个世界。",
+    },
+  ];
+
+  const seriesDefinitions = [
+    {
+      label: "ASSASSIN'S CREED",
+      title: "刺客信条",
+      test: /刺客信条|Assassin/i,
+      text: "从艾吉奥到神话三部曲，再到对《幻景》的强烈失望。这个系列几乎完整记录了我对历史城市、跑酷和开放世界设计的偏好。",
+    },
+    {
+      label: "BATTLEFIELD",
+      title: "战地",
+      test: /战地|Battlefield/i,
+      text: "我并不是传统 FPS 玩家，但大战场、历史氛围和偶然形成的团队协作，让它成为少数会长期回去的多人游戏。",
+    },
+    {
+      label: "METRO",
+      title: "地铁",
+      test: /地铁|Metro/i,
+      text: "压抑的空间、有限资源和缓慢建立起来的末世氛围。它吸引我的不是单纯射击，而是人在地下世界里怎样继续生活。",
+    },
+    {
+      label: "RUSTY LAKE",
+      title: "锈湖",
+      test: /Rusty Lake|Cube Escape|The Past Within|White Door/i,
+      text: "体量不大，却一直保持自己的视觉、谜题和叙事方式。它像一套不断补全的私人暗号。",
+    },
+    {
+      label: "TOMB RAIDER",
+      title: "古墓丽影",
+      test: /Tomb Raider|古墓丽影/i,
+      text: "它代表的是更直接的冒险乐趣：探索遗迹、穿越环境、解谜和一段足够顺畅的电影式旅程。",
+    },
+    {
+      label: "WARHAMMER 40,000",
+      title: "战锤 40K",
+      test: /Warhammer 40,000|战锤/i,
+      text: "桌面模型和电子游戏在这里连到了一起。比起单一作品，我更在意这个庞大世界怎样在不同媒介里继续展开。",
+    },
+  ];
+
+  function escapeHTML(value = "") {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    })[char]);
+  }
 
   function candidates(game, kind = "cover") {
     if (kind === "hero") {
@@ -50,13 +126,13 @@
     ];
   }
 
-  function setAsset(img, game, kind = "cover") {
+  function setAsset(img, game, kind = "cover", eager = false) {
     const urls = candidates(game, kind);
     let index = 0;
     img.alt = game.name;
     img.referrerPolicy = "no-referrer";
     img.decoding = "async";
-    img.loading = "lazy";
+    img.loading = eager ? "eager" : "lazy";
 
     const loadNext = () => {
       if (index >= urls.length) {
@@ -71,136 +147,208 @@
     loadNext();
   }
 
-  function shuffled(list, seed = 7) {
-    const copy = [...list];
-    let state = seed;
-    for (let i = copy.length - 1; i > 0; i--) {
-      state = (state * 9301 + 49297) % 233280;
-      const j = Math.floor((state / 233280) * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
+  function createImage(game, kind = "cover", className = "", eager = false) {
+    const img = document.createElement("img");
+    if (className) img.className = className;
+    setAsset(img, game, kind, eager);
+    return img;
   }
 
-  const backgroundGames = shuffled(games, 274);
-
-  function renderLane(lane) {
-    const kind = lane.dataset.kind || "cover";
-    const size = Number(lane.dataset.size || 16);
-    const offset = Number(lane.dataset.offset || 0) % backgroundGames.length;
-    const batch = Array.from({ length: size }, (_, i) => backgroundGames[(offset + i) % backgroundGames.length]);
-    lane.innerHTML = "";
-
-    const makeTrack = () => {
-      const track = document.createElement("div");
-      track.className = "art-track";
-      batch.forEach((game) => {
-        const tile = document.createElement("div");
-        tile.className = "art-tile";
-        const image = document.createElement("img");
-        setAsset(image, game, kind);
-        const label = document.createElement("span");
-        label.textContent = game.name;
-        tile.append(image, label);
-        track.append(tile);
-      });
-      return track;
-    };
-
-    lane.append(makeTrack(), makeTrack());
-    lane.dataset.offset = String((offset + size) % backgroundGames.length);
-  }
-
-  const lanes = $$(".art-lane");
-  lanes.forEach(renderLane);
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    lanes.forEach((lane, laneIndex) => {
-      window.setInterval(() => {
-        lane.classList.add("is-refreshing");
-        window.setTimeout(() => {
-          renderLane(lane);
-          lane.classList.remove("is-refreshing");
-        }, 480);
-      }, 26000 + laneIndex * 4700);
-    });
-  }
-
-  const formatHours = (hours) => `${Number(hours).toLocaleString("zh-CN", { maximumFractionDigits: 1 })} h`;
-  const formatDate = (iso) => {
+  function formatDate(iso) {
     if (!iso) return "未记录";
     const date = new Date(iso);
     if (Number.isNaN(date.getTime())) return iso;
     return new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
-  };
-
-  function createImage(game, kind = "cover", className = "") {
-    const img = document.createElement("img");
-    if (className) img.className = className;
-    setAsset(img, game, kind);
-    return img;
   }
 
-  function renderRecent() {
-    const container = $("#recent-game-grid");
-    const recent = games.filter((game) => game.recent > 0).sort((a, b) => b.recent - a.recent).slice(0, 8);
+  function shortHours(value) {
+    const n = Number(value || 0);
+    if (n < 1) return "不到 1 小时";
+    return `${n.toLocaleString("zh-CN", { maximumFractionDigits: 1 })} 小时`;
+  }
+
+  function setupHeroCycle() {
+    const layers = [...document.querySelectorAll(".hero-art-layer")];
+    if (layers.length < 2) return;
+
+    const ordered = [...games].sort((a, b) => b.hours - a.hours || a.archiveIndex - b.archiveIndex);
+    let gameIndex = 0;
+    let activeLayer = 0;
+
+    setAsset(layers[0], ordered[0], "hero", true);
+    layers[0].classList.add("is-active");
+    setAsset(layers[1], ordered[1], "hero", true);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    window.setInterval(() => {
+      gameIndex = (gameIndex + 1) % ordered.length;
+      const nextLayer = 1 - activeLayer;
+      const nextGame = ordered[gameIndex];
+      const preload = new Image();
+      const urls = candidates(nextGame, "hero");
+      let candidateIndex = 0;
+
+      const tryLoad = () => {
+        if (candidateIndex >= urls.length) return;
+        preload.src = urls[candidateIndex++];
+      };
+
+      preload.onload = () => {
+        layers[nextLayer].src = preload.src;
+        layers[nextLayer].alt = "";
+        layers[nextLayer].classList.add("is-active");
+        layers[activeLayer].classList.remove("is-active");
+        activeLayer = nextLayer;
+      };
+      preload.onerror = tryLoad;
+      tryLoad();
+    }, 9000);
+  }
+
+  function setupCoverRibbon() {
+    const track = $("#game-cover-track");
+    if (!track) return;
+
+    const batchSize = 14;
+    let offset = 0;
+
+    function renderBatch() {
+      const batch = Array.from({ length: batchSize }, (_, i) => games[(offset + i) % games.length]);
+      track.innerHTML = "";
+
+      const appendBatch = () => {
+        batch.forEach((game) => {
+          const item = document.createElement("div");
+          item.className = "cover-ribbon-item";
+          item.append(createImage(game, "cover"));
+          track.append(item);
+        });
+      };
+
+      appendBatch();
+      appendBatch();
+    }
+
+    renderBatch();
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    track.addEventListener("animationiteration", () => {
+      offset = (offset + batchSize) % games.length;
+      track.style.animation = "none";
+      renderBatch();
+      void track.offsetWidth;
+      track.style.animation = "";
+    });
+  }
+
+  function renderMemories() {
+    const container = $("#memory-grid");
     container.innerHTML = "";
 
-    recent.forEach((game) => {
+    memoryChapters.forEach((chapter) => {
+      const game = games.find((item) => item.id === chapter.id);
+      if (!game) return;
       const card = document.createElement("article");
-      card.className = "recent-card";
-      const img = createImage(game);
+      card.className = "memory-card";
+      card.append(createImage(game, "hero"));
       const copy = document.createElement("div");
-      copy.className = "recent-card-copy";
+      copy.className = "memory-card-copy";
       copy.innerHTML = `
-        <span>近两周 ${formatHours(game.recent)}</span>
-        <h3>${escapeHTML(game.name)}</h3>
-        <p>累计 ${formatHours(game.hours)} · ${game.installed ? "当前已安装" : `最后游玩 ${formatDate(game.lastPlayed)}`}</p>
+        <span>${escapeHTML(chapter.label)}</span>
+        <h3>${escapeHTML(chapter.title)}</h3>
+        <p>${escapeHTML(chapter.text)}</p>
       `;
-      card.append(img, copy);
+      card.append(copy);
       container.append(card);
     });
   }
 
-  function renderRanking() {
-    const container = $("#playtime-ranking");
-    const top = [...games].sort((a, b) => b.hours - a.hours).slice(0, 12);
-    const max = top[0]?.hours || 1;
-    container.innerHTML = "";
+  function renderRecent() {
+    const container = $("#recent-game-grid");
+    const recent = games
+      .filter((game) => game.recent > 0)
+      .sort((a, b) => b.recent - a.recent || b.hours - a.hours)
+      .slice(0, 8);
 
-    top.forEach((game, index) => {
-      const row = document.createElement("article");
-      row.className = "rank-row";
-      row.innerHTML = `
-        <span class="rank-number">${String(index + 1).padStart(2, "0")}</span>
-        <div class="rank-cover-slot"></div>
-        <div class="rank-main">
-          <h3>${escapeHTML(game.name)}</h3>
-          <div class="rank-bar"><i style="width:${Math.max(4, game.hours / max * 100)}%"></i></div>
-        </div>
-        <strong class="rank-hours">${formatHours(game.hours)}</strong>
+    container.innerHTML = "";
+    recent.forEach((game) => {
+      const card = document.createElement("article");
+      card.className = "recent-card";
+      const art = document.createElement("div");
+      art.className = "recent-card-art";
+      art.append(createImage(game, "hero"));
+      const copy = document.createElement("div");
+      copy.className = "recent-card-copy";
+      copy.innerHTML = `
+        <h3>${escapeHTML(game.name)}</h3>
+        <p>${game.installed ? "现在仍装在电脑里" : `最近游玩于 ${formatDate(game.lastPlayed)}`} · 近两周 ${shortHours(game.recent)}</p>
       `;
-      $(".rank-cover-slot", row).append(createImage(game, "cover", "rank-cover"));
-      container.append(row);
+      card.append(art, copy);
+      container.append(card);
     });
   }
 
-  function renderGenres() {
-    const counts = new Map();
-    games.forEach((game) => {
-      game.tags.forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1));
-    });
-    const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
-    const max = top[0]?.[1] || 1;
-    const container = $("#genre-bars");
-    container.innerHTML = top.map(([tag, count]) => `
-      <div class="genre-row">
-        <span>${escapeHTML(tag)}</span>
-        <i><b style="width:${count / max * 100}%"></b></i>
-        <strong>${count}</strong>
-      </div>
-    `).join("");
+  function renderReviews() {
+    const container = $("#featured-review-list");
+    const reviewIds = [1174180, 2531310, 1238810, 2358720, 1659420, 3035570];
+    container.innerHTML = "";
 
+    reviewIds.forEach((id) => {
+      const game = games.find((item) => item.id === id);
+      if (!game) return;
+      const story = document.createElement("article");
+      story.className = "review-story";
+      story.append(createImage(game, "hero", "review-story-art"));
+
+      const copy = document.createElement("div");
+      copy.className = "review-story-copy";
+      copy.innerHTML = `
+        <h3>${escapeHTML(game.name)}</h3>
+        <blockquote>${escapeHTML(reviewExcerpts[id] || "")}</blockquote>
+      `;
+
+      const meta = document.createElement("div");
+      meta.className = "review-story-meta";
+      const statusClass = game.recommendation === "Not Recommended" ? "bad" : "good";
+      const statusText = game.recommendation === "Not Recommended" ? "不推荐" : "推荐";
+      meta.innerHTML = `
+        <span class="${statusClass}">${statusText}</span>
+        ${game.reviewUrl ? `<a href="${game.reviewUrl}" target="_blank" rel="noopener">读完整评测 ↗</a>` : ""}
+      `;
+
+      story.append(copy, meta);
+      container.append(story);
+    });
+  }
+
+  function renderSeries() {
+    const container = $("#series-grid");
+    container.innerHTML = "";
+
+    seriesDefinitions.forEach((series) => {
+      const matched = games.filter((game) => series.test.test(game.name));
+      if (!matched.length) return;
+      const card = document.createElement("article");
+      card.className = "series-card";
+      card.innerHTML = `
+        <span>${series.label}</span>
+        <h3>${series.title}</h3>
+        <p>${series.text}</p>
+        <small>${matched.length} 部已记录作品</small>
+      `;
+      container.append(card);
+    });
+  }
+
+  let visibleLimit = 20;
+  let installedOnly = false;
+  let reviewedOnly = false;
+
+  function setupGenres() {
+    const counts = new Map();
+    games.forEach((game) => game.tags.forEach((tag) => counts.set(tag, (counts.get(tag) || 0) + 1)));
     const select = $("#genre-filter");
     [...counts.entries()]
       .filter(([tag]) => tag)
@@ -213,68 +361,6 @@
       });
   }
 
-  function renderFranchises() {
-    const definitions = [
-      { label: "ASSASSIN'S CREED", title: "刺客信条", test: /刺客信条|Assassin/i },
-      { label: "BATTLEFIELD", title: "战地", test: /战地|Battlefield/i },
-      { label: "METRO", title: "地铁", test: /地铁|Metro/i },
-      { label: "TOMB RAIDER", title: "古墓丽影", test: /Tomb Raider|古墓丽影/i },
-      { label: "RUSTY LAKE", title: "锈湖", test: /Rusty Lake|Cube Escape|The Past Within/i },
-      { label: "WARHAMMER", title: "战锤 40,000", test: /Warhammer 40,000|战锤/i },
-    ];
-
-    const container = $("#franchise-grid");
-    container.innerHTML = definitions.map((series) => {
-      const matched = games.filter((game) => series.test.test(game.name));
-      const hours = matched.reduce((sum, game) => sum + game.hours, 0);
-      return `
-        <article class="franchise-card">
-          <span>${series.label}</span>
-          <h3>${series.title}</h3>
-          <strong>${hours.toFixed(1)} h</strong>
-          <p>${matched.length} 款游戏</p>
-        </article>
-      `;
-    }).join("");
-  }
-
-  function truncate(text, max = 330) {
-    if (!text) return "";
-    const normalized = text.replace(/\s+/g, " ").trim();
-    return normalized.length > max ? `${normalized.slice(0, max - 1)}…` : normalized;
-  }
-
-  function renderReviews() {
-    const ids = [1238810, 1174180, 2483190, 2358720, 1659420, 3035570];
-    const featured = ids.map((id) => games.find((game) => game.id === id)).filter(Boolean);
-    const container = $("#featured-review-grid");
-    container.innerHTML = "";
-
-    featured.forEach((game) => {
-      const card = document.createElement("article");
-      card.className = "review-card";
-      const statusClass = game.recommendation === "Not Recommended" ? "bad" : "good";
-      const statusText = game.recommendation === "Not Recommended" ? "不推荐" : "推荐";
-      card.innerHTML = `
-        <div class="review-card-head">
-          <div class="review-cover-slot"></div>
-          <div>
-            <h3>${escapeHTML(game.name)}</h3>
-            <span class="review-status ${statusClass}">${statusText} · ${formatHours(game.hours)}</span>
-          </div>
-        </div>
-        <blockquote>${escapeHTML(truncate(featuredReviews[game.id], 360))}</blockquote>
-        ${game.reviewUrl ? `<a href="${game.reviewUrl}" target="_blank" rel="noopener">阅读 Steam 原评测 ↗</a>` : ""}
-      `;
-      $(".review-cover-slot", card).append(createImage(game));
-      container.append(card);
-    });
-  }
-
-  let visibleLimit = 24;
-  let installedOnly = false;
-  let reviewedOnly = false;
-
   function filteredGames() {
     const query = $("#game-search-input").value.trim().toLowerCase();
     const genre = $("#genre-filter").value;
@@ -285,27 +371,31 @@
       if (reviewedOnly && !game.reviewUrl) return false;
       if (genre !== "all" && !game.tags.includes(genre)) return false;
       if (!query) return true;
-      const haystack = [game.name, game.tags.join(" ")].join(" ").toLowerCase();
-      return haystack.includes(query);
+      return `${game.name} ${game.tags.join(" ")}`.toLowerCase().includes(query);
     });
 
     result.sort((a, b) => {
-      if (sort === "recent") return b.recent - a.recent || b.hours - a.hours;
-      if (sort === "lastPlayed") return String(b.lastPlayed || "").localeCompare(String(a.lastPlayed || ""));
+      if (sort === "recent") return String(b.lastPlayed || "").localeCompare(String(a.lastPlayed || ""));
+      if (sort === "hours") return b.hours - a.hours;
       if (sort === "steamPositive") return (b.steamPositive || 0) - (a.steamPositive || 0) || b.hours - a.hours;
       if (sort === "name") return a.name.localeCompare(b.name, "zh-CN");
-      return b.hours - a.hours;
+      return a.archiveIndex - b.archiveIndex;
     });
+
     return result;
   }
 
-  function renderLibrary(resetLimit = false) {
-    if (resetLimit) visibleLimit = 24;
+  function renderLibrary(reset = false) {
+    if (reset) visibleLimit = 20;
     const filtered = filteredGames();
     const displayed = filtered.slice(0, visibleLimit);
     const container = $("#game-library-grid");
+    const resultLine = $("#library-result-line");
     container.innerHTML = "";
-    $("#library-count").textContent = filtered.length;
+
+    resultLine.textContent = filtered.length === games.length
+      ? `这份书架里目前有 ${games.length} 款实际游戏。`
+      : `当前筛选显示 ${filtered.length} 款游戏。`;
 
     if (!displayed.length) {
       container.innerHTML = `<div class="empty-library">没有找到符合条件的游戏。</div>`;
@@ -314,25 +404,23 @@
     displayed.forEach((game) => {
       const card = document.createElement("article");
       card.className = "library-game-card";
-      const status = game.recommendation === "Recommended"
-        ? `<span>我的推荐</span>`
-        : game.recommendation === "Not Recommended"
-          ? `<span>我的不推荐</span>`
-          : "";
-      const positive = game.steamPositive != null ? `<span>Steam ${game.steamPositive}%</span>` : "";
-      const installed = game.installed ? `<span>已安装</span>` : "";
+      const badges = [
+        game.installed ? "已安装" : "",
+        game.recommendation === "Recommended" ? "我的推荐" : "",
+        game.recommendation === "Not Recommended" ? "我的不推荐" : "",
+      ].filter(Boolean).map((label) => `<span>${label}</span>`).join("");
 
       card.innerHTML = `
         <div class="library-game-cover">
           <div class="library-cover-slot"></div>
-          <div class="library-game-badges">${installed}${status}${positive}</div>
+          <div class="library-game-badges">${badges}</div>
         </div>
         <div class="library-game-copy">
           <h3>${escapeHTML(game.name)}</h3>
           <p>${escapeHTML(game.tags.slice(0, 4).join(" · ") || "Steam 游戏")}</p>
           <div class="library-game-meta">
-            <span>累计 <strong>${formatHours(game.hours)}</strong></span>
-            <span>${game.recent > 0 ? `近两周 ${formatHours(game.recent)}` : formatDate(game.lastPlayed)}</span>
+            <span>${shortHours(game.hours)}</span>
+            <span>${formatDate(game.lastPlayed)}</span>
           </div>
           <div class="library-game-links">
             <a href="${game.store}" target="_blank" rel="noopener">商店 ↗</a>
@@ -340,37 +428,32 @@
           </div>
         </div>
       `;
+
       $(".library-cover-slot", card).append(createImage(game));
       container.append(card);
     });
 
     const loadMore = $("#load-more-games");
     loadMore.hidden = visibleLimit >= filtered.length;
-    loadMore.textContent = `继续显示（还剩 ${Math.max(0, filtered.length - visibleLimit)} 款）`;
+    loadMore.textContent = `继续往下翻（还有 ${Math.max(0, filtered.length - visibleLimit)} 款）`;
   }
 
-  function toggleFilter(button, stateSetter) {
+  function toggleFilter(button, setter) {
     const next = button.getAttribute("aria-pressed") !== "true";
     button.setAttribute("aria-pressed", String(next));
-    stateSetter(next);
+    setter(next);
     renderLibrary(true);
   }
 
-  function escapeHTML(value = "") {
-    return String(value).replace(/[&<>"']/g, (char) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;",
-    })[char]);
-  }
+  $("#archive-note").textContent = `Steam 游玩记录更新于 2026 年 8 月。完整书架收录 ${games.length} 款实际游戏。`;
 
+  setupHeroCycle();
+  setupCoverRibbon();
+  renderMemories();
   renderRecent();
-  renderRanking();
-  renderGenres();
-  renderFranchises();
   renderReviews();
+  renderSeries();
+  setupGenres();
   renderLibrary();
 
   $("#game-search-input").addEventListener("input", () => renderLibrary(true));
@@ -379,7 +462,7 @@
   $("#installed-filter").addEventListener("click", (event) => toggleFilter(event.currentTarget, (value) => installedOnly = value));
   $("#reviewed-filter").addEventListener("click", (event) => toggleFilter(event.currentTarget, (value) => reviewedOnly = value));
   $("#load-more-games").addEventListener("click", () => {
-    visibleLimit += 24;
+    visibleLimit += 20;
     renderLibrary();
   });
 })();
