@@ -1,0 +1,151 @@
+name: Finalize photography assets
+
+on:
+  push:
+    branches:
+      - fix/finalize-photography-20260809
+    paths:
+      - '.github/workflows/finalize-photography.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout high-quality source assets
+        uses: actions/checkout@v4
+        with:
+          ref: fix/high-quality-photography-20260809
+          path: source
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 0
+      - name: Install deterministic image tools
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick libheif-examples python3-pip
+          python3 -m pip install --quiet pillow opencv-python-headless numpy
+      - name: Copy three sharp editions
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=source/assets/photography/featured
+          dst=site/assets/photography/featured
+          mkdir -p "$dst"
+          cp "$src/guangxi-man-cormorant-2026.avif" "$dst/guangxi-man-cormorant-2026.avif"
+          cp "$src/haining-tidal-flat-worker-2025.avif" "$dst/haining-tidal-flat-worker-2025.avif"
+          cp "$src/yunnan-hani-terraces-village-2023.avif" "$dst/yunnan-hani-terraces-village-2023.avif"
+          test "$(stat -c%s "$dst/guangxi-man-cormorant-2026.avif")" -ge 25000
+          test "$(stat -c%s "$dst/haining-tidal-flat-worker-2025.avif")" -ge 45000
+          test "$(stat -c%s "$dst/yunnan-hani-terraces-village-2023.avif")" -ge 37000
+      - name: Make the Qianjiang watermark smaller
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='source/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif'
+          work="$RUNNER_TEMP/pano.png"
+          outpng="$RUNNER_TEMP/pano-smallwm.png"
+          dst='site/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif'
+          convert "$src" "$work"
+          python3 - "$work" "$outpng" <<'PY'
+          import sys
+          import cv2
+          import numpy as np
+          from PIL import Image
+
+          src, out = sys.argv[1], sys.argv[2]
+          rgb = np.array(Image.open(src).convert('RGB'))
+          h, w = rgb.shape[:2]
+          if w < 4000:
+              raise SystemExit(f'Panorama source unexpectedly small: {w}x{h}')
+
+          # Existing signature is confined to the lower central water area.
+          x0, x1 = int(w * 0.36), int(w * 0.64)
+          y0, y1 = int(h * 0.80), int(h * 0.985)
+          roi = rgb[y0:y1, x0:x1]
+          mx = roi.max(axis=2)
+          mn = roi.min(axis=2)
+          neutral_bright = (mn > 150) & ((mx - mn) < 58)
+          mask = np.zeros((h, w), dtype=np.uint8)
+          mask[y0:y1, x0:x1][neutral_bright] = 255
+
+          n, labels, stats, _ = cv2.connectedComponentsWithStats(mask, 8)
+          keep = np.zeros_like(mask)
+          for i in range(1, n):
+              x, y, ww, hh, area = stats[i]
+              cx = x + ww / 2
+              if 2 <= area <= 30000 and (w * 0.38) <= cx <= (w * 0.62) and y >= h * 0.80:
+                  keep[labels == i] = 255
+          if keep.max() == 0:
+              raise SystemExit('Existing signature could not be detected safely.')
+
+          ys, xs = np.where(keep > 0)
+          bx0, bx1 = max(0, xs.min() - 18), min(w, xs.max() + 19)
+          by0, by1 = max(0, ys.min() - 18), min(h, ys.max() + 19)
+          sig_mask = keep[by0:by1, bx0:bx1]
+          sig_rgba = np.zeros((sig_mask.shape[0], sig_mask.shape[1], 4), dtype=np.uint8)
+          sig_rgba[..., :3] = 255
+          sig_rgba[..., 3] = (sig_mask.astype(np.float32) * 0.78).astype(np.uint8)
+
+          # Remove only the original white signature strokes using deterministic inpainting.
+          dilated = cv2.dilate(keep, np.ones((5, 5), np.uint8), iterations=1)
+          cleaned = cv2.inpaint(cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR), dilated, 5, cv2.INPAINT_TELEA)
+          cleaned = cv2.cvtColor(cleaned, cv2.COLOR_BGR2RGB)
+
+          base = Image.fromarray(cleaned).convert('RGBA')
+          sig = Image.fromarray(sig_rgba, 'RGBA')
+          target_w = max(150, int(w * 0.032))
+          target_h = max(1, round(sig.height * target_w / sig.width))
+          sig = sig.resize((target_w, target_h), Image.Resampling.LANCZOS)
+          px = (w - target_w) // 2
+          py = h - target_h - int(h * 0.045)
+          base.alpha_composite(sig, (px, py))
+          base.convert('RGB').save(out, quality=96)
+          print(f'{w}x{h}; old watermark bbox={bx0},{by0},{bx1},{by1}; new={target_w}x{target_h}@{px},{py}')
+          PY
+          convert "$outpng" -quality 62 "$dst"
+          dims=$(identify -format '%w %h' "$dst")
+          echo "Final panorama: $dims, $(stat -c%s "$dst") bytes"
+          test "$(stat -c%s "$dst")" -gt 30000
+      - name: Bust photo caches in site content
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          files = [Path('site/index.md'), Path('site/photography.md'), Path('site/_data/home_gallery.yml')]
+          names = [
+              'hangzhou-qianjiang-panorama-2026.avif',
+              'haining-tidal-flat-worker-2025.avif',
+              'guangxi-man-cormorant-2026.avif',
+              'yunnan-hani-terraces-village-2023.avif',
+          ]
+          tag = '?v=20260809-hq-final-smallwm'
+          for path in files:
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              for name in names:
+                  text = re.sub(re.escape(name) + r'(?:\?v=[A-Za-z0-9._-]+)?', name + tag, text)
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit final photography state to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd site
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/photography/featured/*.avif index.md photography.md _data/home_gallery.yml
+          if git diff --cached --quiet; then
+              echo 'No final changes to commit.'
+              exit 0
+          fi
+          git commit -m 'Finalize sharp photography assets and smaller panorama watermark'
+          git push origin HEAD:main
