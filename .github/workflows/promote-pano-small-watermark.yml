@@ -1,0 +1,115 @@
+name: Promote HQ panorama with smaller watermark
+
+on:
+  push:
+    branches:
+      - fix/promote-hq-pano-smallwm-20260809
+    paths:
+      - '.github/workflows/promote-pano-small-watermark.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout HQ source branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/high-quality-photography-20260809
+          path: source
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 0
+      - name: Install deterministic image tools
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick libheif-examples python3-pip
+          python3 -m pip install --quiet pillow opencv-python-headless numpy
+      - name: Reduce watermark without changing panorama content
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='source/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif'
+          work="$RUNNER_TEMP/pano.png"
+          outpng="$RUNNER_TEMP/pano-smallwm.png"
+          dst='site/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif'
+          magick "$src" "$work"
+          python3 - "$work" "$outpng" <<'PY'
+          import sys
+          import cv2
+          import numpy as np
+          from PIL import Image
+
+          src, out = sys.argv[1], sys.argv[2]
+          rgb = np.array(Image.open(src).convert('RGB'))
+          h, w = rgb.shape[:2]
+
+          # Only inspect the lower-central water area where the existing signature lives.
+          x0, x1 = int(w * 0.36), int(w * 0.64)
+          y0, y1 = int(h * 0.82), int(h * 0.985)
+          roi = rgb[y0:y1, x0:x1]
+          mx = roi.max(axis=2)
+          mn = roi.min(axis=2)
+          neutral_bright = (mn > 155) & ((mx - mn) < 55)
+
+          # Keep the signature strokes and avoid touching the rest of the photograph.
+          mask = np.zeros((h, w), dtype=np.uint8)
+          mask[y0:y1, x0:x1][neutral_bright] = 255
+          n, labels, stats, _ = cv2.connectedComponentsWithStats(mask, 8)
+          keep = np.zeros_like(mask)
+          for i in range(1, n):
+              x, y, ww, hh, area = stats[i]
+              cx = x + ww / 2
+              if area >= 2 and (w * 0.38) <= cx <= (w * 0.62) and y >= h * 0.82:
+                  keep[labels == i] = 255
+          if keep.max() == 0:
+              raise SystemExit('Could not detect the existing signature safely.')
+
+          ys, xs = np.where(keep > 0)
+          bx0, bx1 = max(0, xs.min() - 18), min(w, xs.max() + 19)
+          by0, by1 = max(0, ys.min() - 18), min(h, ys.max() + 19)
+
+          # Extract the original signature itself before removing it.
+          sig_crop = rgb[by0:by1, bx0:bx1]
+          sig_mask = keep[by0:by1, bx0:bx1]
+          sig_rgba = np.zeros((sig_crop.shape[0], sig_crop.shape[1], 4), dtype=np.uint8)
+          sig_rgba[..., :3] = 255
+          sig_rgba[..., 3] = (sig_mask.astype(np.float32) * 0.82).astype(np.uint8)
+
+          # Traditional deterministic inpainting of only the old white signature strokes.
+          dilated = cv2.dilate(keep, np.ones((5, 5), np.uint8), iterations=1)
+          bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+          cleaned = cv2.inpaint(bgr, dilated, 5, cv2.INPAINT_TELEA)
+          cleaned = cv2.cvtColor(cleaned, cv2.COLOR_BGR2RGB)
+
+          base = Image.fromarray(cleaned).convert('RGBA')
+          sig = Image.fromarray(sig_rgba, 'RGBA')
+          target_w = max(150, int(w * 0.038))
+          target_h = max(1, round(sig.height * target_w / sig.width))
+          sig = sig.resize((target_w, target_h), Image.Resampling.LANCZOS)
+          # Small, low and centered in empty water, matching the user's examples.
+          px = (w - target_w) // 2
+          py = min(h - target_h - int(h * 0.035), int(h * 0.92))
+          base.alpha_composite(sig, (px, py))
+          base.convert('RGB').save(out, quality=96)
+          print(f'output={w}x{h}; old_bbox={bx0},{by0},{bx1},{by1}; new_signature={target_w}x{target_h}@{px},{py}')
+          PY
+          magick "$outpng" -quality 58 "$dst"
+          identify "$dst"
+          test "$(stat -c%s "$dst")" -gt 30000
+      - name: Commit corrected panorama to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd site
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+          git commit -m 'Replace panorama with sharp small-watermark edition'
+          git push origin HEAD:main
