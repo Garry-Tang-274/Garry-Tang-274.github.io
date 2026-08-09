@@ -1,0 +1,55 @@
+name: Assemble photography assets
+
+on:
+  push:
+    branches:
+      - site/english-first-ai-lightroom-photos-20260809
+    paths:
+      - "assets/photo-staging/**"
+      - ".github/workflows/assemble-photography-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: assemble-photography-assets
+  cancel-in-progress: false
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out website branch
+        uses: actions/checkout@v4
+        with:
+          ref: site/english-first-ai-lightroom-photos-20260809
+          fetch-depth: 0
+
+      - name: Decode staged image assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography
+          cat assets/photo-staging/tidal-*.part | base64 -d > assets/photography/haining-tidal-flat-worker-2026.avif
+          cat assets/photo-staging/guangxi-*.part | base64 -d > assets/photography/guangxi-man-cormorant-2026.avif
+          cat assets/photo-staging/village-*.part | base64 -d > assets/photography/yunnan-hani-terraces-village-2023.avif
+          test "$(wc -c < assets/photography/haining-tidal-flat-worker-2026.avif)" -eq 18283
+          test "$(wc -c < assets/photography/guangxi-man-cormorant-2026.avif)" -eq 15927
+          test "$(wc -c < assets/photography/yunnan-hani-terraces-village-2023.avif)" -eq 17311
+
+      - name: Commit assembled assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/photography; then
+            echo "No image changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/photography/haining-tidal-flat-worker-2026.avif assets/photography/guangxi-man-cormorant-2026.avif assets/photography/yunnan-hani-terraces-village-2023.avif
+          git commit -m "Assemble watermarked photography assets"
+          git push origin HEAD:site/english-first-ai-lightroom-photos-20260809
