@@ -1,0 +1,46 @@
+name: Materialize photo assets
+
+on:
+  push:
+    branches:
+      - site/english-first-ai-lightroom-photos-20260809
+    paths:
+      - '_photo_payload2/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site/english-first-ai-lightroom-photos-20260809
+      - name: Decode photo assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography/featured
+          for name in \
+            guangxi-man-cormorant-2026 \
+            haining-tidal-flat-worker-2025 \
+            hangzhou-qianjiang-panorama-2026 \
+            yunnan-hani-terraces-village-2023; do
+            case "$name" in
+              haining-tidal-flat-worker-2025) prefix='haining-tidal-flat-worker' ;;
+              hangzhou-qianjiang-panorama-2026) prefix='hangzhou-qianjiang-panorama-hq' ;;
+              *) prefix="$name" ;;
+            esac
+            cat _photo_payload2/${prefix}-*.part | base64 --decode > assets/photography/featured/${name}.avif
+          done
+          rm -rf _photo_payload2
+          rm -f .github/workflows/materialize-photo-assets.yml
+      - name: Commit binary assets
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- assets/photography/featured .github/workflows/materialize-photo-assets.yml _photo_payload2
+          git commit -m 'Materialize updated watermarked photography assets'
+          git push origin HEAD:site/english-first-ai-lightroom-photos-20260809
