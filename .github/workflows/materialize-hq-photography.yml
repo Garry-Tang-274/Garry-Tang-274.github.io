@@ -1,0 +1,44 @@
+name: Materialize HQ photography
+
+on:
+  push:
+    branches:
+      - fix/high-quality-photography-20260809
+    paths:
+      - '_hq_payload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/high-quality-photography-20260809
+          fetch-depth: 0
+      - name: Decode high-resolution watermarked assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography/featured
+          cat _hq_payload/guangxi-*.part | base64 --decode > assets/photography/featured/guangxi-man-cormorant-2026.avif
+          cat _hq_payload/tidal-*.part | base64 --decode > assets/photography/featured/haining-tidal-flat-worker-2025.avif
+          cat _hq_payload/pano-*.part | base64 --decode > assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+          cat _hq_payload/hani-*.part | base64 --decode > assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+          test "$(wc -c < assets/photography/featured/guangxi-man-cormorant-2026.avif)" -eq 25295
+          test "$(wc -c < assets/photography/featured/haining-tidal-flat-worker-2025.avif)" -eq 45999
+          test "$(wc -c < assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif)" -eq 38110
+          test "$(wc -c < assets/photography/featured/yunnan-hani-terraces-village-2023.avif)" -eq 37408
+          rm -rf _hq_payload
+          rm -f .github/workflows/materialize-hq-photography.yml
+      - name: Commit exact binary assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Replace blurry photography assets with high-resolution editions'
+          git push origin HEAD:fix/high-quality-photography-20260809
