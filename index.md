@@ -45,7 +45,7 @@ title: Tang Zhi · 唐直
       <p>A non-destructive Windows photo editor with optional natural-language AI colour-grading plans.</p>
     </div>
     <div class="room-grid">
-      <a class="room-card room-photo" href="https://github.com/Garry-Tang-274/AI-Lightroom" target="_blank" rel="noopener">
+      <a class="room-card room-photo" href="{{ '/ai-lightroom' | relative_url }}">
         <span>AI</span>
         <div>
           <small>WINDOWS · PHOTO EDITING · OPEN SOURCE</small>
@@ -53,7 +53,7 @@ title: Tang Zhi · 唐直
           <p>Traditional local adjustments, HSL, curves, masks and watermark layers share one editing state with optional AI providers. The renderer applies supported edits instead of redrawing or replacing the photograph.</p>
           <p class="zh-secondary">把传统非破坏性后期与可选的自然语言调色计划放在同一个桌面编辑器里；AI 只生成调整方案，本地渲染器负责真正执行参数。</p>
         </div>
-        <b>View project on GitHub ↗</b>
+        <b>Open project page ↗</b>
       </a>
     </div>
   </section>
@@ -85,10 +85,10 @@ title: Tang Zhi · 唐直
   <section class="home-section home-panorama-section">
     <div class="home-section-head">
       <div><p class="home-kicker">FEATURED PANORAMA</p><h2>Qianjiang Century City · 钱江世纪城</h2></div>
-      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II. Open the panorama to view it at a larger scale.</p>
+      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Updated high-resolution web edition.</p>
     </div>
-    <a class="home-panorama" href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-link target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-image alt="Panorama of Qianjiang Century City in Hangzhou">
+    <a class="home-panorama" href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou">
     </a>
   </section>
 
@@ -139,9 +139,3 @@ title: Tang Zhi · 唐直
     <p class="zh-secondary">先留下真正值得回看的东西，再让这个网站慢慢长成它该有的样子。</p>
   </section>
 </div>
-<script src="{{ '/assets/data/qianjiang/chunk-00.js' | relative_url }}"></script>
-<script src="{{ '/assets/data/qianjiang/chunk-01.js' | relative_url }}"></script>
-<script src="{{ '/assets/data/qianjiang/chunk-02.js' | relative_url }}"></script>
-<script src="{{ '/assets/data/qianjiang/chunk-03.js' | relative_url }}"></script>
-<script src="{{ '/assets/data/qianjiang/chunk-04.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/qianjiang-panorama.js' | relative_url }}"></script>
