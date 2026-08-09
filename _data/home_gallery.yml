@@ -1,34 +1,42 @@
-# 主页精选图片。新增图片时，复制一段并修改 image/title/caption/alt。
-# visible: false 可以暂时隐藏；size 可填 standard、wide 或 tall。
+# Homepage selected photography. English is primary; Chinese remains in the title where useful.
+# Set visible: false to hide an item. size may be standard, wide, or tall.
+
+- image: /assets/photography/featured/guangxi-man-cormorant-2026.avif?v=20260809
+  original: /assets/photography/featured/guangxi-man-cormorant-2026.avif?v=20260809
+  title: Man and Cormorant · 人与鸬鹚
+  caption: Guangxi · 2026 · Nikon Z6 II
+  alt: A seated man in a straw hat beside a cormorant in Guangxi
+  size: tall
+  visible: true
+
+- image: /assets/photography/featured/yunnan-hani-terraces-village-2023.avif?v=20260809
+  original: /assets/photography/featured/yunnan-hani-terraces-village-2023.avif?v=20260809
+  title: Clouds over the Hani Terraces · 云上哈尼梯田
+  caption: Honghe, Yunnan · 2023 · DJI Mini 2
+  alt: A mountain village and Hani rice terraces surrounded by low clouds in Honghe, Yunnan
+  size: wide
+  visible: true
+
+- image: /assets/photography/featured/haining-tidal-flat-worker-2025.avif?v=20260809
+  original: /assets/photography/featured/haining-tidal-flat-worker-2025.avif?v=20260809
+  title: Returning Across the Tidal Flat · 滩涂归途
+  caption: Haining, Zhejiang · 2025 · Nikon Z6 II
+  alt: A lone person walking across a tidal flat in a minimalist black-and-white scene
+  size: tall
+  visible: true
 
 - image: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
   original: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
-  title: 雨中过街
-  caption: 成都，四川 · 2026 · Nikon Z6 II
-  alt: 成都九眼桥，雨天街道上情侣共撑一把伞
-  size: standard
-  visible: true
-
-- image: /assets/photography/haining-tidal-flat-worker.webp?v=20260806-hq
-  original: /assets/photography/haining-tidal-flat-worker.webp?v=20260806-hq
-  title: 滩涂归途
-  caption: 观海园，海宁 · 2025 · Nikon Z6 II
-  alt: 一名工人从观海园滩涂上走过
+  title: Rain Crossing · 雨中过街
+  caption: Chengdu, Sichuan · 2026 · Nikon Z6 II
+  alt: Two people crossing a rainy street under one umbrella in Chengdu
   size: standard
   visible: true
 
 - image: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
   original: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
-  title: 相公山
-  caption: 阳朔，广西 · 2025 · DJI Mini 4 Pro
-  alt: 从相公山俯瞰漓江与喀斯特山峰
+  title: Xianggong Mountain · 相公山
+  caption: Yangshuo, Guangxi · 2025 · DJI Mini 4 Pro
+  alt: The Li River and karst mountains seen from Xianggong Mountain
   size: wide
-  visible: true
-
-- image: /assets/photography/hangzhou-atrium.webp?v=20260806-hq
-  original: /assets/photography/hangzhou-atrium.webp?v=20260806-hq
-  title: 天井
-  caption: 杭州，浙江 · 2026 · Nikon Z6 II
-  alt: 天目里，玻璃连廊围绕的室内天井
-  size: standard
   visible: true
