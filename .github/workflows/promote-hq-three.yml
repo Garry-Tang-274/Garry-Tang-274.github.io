@@ -1,0 +1,54 @@
+name: Promote HQ photography three
+
+on:
+  push:
+    branches:
+      - fix/promote-hq-three-20260809
+    paths:
+      - '.github/workflows/promote-hq-three.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout HQ source branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/high-quality-photography-20260809
+          path: source
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 0
+      - name: Copy and verify three HQ assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=source/assets/photography/featured
+          dst=site/assets/photography/featured
+          mkdir -p "$dst"
+          cp "$src/guangxi-man-cormorant-2026.avif" "$dst/guangxi-man-cormorant-2026.avif"
+          cp "$src/haining-tidal-flat-worker-2025.avif" "$dst/haining-tidal-flat-worker-2025.avif"
+          cp "$src/yunnan-hani-terraces-village-2023.avif" "$dst/yunnan-hani-terraces-village-2023.avif"
+          test "$(wc -c < "$dst/guangxi-man-cormorant-2026.avif")" -eq 25295
+          test "$(wc -c < "$dst/haining-tidal-flat-worker-2025.avif")" -eq 45999
+          test "$(wc -c < "$dst/yunnan-hani-terraces-village-2023.avif")" -eq 37408
+      - name: Commit three HQ assets to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd site
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/photography/featured/guangxi-man-cormorant-2026.avif assets/photography/featured/haining-tidal-flat-worker-2025.avif assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+          if git diff --cached --quiet; then
+            echo 'No asset changes.'
+            exit 0
+          fi
+          git commit -m 'Replace three blurry photography assets with sharper editions'
+          git push origin HEAD:main
