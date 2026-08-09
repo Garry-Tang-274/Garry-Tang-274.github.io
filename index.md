@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 唐直 · Tang Zhi
+title: Tang Zhi · 唐直
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/portfolio.css' | relative_url }}">
@@ -11,69 +11,91 @@ title: 唐直 · Tang Zhi
 <div class="home-shell">
   <section class="home-hero">
     <div class="home-hero-copy">
-      <p class="home-kicker">PERSONAL WEBSITE · 个人主页</p>
-      <h1>唐直 <span>Tang Zhi</span></h1>
-      <p class="home-lead">我是一名生物信息学本科生，也长期拍照、听摇滚、玩游戏和收藏模型。这个网站不是一份只谈科研的简历，而是把这些彼此不同、但都属于我的东西放在一起。</p>
+      <p class="home-kicker">PERSONAL WEBSITE · 个人网站</p>
+      <h1>Tang Zhi <span>唐直</span></h1>
+      <p class="home-lead">Biomedical Informatics undergraduate working across computational immunology, photography, software, music, and games. This site is a place for the work I build, the images I keep, and the ideas that remain worth returning to.</p>
+      <p class="zh-secondary">生物医学信息学本科生。这里同时记录科研、摄影、软件开发、音乐与游戏——不是一份只谈学术的简历，而是一个持续生长的个人档案。</p>
       <div class="home-actions">
-        <a class="button primary" href="#rooms">浏览主页</a>
-        <a class="button secondary" href="{{ '/notes' | relative_url }}">随笔与记录</a>
+        <a class="button primary" href="#rooms">Explore the site</a>
+        <a class="button secondary" href="{{ '/notes' | relative_url }}">Notes · 随笔</a>
       </div>
     </div>
     <figure class="home-hero-photo">
-      <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="新疆岩壁之间的人物剪影">
-      <figcaption>《岩壁之间》· 新疆 · 2023</figcaption>
+      <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="A figure standing between rock formations in Xinjiang">
+      <figcaption>Figure Between Rocks · 岩壁之间 · Xinjiang, 2023</figcaption>
     </figure>
   </section>
 
   <section class="home-intro">
     <div>
       <p class="home-kicker">ABOUT</p>
-      <h2>我在做什么</h2>
+      <h2>What I am working on</h2>
+      <p class="zh-secondary">目前在做什么</p>
     </div>
     <div class="home-intro-copy">
-      <p>目前的科研兴趣集中在计算免疫学、TCR 序列分析和机器学习方法审计。我更关心模型到底学到了什么、结论能不能经得住对照，而不只是最后的分数。</p>
-      <p>科研之外，我拍摄城市、建筑、自然与航拍景观；音乐以摇滚为主，也听民谣、乡村和华语独立；游戏方面更在意机制、叙事和具体的游玩记忆。</p>
+      <p>My research interests centre on computational immunology, TCR sequence analysis, and careful evaluation of machine-learning methods for biological data. I care less about a single headline score than about what a model has actually learned, whether controls are fair, and whether a conclusion survives leakage checks and matched comparisons.</p>
+      <p>Outside research, I photograph cities, landscapes, architecture, and ordinary people; build small software tools; listen mostly to rock; and keep a personal archive of games that changed how I think about narrative, space, and interaction.</p>
+      <p class="zh-secondary">科研之外，摄影、软件、摇滚与游戏并不是“附加兴趣”，而是同一套观察和表达方式的不同出口。</p>
+    </div>
+  </section>
+
+  <section class="home-section" id="current-build">
+    <div class="home-section-head">
+      <div><p class="home-kicker">CURRENT BUILD · 最近开发</p><h2>AI Lightroom</h2></div>
+      <p>A non-destructive Windows photo editor with optional natural-language AI colour-grading plans.</p>
+    </div>
+    <div class="room-grid">
+      <a class="room-card room-photo" href="https://github.com/Garry-Tang-274/AI-Lightroom" target="_blank" rel="noopener">
+        <span>AI</span>
+        <div>
+          <small>WINDOWS · PHOTO EDITING · OPEN SOURCE</small>
+          <h3>AI Lightroom</h3>
+          <p>Traditional local adjustments, HSL, curves, masks and watermark layers share one editing state with optional AI providers. The renderer applies supported edits instead of redrawing or replacing the photograph.</p>
+          <p class="zh-secondary">把传统非破坏性后期与可选的自然语言调色计划放在同一个桌面编辑器里；AI 只生成调整方案，本地渲染器负责真正执行参数。</p>
+        </div>
+        <b>View project on GitHub ↗</b>
+      </a>
     </div>
   </section>
 
   <section id="rooms" class="home-section">
     <div class="home-section-head">
-      <div><p class="home-kicker">FIVE ROOMS</p><h2>这个网站的几个入口</h2></div>
-      <p>主页负责介绍和展示；短更新、随笔和长文统一放进独立的记录区。</p>
+      <div><p class="home-kicker">FIVE ROOMS</p><h2>Five ways into the site</h2></div>
+      <p>English is the primary language; concise Chinese notes remain alongside it where they add context.</p>
     </div>
     <div class="room-grid">
       <a class="room-card room-photo" href="{{ '/photography' | relative_url }}">
-        <span>01</span><div><small>PHOTOGRAPHY</small><h3>摄影</h3><p>城市、建筑、自然风光与航拍作品。</p></div><b>进入画廊 ↗</b>
+        <span>01</span><div><small>PHOTOGRAPHY</small><h3>Photography · 摄影</h3><p>Street scenes, people, landscapes, architecture, and aerial work.</p></div><b>Open gallery ↗</b>
       </a>
       <a class="room-card" href="{{ '/music' | relative_url }}">
-        <span>02</span><div><small>MUSIC</small><h3>音乐</h3><p>长期喜欢的乐队、专辑和听歌记录。</p></div><b>查看音乐页 ↗</b>
+        <span>02</span><div><small>MUSIC</small><h3>Music · 音乐</h3><p>Rock at the centre, with albums and artists that have stayed for years.</p></div><b>Open music page ↗</b>
       </a>
       <a class="room-card" href="{{ '/games' | relative_url }}">
-        <span>03</span><div><small>GAMES</small><h3>游戏</h3><p>单机叙事、多人机制与游玩档案。</p></div><b>查看游戏页 ↗</b>
+        <span>03</span><div><small>GAMES</small><h3>Games · 游戏</h3><p>Personal reflections on narrative, mechanics, worlds, and play.</p></div><b>Open game archive ↗</b>
       </a>
       <a class="room-card" href="{{ '/cv' | relative_url }}">
-        <span>04</span><div><small>RESEARCH</small><h3>科研与学习</h3><p>研究方向、公开项目和学术经历。</p></div><b>查看 CV ↗</b>
+        <span>04</span><div><small>RESEARCH</small><h3>Research & CV · 科研</h3><p>Computational immunology, TCR analysis, public projects, and academic experience.</p></div><b>Open CV ↗</b>
       </a>
       <a class="room-card" href="{{ '/notes' | relative_url }}">
-        <span>05</span><div><small>NOTES</small><h3>随笔与记录</h3><p>短更新、科研复盘、摄影手记和游戏感想。</p></div><b>进入记录区 ↗</b>
+        <span>05</span><div><small>NOTES</small><h3>Notes & Journal · 随笔</h3><p>Research reflections, photography notes, game writing, and longer records.</p></div><b>Open notes ↗</b>
       </a>
     </div>
   </section>
 
   <section class="home-section home-panorama-section">
     <div class="home-section-head">
-      <div><p class="home-kicker">FEATURED PANORAMA</p><h2>钱江世纪城</h2></div>
-      <p>杭州 · 2026 · Nikon Z6 II。点击查看原图。</p>
+      <div><p class="home-kicker">FEATURED PANORAMA</p><h2>Qianjiang Century City · 钱江世纪城</h2></div>
+      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II. Open the panorama to view it at a larger scale.</p>
     </div>
     <a class="home-panorama" href="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-link target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-image alt="钱江世纪城夜景全景图">
+      <img src="{{ '/assets/photography/hangzhou-qianjiang-panorama-hq.png?v=20260806-fallback' | relative_url }}" data-qianjiang-image alt="Panorama of Qianjiang Century City in Hangzhou">
     </a>
   </section>
 
   <section class="home-section">
     <div class="home-section-head">
-      <div><p class="home-kicker">SELECTED PHOTOGRAPHY</p><h2>主页精选图片</h2></div>
-      <p>这里由一个单独的数据文件控制，你可以自己添加图片、标题和注脚。</p>
+      <div><p class="home-kicker">SELECTED PHOTOGRAPHY</p><h2>Selected photographs · 摄影精选</h2></div>
+      <p>A small rotating selection from the full photography archive.</p>
     </div>
     <div class="home-gallery">
       {% for photo in site.data.home_gallery %}
@@ -88,32 +110,33 @@ title: 唐直 · Tang Zhi
       {% endfor %}
     </div>
     <div class="home-gallery-actions">
-      <a class="button secondary" href="{{ '/photography' | relative_url }}">查看完整摄影页</a>
-      <a class="button secondary" href="{{ '/manage' | relative_url }}">自己维护主页图片</a>
+      <a class="button secondary" href="{{ '/photography' | relative_url }}">Full photography page</a>
+      <a class="button secondary" href="{{ '/manage' | relative_url }}">Maintain homepage images · 自助维护</a>
     </div>
   </section>
 
   <section class="home-section latest-notes">
     <div class="home-section-head">
-      <div><p class="home-kicker">RECENT NOTES</p><h2>最近记录</h2></div>
-      <p>这里只显示最新几条，不让主页变成信息流。</p>
+      <div><p class="home-kicker">RECENT NOTES</p><h2>Recent notes · 最近记录</h2></div>
+      <p>Only the latest entries appear here; the full journal lives on its own page.</p>
     </div>
     <div class="note-preview-grid">
       {% for post in site.posts limit:3 %}
       <a class="note-preview" href="{{ post.url | relative_url }}">
-        <div><span>{{ post.category | default: '记录' }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></div>
+        <div><span>{{ post.category | default: 'Note' }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
       </a>
       {% endfor %}
     </div>
-    <a class="text-link" href="{{ '/notes' | relative_url }}">查看全部随笔与记录 →</a>
+    <a class="text-link" href="{{ '/notes' | relative_url }}">View all notes →</a>
   </section>
 
   <section class="home-closing">
     <p class="home-kicker">ONGOING</p>
-    <h2>这个网站会随着内容慢慢长出来。</h2>
-    <p>先把真正想留下来的东西放进来，再决定它最终应该长成什么样。</p>
+    <h2>A personal archive that keeps changing.</h2>
+    <p>Keep the things worth returning to; let the structure grow around them.</p>
+    <p class="zh-secondary">先留下真正值得回看的东西，再让这个网站慢慢长成它该有的样子。</p>
   </section>
 </div>
 <script src="{{ '/assets/data/qianjiang/chunk-00.js' | relative_url }}"></script>
