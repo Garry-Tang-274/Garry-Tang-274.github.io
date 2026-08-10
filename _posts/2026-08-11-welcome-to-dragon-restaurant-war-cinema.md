@@ -3,6 +3,7 @@ layout: post
 title: "《欢迎来龙餐馆》：当‘双方’本身都成为战争叙事的廉价简化"
 date: 2026-08-11 02:18:00 +0800
 category: Film · War Cinema · 电影
+permalink: /notes/welcome-to-dragon-restaurant-war-cinema/
 excerpt: "从英雄主义的个人战斗，到敌我双方，再到仇恨循环和战争社会：这部电影几乎可以作为我战争片观看史的一个节点。"
 ---
 
