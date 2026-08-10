@@ -6,6 +6,21 @@ category: Film · War Cinema · 电影
 excerpt: "从英雄主义的个人战斗，到敌我双方，再到仇恨循环和战争社会：这部电影几乎可以作为我战争片观看史的一个节点。"
 ---
 
+<style>
+.essay-deck{margin:0 0 .55rem;color:#f2f5f8;font-family:Georgia,"Songti SC",serif;font-size:1.28rem;line-height:1.7;}
+.essay-deck-zh{margin:0 0 2.2rem!important;font-size:.96rem;line-height:1.85;}
+.film-poster-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin:2.2rem 0 3rem;align-items:stretch;}
+.film-poster-card{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#08121f;}
+.film-poster-card img{display:block;width:100%;height:520px;object-fit:cover;background:#050b13;}
+.film-poster-card:nth-child(2) img{object-position:center;}
+.film-poster-card figcaption{padding:13px 15px 15px;color:var(--muted);font-size:.76rem;line-height:1.55;}
+.film-poster-card a{color:var(--gold-soft);text-decoration:none;}
+.essay-thesis{margin:2.1rem 0!important;padding:1.25rem 1.4rem;border-left:3px solid var(--gold);background:rgba(216,170,86,.08);color:#fff;font-family:Georgia,"Songti SC",serif;font-size:1.16rem;line-height:1.8;}
+.poster-rights-note{display:block;margin-top:2rem;color:var(--muted);line-height:1.7;}
+.post-body h2{margin-top:2.7rem;font-size:1.75rem;line-height:1.35;}
+@media(max-width:680px){.film-poster-grid{grid-template-columns:1fr}.film-poster-card img{height:auto;max-height:620px;object-fit:contain}.essay-deck{font-size:1.12rem}}
+</style>
+
 <p class="essay-deck">A personal history of watching war films — from heroic spectacle, to anti-war cinema, to the point where even the idea of “two sides” becomes too simple.</p>
 <p class="zh-secondary essay-deck-zh">从英雄主义的个人战斗，到敌我双方，到仇恨循环，再到战争社会的社会关系。《欢迎来龙餐馆》几乎可以作为我的战争片观看史的一个节点。</p>
 
