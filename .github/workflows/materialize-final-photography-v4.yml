@@ -1,0 +1,51 @@
+name: Materialize final photography v4
+
+on:
+  push:
+    branches:
+      - fix/final-photo-assets-20260811-v4
+    paths:
+      - '_photo_payload_v4/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decode and verify final photography
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography/featured
+
+          cat _photo_payload_v4/panorama/part*.b64 | tr -d '\n\r' | base64 -d > assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+          cat _photo_payload_v4/guangxi/part*.b64 | tr -d '\n\r' | base64 -d > assets/photography/featured/guangxi-man-cormorant-2026.avif
+          cat _photo_payload_v4/tidal/part*.b64 | tr -d '\n\r' | base64 -d > assets/photography/featured/haining-tidal-flat-worker-2025.avif
+          cat _photo_payload_v4/hani/part*.b64 | tr -d '\n\r' | base64 -d > assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+
+          echo 'f1fd44c6c9857d8d810c60043fe5bfb87229cb8c5623e7dab983000988609505  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
+          echo '06e82c413437377869a2b9c1f88d97cb466e3ab44dde28a81459857532392477  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo 'cce3b53951af0803a39890866b2015a602c2df45e9143de2c3cb1b9fe0f91be4  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo '0e22d9bd4c4b8defd1b7c11029ef35eb328ee35c35cde7bd685e1f6ea4c3ff47  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+
+      - name: Commit verified binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf _photo_payload_v4
+          rm -f .github/workflows/materialize-final-photography-v4.yml
+          git add -- assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif \
+                    assets/photography/featured/guangxi-man-cormorant-2026.avif \
+                    assets/photography/featured/haining-tidal-flat-worker-2025.avif \
+                    assets/photography/featured/yunnan-hani-terraces-village-2023.avif \
+                    _photo_payload_v4 .github/workflows/materialize-final-photography-v4.yml
+          git commit -m 'Publish verified high-resolution watermarked photography'
+          git push origin HEAD:fix/final-photo-assets-20260811-v4
