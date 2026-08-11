@@ -29,10 +29,10 @@ jobs:
           cat _photo_payload_final/tidal/part*.b64 | base64 --decode > assets/photography/featured/haining-tidal-flat-worker-2025.avif
           cat _photo_payload_final/hani/part*.b64 | base64 --decode > assets/photography/featured/yunnan-hani-terraces-village-2023.avif
 
-          echo '3acc31a201648fe5498d8797709866f48532a6e8dccb98549a1124d84bea4f03  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
-          echo 'f554a1ee824d7872db9d67270b8e17b2ec9b8ac06a396a35e7149bf5e7bc6763  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
-          echo '1571568584abdfaf5c183aa1404204b6111f9f44a65befb06da8a6f6e1261598  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
-          echo '3332c530ef37822d9a64ec43d9f240090fe00d68e2e99840eee58b9869dc2dbd  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+          echo '1ae7813e0aeede3f1c462ca47dd498992c02bfa16f26d631bd0bd8767f7de7cd  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
+          echo '26d35163d70a3d03e0b997ef05e8e88681df6e3b8f6d54e9867bc1fbe1abad09  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo '6d8294f31591ded81c15dabc809449c6056ee603da4553c3ed9b980c0a34152f  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo '9fb47b9fb76da2ca71e3b8fbfaf34bf6c799194b0ea1e57112a9049dad9430c0  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
 
           rm -rf _photo_payload_final
           rm -f .github/workflows/materialize-final-photography.yml
