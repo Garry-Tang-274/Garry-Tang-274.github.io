@@ -1,0 +1,42 @@
+name: Diagnose photo Drive download
+
+on:
+  push:
+    branches:
+      - fix/final-photo-publish-20260812
+    paths:
+      - '.photo_diag/TRIGGER'
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/final-photo-publish-20260812
+          fetch-depth: 0
+      - name: Test Drive download and write marker
+        shell: bash
+        run: |
+          set -u
+          mkdir -p .photo_diag
+          rm -f .photo_diag/SUCCESS .photo_diag/FAIL
+          if curl -L --fail --retry 2 'https://drive.usercontent.google.com/download?id=1hGPg--UsupExxxFvc_703dz2JG3uD2ht&export=download&confirm=t' -o /tmp/pano.avif; then
+            got="$(sha256sum /tmp/pano.avif | awk '{print $1}')"
+            if [ "$got" = '4ea8642fa707a689f38f14605ede3d94de94bd8b46ca6a3d84bf8fd7d2d964e4' ]; then
+              echo ok > .photo_diag/SUCCESS
+            else
+              printf 'sha_mismatch %s\n' "$got" > .photo_diag/FAIL
+            fi
+          else
+            echo curl_failed > .photo_diag/FAIL
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- .photo_diag/SUCCESS .photo_diag/FAIL 2>/dev/null || true
+          git add -u -- .photo_diag/SUCCESS .photo_diag/FAIL 2>/dev/null || true
+          git commit -m 'Record photo Drive diagnostic' || true
+          git push origin HEAD:fix/final-photo-publish-20260812
