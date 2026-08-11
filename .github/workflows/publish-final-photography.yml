@@ -1,0 +1,120 @@
+name: Publish final high-resolution photography
+
+on:
+  push:
+    branches:
+      - fix/final-photo-assets-20260811
+    paths:
+      - '_final_photo_payload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest production site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 0
+
+      - name: Checkout staged panorama payload
+        uses: actions/checkout@v4
+        with:
+          ref: fix/final-photo-assets-20260811
+          path: payload
+          fetch-depth: 0
+
+      - name: Install deterministic image inspection tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick libheif-examples
+
+      - name: Materialize exact final photography assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p site/assets/photography/featured
+
+          # Qianjiang Century City: exact 6000 px final edition with the small,
+          # complete signature already baked in by deterministic pixel editing.
+          cat payload/_final_photo_payload/hangzhou-qianjiang-panorama-2026-*.part \
+            | base64 --decode \
+            > site/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+
+          test "$(stat -c%s site/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif)" -eq 118689
+
+          # Reuse the exact high-resolution blobs that were already uploaded in
+          # previous staging work. This avoids another lossy re-encode.
+          git -C site fetch origin '+refs/heads/*:refs/remotes/origin/*'
+
+          git -C site cat-file -e d9e66a1a26dd86d08a77721c1e2b5568fe8b4396^{blob}
+          git -C site cat-file blob d9e66a1a26dd86d08a77721c1e2b5568fe8b4396 \
+            > site/assets/photography/featured/guangxi-man-cormorant-2026.avif
+
+          git -C site cat-file -e 0503185b0cabab161df56eeb6098d8acb1dfa0ce^{blob}
+          git -C site cat-file blob 0503185b0cabab161df56eeb6098d8acb1dfa0ce \
+            > site/assets/photography/featured/haining-tidal-flat-worker-2025.avif
+
+          git -C site cat-file -e fc8a7ec55c15f389795884e1abefc25d5bdbeacc^{blob}
+          git -C site cat-file blob fc8a7ec55c15f389795884e1abefc25d5bdbeacc \
+            > site/assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+
+          test "$(stat -c%s site/assets/photography/featured/guangxi-man-cormorant-2026.avif)" -eq 84120
+          test "$(stat -c%s site/assets/photography/featured/haining-tidal-flat-worker-2025.avif)" -eq 146050
+          test "$(stat -c%s site/assets/photography/featured/yunnan-hani-terraces-village-2023.avif)" -eq 100968
+
+          echo '9b9b2a58bdf98c9b895da84a72f9a3ce15dbd3bc72ae8551db60ff025b02c9a7  site/assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo '0557075700251bd770fec322765ada22dc31fa55fac0b83e6ca51d1b5404fe5  site/assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo 'c3614a29ad7c4c0b764a5370cb401a475dcc643676adb4363d84a4b31c881a1f  site/assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+
+          test "$(identify -format '%wx%h' site/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif)" = '6000x1023'
+          test "$(identify -format '%wx%h' site/assets/photography/featured/guangxi-man-cormorant-2026.avif)" = '1800x2705'
+          test "$(identify -format '%wx%h' site/assets/photography/featured/haining-tidal-flat-worker-2025.avif)" = '1600x2405'
+          test "$(identify -format '%wx%h' site/assets/photography/featured/yunnan-hani-terraces-village-2023.avif)" = '2400x1351'
+
+      - name: Bust stale photography caches without changing page design
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          files = [Path('site/index.md'), Path('site/photography.md'), Path('site/_data/home_gallery.yml')]
+          names = [
+              'hangzhou-qianjiang-panorama-2026',
+              'guangxi-man-cormorant-2026',
+              'haining-tidal-flat-worker-2025',
+              'yunnan-hani-terraces-village-2023',
+          ]
+          version = '20260811-hq-final'
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              for name in names:
+                  pattern = rf'(assets/photography/featured/{re.escape(name)}\.avif)(?:\?v=[A-Za-z0-9._-]+)?'
+                  text = re.sub(pattern, rf'\1?v={version}', text)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit only the final photography update to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd site
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif \
+            assets/photography/featured/guangxi-man-cormorant-2026.avif \
+            assets/photography/featured/haining-tidal-flat-worker-2025.avif \
+            assets/photography/featured/yunnan-hani-terraces-village-2023.avif \
+            index.md photography.md _data/home_gallery.yml
+          git diff --cached --check
+          git commit -m 'Publish final high-resolution photography assets'
+          git push origin HEAD:main
