@@ -24,16 +24,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p assets/photography/featured
-
           cat _photo_payload_final/panorama/part*.b64 | base64 --decode > assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
           cat _photo_payload_final/guangxi/part*.b64 | base64 --decode > assets/photography/featured/guangxi-man-cormorant-2026.avif
           cat _photo_payload_final/tidal/part*.b64 | base64 --decode > assets/photography/featured/haining-tidal-flat-worker-2025.avif
           cat _photo_payload_final/hani/part*.b64 | base64 --decode > assets/photography/featured/yunnan-hani-terraces-village-2023.avif
 
-          echo '45fe6e110710493c22f9c9148702f335a950bdf8f3ed1838c89c695fc4920eaf  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
-          echo '6689594357b50ffad6639205fd414aae19b87009d27af4c2946866f34ac8630f  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
-          echo '3d2c40577bd9ad7d790fbed9f8d2904afe736cfbb1dda66780955051fba59e2b  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
-          echo 'ca014c3e3a38084d2488be0800829eca4ba1f3dfbe931197d30010b3c7711a09  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+          echo '3acc31a201648fe5498d8797709866f48532a6e8dccb98549a1124d84bea4f03  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
+          echo 'f554a1ee824d7872db9d67270b8e17b2ec9b8ac06a396a35e7149bf5e7bc6763  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo '1571568584abdfaf5c183aa1404204b6111f9f44a65befb06da8a6f6e1261598  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo '3332c530ef37822d9a64ec43d9f240090fe00d68e2e99840eee58b9869dc2dbd  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
 
           rm -rf _photo_payload_final
           rm -f .github/workflows/materialize-final-photography.yml
