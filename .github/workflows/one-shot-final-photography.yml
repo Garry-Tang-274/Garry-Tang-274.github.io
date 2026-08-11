@@ -1,0 +1,91 @@
+name: One-shot final photography publish
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.photo-publish-main-trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download four final full-pixel AVIF files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography/featured
+          download_drive() {
+            local id="$1"
+            local out="$2"
+            curl -L --fail --retry 3 --retry-delay 2 \
+              "https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t" \
+              -o "$out"
+          }
+          download_drive '1hGPg--UsupExxxFvc_703dz2JG3uD2ht' 'assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif'
+          download_drive '1K4VoxETNhCnkw_JzdLixP_2L_R8J9GAW' 'assets/photography/featured/guangxi-man-cormorant-2026.avif'
+          download_drive '1g95O6oXolxJnYXVlv5UKyfOY5u5bjg2A' 'assets/photography/featured/haining-tidal-flat-worker-2025.avif'
+          download_drive '1hcLVaEQHnXaPrI_uRpNSYyFkKYxSOuu6' 'assets/photography/featured/yunnan-hani-terraces-village-2023.avif'
+
+      - name: Verify byte-exact final files
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '4ea8642fa707a689f38f14605ede3d94de94bd8b46ca6a3d84bf8fd7d2d964e4  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
+          echo '62e746909db0a1ed33a82cb6462ccb366ae6853ef85d837ae585de7acf85ec25  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo 'c37bf3eb3cfd900a8ef5acbb4801778feff40fc4d55d01c2538d07ce8756e4e9  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo '5060f7e68e75520e4a1d578a60408000043b11002008fe8f998f728a42987454  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+
+      - name: Refresh every website reference
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          names = [
+              'hangzhou-qianjiang-panorama-2026.avif',
+              'guangxi-man-cormorant-2026.avif',
+              'haining-tidal-flat-worker-2025.avif',
+              'yunnan-hani-terraces-village-2023.avif',
+          ]
+          allowed = {'.md', '.html', '.yml', '.yaml', '.css', '.js'}
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or '.git' in p.parts or p.suffix.lower() not in allowed:
+                  continue
+              try:
+                  s = p.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              old = s
+              for name in names:
+                  s = re.sub(re.escape(name) + r'(?:\?v=[A-Za-z0-9._-]+)?', name + '?v=20260812-fullres', s)
+              if s != old:
+                  p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit final production photography and clean one-shot files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+          git add -- assets/photography/featured/guangxi-man-cormorant-2026.avif
+          git add -- assets/photography/featured/haining-tidal-flat-worker-2025.avif
+          git add -- assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+          git diff --name-only -- '*.md' '*.html' '*.yml' '*.yaml' '*.css' '*.js' | while IFS= read -r f; do
+            [ -n "$f" ] && git add -- "$f"
+          done
+          git rm -f -- .photo-publish-main-trigger .github/workflows/one-shot-final-photography.yml
+          git commit -m 'Publish full-resolution watermarked photography'
+          git push origin HEAD:main
