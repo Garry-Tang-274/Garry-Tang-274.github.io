@@ -1,0 +1,50 @@
+name: Materialize final photography assets
+
+on:
+  push:
+    branches:
+      - fix/final-photo-assets-20260811-v3
+    paths:
+      - '_photo_payload_final/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/final-photo-assets-20260811-v3
+          fetch-depth: 0
+
+      - name: Decode and verify final photography assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/photography/featured
+
+          cat _photo_payload_final/panorama/part*.b64 | base64 --decode > assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif
+          cat _photo_payload_final/guangxi/part*.b64 | base64 --decode > assets/photography/featured/guangxi-man-cormorant-2026.avif
+          cat _photo_payload_final/tidal/part*.b64 | base64 --decode > assets/photography/featured/haining-tidal-flat-worker-2025.avif
+          cat _photo_payload_final/hani/part*.b64 | base64 --decode > assets/photography/featured/yunnan-hani-terraces-village-2023.avif
+
+          echo '45fe6e110710493c22f9c9148702f335a950bdf8f3ed1838c89c695fc4920eaf  assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif' | sha256sum -c -
+          echo '6689594357b50ffad6639205fd414aae19b87009d27af4c2946866f34ac8630f  assets/photography/featured/guangxi-man-cormorant-2026.avif' | sha256sum -c -
+          echo '3d2c40577bd9ad7d790fbed9f8d2904afe736cfbb1dda66780955051fba59e2b  assets/photography/featured/haining-tidal-flat-worker-2025.avif' | sha256sum -c -
+          echo 'ca014c3e3a38084d2488be0800829eca4ba1f3dfbe931197d30010b3c7711a09  assets/photography/featured/yunnan-hani-terraces-village-2023.avif' | sha256sum -c -
+
+          rm -rf _photo_payload_final
+          rm -f .github/workflows/materialize-final-photography.yml
+
+      - name: Commit verified binary assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- assets/photography/featured
+          git add -u -- _photo_payload_final .github/workflows/materialize-final-photography.yml
+          git commit -m 'Publish verified high-resolution watermarked photography'
+          git push origin HEAD:fix/final-photo-assets-20260811-v3
