@@ -1,24 +1,24 @@
 # Homepage selected photography. English is primary; Chinese remains in the title where useful.
 # Set visible: false to hide an item. size may be standard, wide, or tall.
 
-- image: /assets/photography/featured/guangxi-man-cormorant-2026.avif?v=20260809
-  original: /assets/photography/featured/guangxi-man-cormorant-2026.avif?v=20260809
+- image: /assets/photography/featured/guangxi-man-cormorant-2026-original.jpg?v=20260812-original
+  original: /assets/photography/featured/guangxi-man-cormorant-2026-original.jpg?v=20260812-original
   title: Man and Cormorant · 人与鸬鹚
   caption: Guangxi · 2026 · Nikon Z6 II
   alt: A seated man in a straw hat beside a cormorant in Guangxi
   size: tall
   visible: true
 
-- image: /assets/photography/featured/yunnan-hani-terraces-village-2023.avif?v=20260809
-  original: /assets/photography/featured/yunnan-hani-terraces-village-2023.avif?v=20260809
+- image: /assets/photography/featured/yunnan-hani-terraces-village-2023-original.jpg?v=20260812-original
+  original: /assets/photography/featured/yunnan-hani-terraces-village-2023-original.jpg?v=20260812-original
   title: Clouds over the Hani Terraces · 云上哈尼梯田
   caption: Honghe, Yunnan · 2023 · DJI Mini 2
   alt: A mountain village and Hani rice terraces surrounded by low clouds in Honghe, Yunnan
   size: wide
   visible: true
 
-- image: /assets/photography/featured/haining-tidal-flat-worker-2025.avif?v=20260809
-  original: /assets/photography/featured/haining-tidal-flat-worker-2025.avif?v=20260809
+- image: /assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original
+  original: /assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original
   title: Returning Across the Tidal Flat · 滩涂归途
   caption: Haining, Zhejiang · 2025 · Nikon Z6 II
   alt: A lone person walking across a tidal flat in a minimalist black-and-white scene
