@@ -23,23 +23,23 @@ permalink: /photography/
   </section>
 
   <figure class="panorama-showcase">
-    <a href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou" loading="eager">
+    <a href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou" loading="eager">
     </a>
     <figcaption><strong>Qianjiang Century City · 钱江世纪城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Updated high-resolution web edition</span></figcaption>
   </figure>
 
   <div class="photo-grid-editorial">
     <figure class="photo-card photo-wide">
-      <img src="{{ '/assets/photography/featured/yunnan-hani-terraces-village-2023.avif?v=20260809' | relative_url }}" alt="Hani rice terraces and a mountain village surrounded by low clouds in Honghe, Yunnan" loading="lazy">
+      <img src="{{ '/assets/photography/featured/yunnan-hani-terraces-village-2023-original.jpg?v=20260812-original' | relative_url }}" alt="Hani rice terraces and a mountain village surrounded by low clouds in Honghe, Yunnan" loading="lazy">
       <figcaption><strong>Clouds over the Hani Terraces · 云上哈尼梯田</strong><span>Honghe, Yunnan · 2023 · DJI Mini 2</span></figcaption>
     </figure>
     <figure class="photo-card">
-      <img src="{{ '/assets/photography/featured/guangxi-man-cormorant-2026.avif?v=20260809' | relative_url }}" alt="A man in a straw hat sitting beside a cormorant in Guangxi" loading="lazy">
+      <img src="{{ '/assets/photography/featured/guangxi-man-cormorant-2026-original.jpg?v=20260812-original' | relative_url }}" alt="A man in a straw hat sitting beside a cormorant in Guangxi" loading="lazy">
       <figcaption><strong>Man and Cormorant · 人与鸬鹚</strong><span>Guangxi · 2026 · Nikon Z6 II</span></figcaption>
     </figure>
     <figure class="photo-card">
-      <img src="{{ '/assets/photography/featured/haining-tidal-flat-worker-2025.avif?v=20260809' | relative_url }}" alt="A lone figure walking across a tidal flat in black and white" loading="lazy">
+      <img src="{{ '/assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original' | relative_url }}" alt="A lone figure walking across a tidal flat in black and white" loading="lazy">
       <figcaption><strong>Returning Across the Tidal Flat · 滩涂归途</strong><span>Haining, Zhejiang · 2025 · Nikon Z6 II · Updated edition</span></figcaption>
     </figure>
     <figure class="photo-card photo-wide">
@@ -58,7 +58,7 @@ permalink: /photography/
       <img src="{{ '/assets/photography/chengdu-yellow-riders.webp?v=20260806-hq' | relative_url }}" alt="Two riders in yellow rain gear" loading="lazy">
       <figcaption><strong>Riders in Rain · 雨中骑手</strong><span>Chengdu, Sichuan · 2026 · Nikon Z6 II</span></figcaption>
     </figure>
-    <figure class="photo-card photo-wide">
+    <figure class="photo-card">
       <img src="{{ '/assets/photography/chengdu-rain-biker.webp?v=20260806-hq' | relative_url }}" alt="A rider seen from behind on a rainy city street" loading="lazy">
       <figcaption><strong>Forward Through Rain · 向前</strong><span>Chengdu, Sichuan · 2026 · Nikon Z6 II</span></figcaption>
     </figure>

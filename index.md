@@ -87,8 +87,8 @@ title: Tang Zhi · 唐直
       <div><p class="home-kicker">FEATURED PANORAMA</p><h2>Qianjiang Century City · 钱江世纪城</h2></div>
       <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Updated high-resolution web edition.</p>
     </div>
-    <a class="home-panorama" href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026.avif?v=20260809' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou">
+    <a class="home-panorama" href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou">
     </a>
   </section>
 
