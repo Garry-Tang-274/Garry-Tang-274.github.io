@@ -92,6 +92,9 @@
 .post-header time{display:block;margin-top:20px;color:var(--muted);}
 .post-body{padding-top:34px;color:#dce3ec;font-size:1.06rem;line-height:2;}
 .post-body p{margin:0 0 1.4em;}
+.inline-essay-photo{margin:2rem 0 2.55rem;}
+.inline-essay-photo img{display:block;width:100%;max-height:760px;object-fit:contain;background:#0a1018;border:1px solid var(--line);border-radius:14px;}
+.inline-essay-photo figcaption{margin-top:.7rem;color:var(--muted);font-size:.82rem;line-height:1.6;}
 .post-body h2,.post-body h3{color:#fff;font-family:var(--home-serif);}
 .post-end{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);}
 .post-end a{color:var(--gold-soft);text-decoration:none;}

@@ -21,7 +21,7 @@ permalink: /notes/
     <div class="notes-list">
       {% for post in site.posts %}
       <a class="notes-list-item" href="{{ post.url | relative_url }}">
-        <div class="notes-list-meta"><span>{{ post.category | default: 'Note' }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></div>
+        <div class="notes-list-meta"><span>{{ post.category | default: 'Note' }}</span></div>
         <div><h3>{{ post.title }}</h3><p>{{ post.excerpt | strip_html | truncate: 180 }}</p></div>
       </a>
       {% endfor %}

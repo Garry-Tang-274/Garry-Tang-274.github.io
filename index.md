@@ -123,7 +123,7 @@ title: Tang Zhi · 唐直
     <div class="note-preview-grid">
       {% for post in site.posts limit:3 %}
       <a class="note-preview" href="{{ post.url | relative_url }}">
-        <div><span>{{ post.category | default: 'Note' }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></div>
+        <div><span>{{ post.category | default: 'Note' }}</span></div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
       </a>
