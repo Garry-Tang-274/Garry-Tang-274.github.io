@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "生活为什么要站到美的对立面？"
-date: 2026-08-18 12:00:00 +0800
+date: 2026-08-18 00:30:00 +0800
 category: Photography · 摄影
 excerpt: "生活当然可以是美的，也可以是诗意的。丑总是千篇一律，而美各不相同。"
 permalink: /notes/life-and-beauty/
