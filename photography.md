@@ -80,5 +80,22 @@ permalink: /photography/
     </figure>
   </div>
 
-  <p class="privacy-note">Web copies may include modest compression and privacy edits. The four newly added/updated works above use the supplied Garry Tang signature watermark. · 网页版会做适度压缩与隐私处理；本轮新增/替换的四张作品使用你提供的 Garry Tang 签名水印。</p>
+  <section class="gallery-notes">
+    <h2>Recent additions · 新增作品</h2>
+    <p>New work added from the latest archive. Existing photographs and alternate exports are omitted, so this section extends the collection without repeating it.</p>
+    <p class="zh-secondary">从最新图档中加入的新作品。已展示过的同图版本与替代导出均已排除，避免重复出现。</p>
+  </section>
+
+  <div class="photo-grid-editorial">
+    {% for photo in site.data.recent_photography %}
+    <figure class="photo-card">
+      <a href="{{ photo.image | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
+      </a>
+      <figcaption><strong>{{ photo.title }}</strong><span>Photography archive · 新增作品</span></figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+
+  <p class="privacy-note">Selected works are published from supplied originals where available; earlier works may retain privacy edits or web compression. · 如提供原始文件，本站以原始文件发布；较早作品可能保留隐私处理或网页版压缩。</p>
 </div>
