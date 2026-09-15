@@ -13,8 +13,8 @@ title: Tang Zhi · 唐直
     <div class="home-hero-copy">
       <p class="home-kicker">PERSONAL WEBSITE · 个人网站</p>
       <h1>Tang Zhi <span>唐直</span></h1>
-      <p class="home-lead">Biomedical Informatics undergraduate working across computational immunology, photography, software, music, and games. This site is a place for the work I build, the images I keep, and the ideas that remain worth returning to.</p>
-      <p class="zh-secondary">生物医学信息学本科生。这里同时记录科研、摄影、软件开发、音乐与游戏——不是一份只谈学术的简历，而是一个持续生长的个人档案。</p>
+      <p class="home-lead">Biomedical Informatics undergraduate. Research projects, photographs, software, music, game reviews, and essays.</p>
+      <p class="zh-secondary">生物医学信息学本科生。这里有科研项目、摄影作品、自己做的软件，以及音乐、游戏和日常随笔。</p>
       <div class="home-actions">
         <a class="button primary" href="#rooms">Explore the site</a>
         <a class="button secondary" href="{{ '/notes' | relative_url }}">Notes · 随笔</a>
@@ -33,16 +33,15 @@ title: Tang Zhi · 唐直
       <p class="zh-secondary">目前在做什么</p>
     </div>
     <div class="home-intro-copy">
-      <p>My research interests centre on computational immunology, TCR sequence analysis, and careful evaluation of machine-learning methods for biological data. I care less about a single headline score than about what a model has actually learned, whether controls are fair, and whether a conclusion survives leakage checks and matched comparisons.</p>
-      <p>Outside research, I photograph cities, landscapes, architecture, and ordinary people; build small software tools; listen mostly to rock; and keep a personal archive of games that changed how I think about narrative, space, and interaction.</p>
-      <p class="zh-secondary">科研之外，摄影、软件、摇滚与游戏并不是“附加兴趣”，而是同一套观察和表达方式的不同出口。</p>
+      <p>My current research looks at TCR alpha–beta pairing. I compare sequence models, check the data for errors and leakage, and test whether the results hold under different controls.</p>
+      <p class="zh-secondary">目前在做 TCR α–β 链配对研究，比较序列模型，检查数据质量与信息泄漏，并通过不同的对照检验结果。</p>
     </div>
   </section>
 
   <section class="home-section" id="current-build">
     <div class="home-section-head">
       <div><p class="home-kicker">CURRENT BUILD · 最近开发</p><h2>AI Lightroom</h2></div>
-      <p>A non-destructive Windows photo editor with optional natural-language AI colour-grading plans.</p>
+      <p>A Windows photo editor with manual controls and optional AI editing suggestions.</p>
     </div>
     <div class="room-grid">
       <a class="room-card room-photo" href="{{ '/ai-lightroom' | relative_url }}">
@@ -50,8 +49,8 @@ title: Tang Zhi · 唐直
         <div>
           <small>WINDOWS · PHOTO EDITING · OPEN SOURCE</small>
           <h3>AI Lightroom</h3>
-          <p>Traditional local adjustments, HSL, curves, masks and watermark layers share one editing state with optional AI providers. The renderer applies supported edits instead of redrawing or replacing the photograph.</p>
-          <p class="zh-secondary">把传统非破坏性后期与可选的自然语言调色计划放在同一个桌面编辑器里；AI 只生成调整方案，本地渲染器负责真正执行参数。</p>
+          <p>Adjust exposure, colour, curves, and masks by hand, or describe the changes you want and let AI suggest settings. Edits can be revised without changing the original file.</p>
+          <p class="zh-secondary">可以手动调整曝光、色彩、曲线和蒙版，也可以用文字描述效果，让 AI 建议参数。调整随时可以修改，原始文件保留。</p>
         </div>
         <b>Open project page ↗</b>
       </a>
@@ -60,24 +59,23 @@ title: Tang Zhi · 唐直
 
   <section id="rooms" class="home-section">
     <div class="home-section-head">
-      <div><p class="home-kicker">FIVE ROOMS</p><h2>Five ways into the site</h2></div>
-      <p>English is the primary language; concise Chinese notes remain alongside it where they add context.</p>
+      <div><p class="home-kicker">EXPLORE</p><h2>On this site · 网站内容</h2></div>
     </div>
     <div class="room-grid">
       <a class="room-card room-photo" href="{{ '/photography' | relative_url }}">
         <span>01</span><div><small>PHOTOGRAPHY</small><h3>Photography · 摄影</h3><p>Street scenes, people, landscapes, architecture, and aerial work.</p></div><b>Open gallery ↗</b>
       </a>
       <a class="room-card" href="{{ '/music' | relative_url }}">
-        <span>02</span><div><small>MUSIC</small><h3>Music · 音乐</h3><p>Rock at the centre, with albums and artists that have stayed for years.</p></div><b>Open music page ↗</b>
+        <span>02</span><div><small>MUSIC</small><h3>Music · 音乐</h3><p>Rock, folk, country, and Chinese indie.</p></div><b>Open music page ↗</b>
       </a>
       <a class="room-card" href="{{ '/games' | relative_url }}">
-        <span>03</span><div><small>GAMES</small><h3>Games · 游戏</h3><p>Personal reflections on narrative, mechanics, worlds, and play.</p></div><b>Open game archive ↗</b>
+        <span>03</span><div><small>GAMES</small><h3>Games · 游戏</h3><p>Steam library and game reviews.</p></div><b>Open game library ↗</b>
       </a>
       <a class="room-card" href="{{ '/cv' | relative_url }}">
         <span>04</span><div><small>RESEARCH</small><h3>Research & CV · 科研</h3><p>Computational immunology, TCR analysis, public projects, and academic experience.</p></div><b>Open CV ↗</b>
       </a>
       <a class="room-card" href="{{ '/notes' | relative_url }}">
-        <span>05</span><div><small>NOTES</small><h3>Notes & Journal · 随笔</h3><p>Research reflections, photography notes, game writing, and longer records.</p></div><b>Open notes ↗</b>
+        <span>05</span><div><small>NOTES</small><h3>Notes & Journal · 随笔</h3><p>Photography, travel, games, films, and everyday life.</p></div><b>Open notes ↗</b>
       </a>
     </div>
   </section>
@@ -85,7 +83,7 @@ title: Tang Zhi · 唐直
   <section class="home-section home-panorama-section">
     <div class="home-section-head">
       <div><p class="home-kicker">FEATURED PANORAMA</p><h2>Qianjiang Century City · 钱江世纪城</h2></div>
-      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Updated high-resolution web edition.</p>
+      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II</p>
     </div>
     <a class="home-panorama" href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" target="_blank" rel="noopener">
       <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou">
@@ -95,7 +93,6 @@ title: Tang Zhi · 唐直
   <section class="home-section">
     <div class="home-section-head">
       <div><p class="home-kicker">SELECTED PHOTOGRAPHY</p><h2>Selected photographs · 摄影精选</h2></div>
-      <p>A small rotating selection from the full photography archive.</p>
     </div>
     <div class="home-gallery">
       {% for photo in site.data.home_gallery %}
@@ -111,14 +108,13 @@ title: Tang Zhi · 唐直
     </div>
     <div class="home-gallery-actions">
       <a class="button secondary" href="{{ '/photography' | relative_url }}">Full photography page</a>
-      <a class="button secondary" href="{{ '/manage' | relative_url }}">Maintain homepage images · 自助维护</a>
+      <a class="button secondary" href="{{ '/manage' | relative_url }}">Manage photos · 图片管理</a>
     </div>
   </section>
 
   <section class="home-section latest-notes">
     <div class="home-section-head">
       <div><p class="home-kicker">RECENT NOTES</p><h2>Recent notes · 最近记录</h2></div>
-      <p>Only the latest entries appear here; the full journal lives on its own page.</p>
     </div>
     <div class="note-preview-grid">
       {% for post in site.posts limit:3 %}
@@ -132,10 +128,4 @@ title: Tang Zhi · 唐直
     <a class="text-link" href="{{ '/notes' | relative_url }}">View all notes →</a>
   </section>
 
-  <section class="home-closing">
-    <p class="home-kicker">ONGOING</p>
-    <h2>A personal archive that keeps changing.</h2>
-    <p>Keep the things worth returning to; let the structure grow around them.</p>
-    <p class="zh-secondary">先留下真正值得回看的东西，再让这个网站慢慢长成它该有的样子。</p>
-  </section>
 </div>

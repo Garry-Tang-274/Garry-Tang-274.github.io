@@ -15,7 +15,7 @@ permalink: /notes/longtan-ancient-village/
 
 <figure class="inline-essay-photo"><a href="{{ '/assets/notes/2026-08-18-longtan-ancient-village/alley-rider.jpg' | relative_url }}" target="_blank" rel="noopener"><img src="{{ '/assets/notes/2026-08-18-longtan-ancient-village/alley-rider.jpg' | relative_url }}" alt="古寨石巷中骑车经过的人" loading="lazy"></a></figure>
 
-“这个，叫门当；这个，叫户对。自位看门当，文重看户对。你看这个门当，像什么？哎，像印章，说明这家主人是个大官，户对有黑有白，说明是文武全……”
+“这个，叫门当；这个，叫户对。官位看门当，文武看户对。你看这个门当，像什么？哎，对，像印章，说明这家主人是个大官，户对有黑有白，说明是文武双全……”
 
 <figure class="inline-essay-photo"><a href="{{ '/assets/notes/2026-08-18-longtan-ancient-village/door-couplets.jpg' | relative_url }}" target="_blank" rel="noopener"><img src="{{ '/assets/notes/2026-08-18-longtan-ancient-village/door-couplets.jpg' | relative_url }}" alt="写有春联的古寨木门" loading="lazy"></a><figcaption>门当、户对，以及仍被人记住的称呼。</figcaption></figure>
 
@@ -35,7 +35,9 @@ permalink: /notes/longtan-ancient-village/
 
 <figure class="inline-essay-photo"><a href="{{ '/assets/notes/2026-08-18-longtan-ancient-village/village-plaque.jpg' | relative_url }}" target="_blank" rel="noopener"><img src="{{ '/assets/notes/2026-08-18-longtan-ancient-village/village-plaque.jpg' | relative_url }}" alt="古寨老屋上的匾额" loading="lazy"></a></figure>
 
-当然，他最后还是索要了一点辛苦费。我当然不指望我能遇见一个致力于传承文化的无私老人。有很多人不会像在历史中一样活了一千年，也许为了理想，也许出生于贫穷。必须承认，我们有时真的很需要他们记录一下这次经历，虽然我对这位老人的故事一无所知。他叫老徐，今年 82 岁。
+当然，他最后还是索要了一点辛苦费。我当然不指望能遇见一个致力于传承文化的无私者。有很多人至今仍然活在历史中，也许为了生计，也许为了理想，也许出于爱好。必须承认，我们有时真的很需要他们。
+
+记录一下这次经历，虽然我对这位老人的故事一无所知。他叫老徐，今年 82 岁。
 
 <figure class="inline-essay-photo"><a href="{{ '/assets/notes/2026-08-18-longtan-ancient-village/elder-in-alley.jpg' | relative_url }}" target="_blank" rel="noopener"><img src="{{ '/assets/notes/2026-08-18-longtan-ancient-village/elder-in-alley.jpg' | relative_url }}" alt="老徐走在古寨巷子里" loading="lazy"></a></figure>
 

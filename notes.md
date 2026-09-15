@@ -12,8 +12,8 @@ permalink: /notes/
   <section class="content-hero">
     <p class="home-kicker">NOTES · JOURNAL · 随笔与记录</p>
     <h1>Notes & Journal</h1>
-    <p>Research decisions, photography practice, game writing, software notes, and longer records that do not need to live on the homepage. Entries stay in the language in which they were originally written.</p>
-    <p class="zh-secondary">科研判断、摄影练习、游戏体验、软件开发和一些更长的记录。文章正文保留原本使用的语言，不强行翻译成统一语气。</p>
+    <p>Essays on photography, travel, games, films, and everyday life.</p>
+    <p class="zh-secondary">随笔、游记、摄影记录，还有游戏与电影的感想。</p>
   </section>
 
   <section class="content-section">

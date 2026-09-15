@@ -8,6 +8,7 @@ instead and can also refresh the last-played timestamp.
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -129,6 +130,42 @@ def fetch_via_web_api() -> tuple[list[dict[str, Any]], str]:
     return result, "Steam Web API"
 
 
+def read_local_snapshot(path: Path) -> tuple[list[dict[str, Any]], str]:
+    """Import an explicitly exported client snapshot when the public feed fails.
+
+    The snapshot contains only steam_id, source_updated_at and normalized games;
+    Steam credentials and the client's full configuration must not be exported.
+    """
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if str(payload.get("steam_id")) != STEAM_ID:
+        raise RuntimeError("Local snapshot belongs to a different Steam account")
+    updated_at = str(payload.get("source_updated_at") or "")
+    if not updated_at or datetime.fromisoformat(updated_at.replace("Z", "+00:00")).tzinfo is None:
+        raise RuntimeError("Local snapshot needs a timezone-qualified source_updated_at")
+    games = payload.get("games")
+    if not isinstance(games, list):
+        raise RuntimeError("Local snapshot must contain a games array")
+    ids: set[int] = set()
+    for item in games:
+        app_id = int(item["id"])
+        if app_id <= 0 or app_id in ids:
+            raise RuntimeError("Local snapshot contains an invalid or duplicate app ID")
+        ids.add(app_id)
+        for field in ("hours", "recent"):
+            value = float(item[field])
+            if not 0 <= value < 1_000_000:
+                raise RuntimeError(f"Local snapshot contains invalid {field}")
+        if not str(item.get("name") or "").strip():
+            raise RuntimeError("Local snapshot contains a game without a name")
+        if "installed" in item and not isinstance(item["installed"], bool):
+            raise RuntimeError("Local snapshot contains an invalid installed flag")
+        if item.get("last_played"):
+            played_at = datetime.fromisoformat(str(item["last_played"]).replace("Z", "+00:00"))
+            if played_at.tzinfo is None:
+                raise RuntimeError("Local snapshot needs timezone-qualified last_played values")
+    return games, updated_at
+
+
 def read_existing_rows() -> list[list[Any]]:
     if not DATA_PATH.exists():
         return []
@@ -183,6 +220,9 @@ def merge_rows(existing_rows: list[list[Any]], remote_games: list[dict[str, Any]
                 "",
             ]
 
+        if "installed" in item:
+            existing[app_id][4] = 1 if item["installed"] else 0
+
     # Preserve manually enriched rows if Steam temporarily omits them. Their
     # recent-two-week counter is reset, while reviews/tags/installed flags stay.
     for app_id, row in existing.items():
@@ -202,9 +242,10 @@ def validate(remote_games: list[dict[str, Any]], existing_rows: list[list[Any]])
         )
 
 
-def write_dataset(rows: list[list[Any]]) -> None:
+def write_dataset(rows: list[list[Any]], metadata: dict[str, Any]) -> None:
     output = (
         "// Generated automatically by scripts/sync_steam_games.py.\n"
+        f"window.STEAM_SYNC_META={json.dumps(metadata, ensure_ascii=False, separators=(',', ':'))};\n"
         f"window.STEAM_GAME_ROWS={json.dumps(rows, ensure_ascii=False, separators=(',', ':'))};\n"
     )
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -212,18 +253,36 @@ def write_dataset(rows: list[list[Any]]) -> None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--local-snapshot", type=Path, help="Import a dated, account-matched local client export")
+    args = parser.parse_args()
     existing_rows = read_existing_rows()
     normalized_existing = sort_rows([normalize_existing_row(row) for row in existing_rows if row])
-    remote_games, source = fetch_via_web_api() if API_KEY else fetch_via_xml()
+    synced_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    if args.local_snapshot:
+        remote_games, source_updated_at = read_local_snapshot(args.local_snapshot)
+        source = "Steam local client snapshot"
+    else:
+        remote_games, source = fetch_via_web_api() if API_KEY else fetch_via_xml()
+        source_updated_at = synced_at
     validate(remote_games, existing_rows)
     merged_rows = merge_rows(existing_rows, remote_games)
     changed = merged_rows != normalized_existing
-    if changed:
-        write_dataset(merged_rows)
+    metadata = {
+        "synced_at": synced_at,
+        "source_updated_at": source_updated_at,
+        "source": source,
+        "remote_played_games": len(remote_games),
+        "archive_rows": len(merged_rows),
+        "last_played_refreshed": bool(args.local_snapshot or API_KEY),
+        "installed_refreshed": all("installed" in item for item in remote_games),
+    }
+    write_dataset(merged_rows, metadata)
     print(
         json.dumps(
             {
                 "changed": changed,
+                "metadata_updated": True,
                 "source": source,
                 "remote_played_games": len(remote_games),
                 "archive_rows": len(merged_rows),
