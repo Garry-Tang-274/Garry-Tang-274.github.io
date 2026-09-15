@@ -28,18 +28,80 @@
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;",
   })[char]);
 
+  // Excerpts from the author's Steam reviews, verified on 2026-09-15.
   const featured = [
-    [1174180, "开放世界 · 慢速沉浸", "进入一部作品，也需要合适的时机", "《荒野大镖客：救赎 2》第一次打开只坚持了一个小时。后来在一个下雨的返校日重新下载，作品没有改变，真正变化的是游玩者终于愿意放慢节奏。所谓“开局抓不住人”，有时并不是无聊，只是彼此还没有在正确的时刻相遇。", "54% 42%"],
-    [1888930, "线性叙事 · 情感完成度", "游戏作为第九艺术，关键在整体完成度", "《最后生还者 Part I》的力量不只是剧情本身，而是故事、操作、音乐、表演与结尾在同一个时刻完成收束。片尾音乐与成就提示同时响起时，那不是简单的“像电影”，而是只有游戏这种形式才能形成的整体情绪。", "38% 46%"],
-    [2531310, "线性叙事 · 冲突与视角", "不舒服，并不等于叙事失败", "《最后生还者 Part II》先让愤怒支配行动，再迫使玩家面对另一套同样完整的动机。它没有轻易原谅任何人，也没有把复仇写成痛快的闭环。真正留下来的，是人在精疲力尽之后如何停止伤害，并尝试与自己和解。", "64% 42%"],
-    [1811040, "独立游戏 · 情绪交互", "选择也可以只负责传递情绪", "《极圈以南》的情绪图形几乎不改变剧情，却把坚定、温暖、慌张和低落真正交给了玩家。交互的价值不只有分支和结果；一次按键，也可以只是让一个人的处境变得更具体。", "58% 45%"],
-    [683320, "独立游戏 · 视觉表达", "简约来自克制，而不是空白", "《GRIS》的画面、音乐和玩法都很丰满，却没有任何一部分抢着证明自己。所谓艺术游戏，不是少说话、少画几笔，而是每一种表达都知道应该出现到什么程度，又应该在什么时候停下。", "50% 50%"],
-    [609320, "独立游戏 · 空间与依恋", "空间一旦承载安全感，就会成为角色", "《FAR: Lone Sails》里的车像一层移动的保护壳。燃料、小物件和熟悉的舱室共同构成了安全感；旅程结束后失去这层外壳，才更清楚地显出那条朴素的命题：保护终究会消失，人仍要继续往前。", "50% 50%"],
-    [2358720, "动作冒险 · 中式美学", "中式美学不必永远洁净、漂亮和古风", "《黑神话：悟空》里的泥塑、怪物、残破建筑和民间视觉并不像陈列柜里的精致展品，却有一种一眼可辨的文化亲切感。中式表达可以粗粝、怪异、可怖，也仍然扎根于熟悉的文化经验。", "64% 42%"],
-    [287390, "线性剧情 · 氛围与机制", "机制最有力量的时候，是它改变行为", "《地铁：最后的曙光》里的道德点起初只是通往好结局的条件，后来却促使玩家认真听完对话、观察开放区域，并重新理解黑暗族和不同阵营。机制没有单独站出来说教，而是悄悄改变了人在世界里的行动方式。", "44% 46%"],
-    [911400, "历史动作 · 评价的后劲", "后劲可以推翻第一印象", "《刺客信条 3》的系统、演出和任务设计存在大量问题，这些批评至今仍然成立。但康纳、海尔森和那段历史在通关后不断回返。把差评改成好评，并不是忘记缺点，而是承认人物与叙事最终在时间里压过了它们。", "36% 43%"],
-    [1341820, "互动电影 · 人物弧光", "互动叙事的重量不取决于分支数量", "《日落黄昏时》真正留下来的不是路线数量，而是杰·霍尔特和其他人物如何背着缺陷继续生活，偿还并不完全属于自己的罪，并试着走出与生俱来的阴影。选择系统只是形式，人物能否承担过去才决定故事有没有重量。", "42% 44%"],
-  ].map(([id, label, title, text, position]) => ({ id, label, title, text, position }));
+  [
+    1174180,
+    "荒野大镖客 2",
+    "雨天重开",
+    "大一下，返校报道日，一整个空闲的下午。外面下着雨，闲着没事干，随机歌单切到了That's the way it is，于是一时兴起下了回来。",
+    "54% 42%"
+  ],
+  [
+    1888930,
+    "最后生还者 Part I",
+    "通关的那一刻",
+    "结尾的bgm和成就声一起响起的那一刻艺术已成\n并且dlc也水平极高\n这是真正有情感的作品！",
+    "38% 46%"
+  ],
+  [
+    2531310,
+    "最后生还者 Part II",
+    "复仇与和解",
+    "没有人真正原谅了对方的所作所为，大家在做的只不过是与自己和解。每个人都是受害者，又都是加害者，在你死我活的漩涡里达成了一种精疲力尽的清醒。",
+    "64% 42%"
+  ],
+  [
+    1811040,
+    "极圈以南",
+    "选一个情绪",
+    "这些情绪的选择不会左右剧情，就连对话也大同小异，它们只是让玩家去感受。感受。",
+    "58% 45%"
+  ],
+  [
+    683320,
+    "GRIS",
+    "画面与音乐",
+    "真正的简约可以是繁复而不失分寸的画面，丰满却不为难的体验，动听却不喧宾夺主的音乐和简单但富有感染力的剧情。而这正是色灰的一切。",
+    "50% 50%"
+  ],
+  [
+    609320,
+    "孤帆远航",
+    "冰雹中的小车",
+    "前半段游戏我一直无感，直到冰雹那一段，外面大风呼啸，冰雹砸在车上发出叮叮当当的声音，一种被保护的感觉油然而生。仿佛回到了从前夜间坐车走山路，外面一片漆黑，只有车灯照亮一小块地方，车内暖色的光亮着，父母就在身边，还放着音乐。",
+    "50% 50%"
+  ],
+  [
+    2358720,
+    "黑神话：悟空",
+    "小西天的泥塑金刚",
+    "作为一个中国人，我在见到游戏里的某些怪物时会生出一种很亲切的感觉，尽管那些怪物奇形怪状，我也从来没听说过，但他身上的某些元素就是会让我感到中式美学的完美融入（比如小西天的泥塑金刚）。",
+    "64% 42%"
+  ],
+  [
+    287390,
+    "地铁：最后的曙光",
+    "为了道德点停下来",
+    "在我为了道德点听了几段对话之后，我发现这些对话真的很有意思，而且可以补全世界观，之后每当出现有字幕的对话时，我都会认真听完，每个开放区域我也会仔细观察，也找到了不少有意思的彩蛋。",
+    "44% 46%"
+  ],
+  [
+    911400,
+    "刺客信条 3",
+    "改了四次的评测",
+    "不行了后劲越来越大是怎么回事，康纳这个悲剧刺客大师的冲击后劲真的有点猛。",
+    "36% 43%"
+  ],
+  [
+    1341820,
+    "日落黄昏时",
+    "杰·霍尔特",
+    "不到七个小时的流程，塑造了一个在我心中和亚瑟，乔尔等人一样深刻生动的游戏人物。有了公路片+线性剧情这俩我很喜欢的元素，玩之前就抱着很高的期望，但玩下来甚至还超出了我的期望。",
+    "42% 44%"
+  ]
+]
+    .map(([id, label, title, text, position]) => ({ id, label, title, text, position }));
 
   const focalPositions = new Map(featured.map((item) => [item.id, item.position]));
   [
@@ -49,53 +111,37 @@
     [1659420, "55% 42%"], [205100, "45% 45%"], [1057090, "50% 50%"],
   ].forEach(([id, position]) => focalPositions.set(id, position));
 
-  const principles = [
-    ["01", "不舒服，并不直接等于叙事失败", "只要冲突来自人物和世界本身，愤怒、压抑、遗憾甚至反感都可以是有效体验。比起安全地取悦玩家，更重要的是作品有没有勇气把矛盾推到不能轻易解决的地方。", "《最后生还者 Part II》 · 《极圈以南》 · 《日落黄昏时》"],
-    ["02", "开放世界首先应该值得停留", "地图面积和图标数量并不能证明世界成立。真正重要的是：在没有即时奖励的时候，赶路、观察、绕远和偶然相遇是否仍然值得。", "《荒野大镖客：救赎 2》 · 《黑神话：悟空》 · 《刺客信条》系列"],
-    ["03", "小体量完全可以容纳完整经验", "五六个小时足够建立一种美术语言、一种空间关系和一段明确的情绪。独立游戏的价值不在“以小博大”，而在表达足够集中，也清楚自己的边界。", "《GRIS》 · 《FAR: Lone Sails》 · 《极圈以南》"],
-    ["04", "评价可以在通关以后继续变化", "刚结束时的感受是真实的，但不必成为最后裁决。人物的后劲、重新理解的细节和一段时间后的回想，都可能修改甚至推翻最初的结论。", "《刺客信条 3》 · 《荒野大镖客：救赎 2》"],
-  ];
-
   const categories = [
     {
       label: "OPEN WORLD", title: "开放世界",
-      text: "世界需要在任务之外继续成立；地图不是清单，而是允许停留、观察和偶然相遇的地方。",
+      text: "可以自由探索的大地图，路上的支线、风景与偶遇。",
       match: (g) => /Red Dead|荒野大镖客|GTA|Grand Theft Auto|巫师|Witcher|刺客信条|Assassin|黑神话|地平线|Forza|DEATH STRANDING|博德之门|Baldur/i.test(g.name) || g.tags.includes("开放世界"),
     },
     {
       label: "LINEAR NARRATIVE", title: "线性剧情",
-      text: "作者控制节奏并不是缺点。演出、关卡、操作和人物弧光配合得足够精确时，线性结构反而更有力量。",
+      text: "沿着主线往前走，跟着人物经历一个故事。",
       match: (g) => /Last of Us|最后生还者|地铁|Metro|Uncharted|神秘海域|Tomb Raider|古墓丽影|Titanfall|Dishonored|耻辱|Control|控制|Ori|LIMBO|FAR:|GRIS/i.test(g.name),
     },
     {
       label: "INDEPENDENT GAMES", title: "独立游戏",
-      text: "体量不决定价值。明确的美术语言、克制的机制和完整的小型表达，往往比无限扩张更有记忆点。",
+      text: "平台跳跃、解谜、冒险，以及一些短篇故事。",
       match: (g) => g.tags.includes("独立") || /GRIS|FAR:|极圈以南|Rusty Lake|Cube Escape|Gorogoa|Viewfinder|LIMBO|Hollow Knight|空洞骑士|To the Moon|去月球|Edith Finch|Monument Valley|历历在目|Last Campfire|ABZÛ|Lost in Play/i.test(g.name),
     },
     {
       label: "INTERACTIVE DRAMA", title: "互动叙事",
-      text: "分支数量不是唯一尺度。选择是否让人物更具体、关系更难回避，才决定互动有没有真正进入叙事。",
+      text: "通过对话和选择参与剧情。",
       match: (g) => /As Dusk Falls|日落黄昏时|底特律|Detroit|极圈以南|Before Your Eyes|历历在目|Edith Finch|Life is Strange|Telltale/i.test(g.name),
     },
     {
       label: "HISTORICAL WORLDS", title: "历史与时代",
-      text: "时代不该只是背景板；它需要真实地挤压人物、限制选择，并让个人命运在更大的结构里获得重量。",
+      text: "历史事件、时代背景与其中的人物。",
       match: (g) => /刺客信条|Assassin|Red Dead|荒野大镖客|极圈以南|地铁|Metro|Battlefield|战地/i.test(g.name),
     },
     {
       label: "ATMOSPHERE & SPACE", title: "氛围与空间",
-      text: "一辆车、一条隧道、一场雨或一种颜色，都可以比对白更早留在记忆里。空间本身也能承担叙事。",
+      text: "靠场景、声音和色彩营造氛围的游戏。",
       match: (g) => /FAR:|地铁|Metro|GRIS|ABZÛ|Outer Wilds|Control|控制|DEATH STRANDING|LIMBO|Ori|Hollow Knight|空洞骑士|Viewfinder|Gorogoa|Last Campfire|Monument Valley|Wavetale/i.test(g.name),
     },
-  ];
-
-  const voices = [
-    [1174180, "买了吃灰、玩不下去都没关系。有些游戏只是还没有等到真正想进入它的那一天。"],
-    [2531310, "没有人真正原谅了对方。大家做的，只是在复仇把一切烧光以后，尝试与自己和解。"],
-    [1811040, "时代在历史书里可能只是一行话，但对身处其中的人来说，那就是全部生活。"],
-    [609320, "总要学会怎么前进，不管是坐在车里，还是走在路上。"],
-    [287390, "了解得越多，越愿意珍惜；每一次善意，也是在重新审视此前的行为。"],
-    [1341820, "自我救赎或和解，也许正是大多数人终其一生反复经历的过程。"],
   ];
 
   function assetCandidates(id, kind = "hero") {
@@ -147,16 +193,10 @@
       card.append(image);
       const copy = document.createElement("div");
       copy.className = "memory-card-copy";
-      copy.innerHTML = `<span>${escapeHTML(item.label)}</span><h3>${escapeHTML(game.name)}</h3><h4>${escapeHTML(item.title)}</h4><p>${escapeHTML(item.text)}</p><div class="featured-game-links"><a href="${game.store}" target="_blank" rel="noopener">Steam ↗</a>${game.review ? `<a href="${game.review}" target="_blank" rel="noopener">完整评测 ↗</a>` : ""}</div>`;
+      copy.innerHTML = `<span>${escapeHTML(item.label)}</span><h3>${escapeHTML(game.name)}</h3><h4>${escapeHTML(item.title)}</h4><p class="review-excerpt" lang="zh-CN">${escapeHTML(item.text).replace(/\n/g, "<br>")}</p><div class="featured-game-links"><a href="${game.store}" target="_blank" rel="noopener">Steam ↗</a>${game.review ? `<a href="${game.review}" target="_blank" rel="noopener">完整评测 ↗</a>` : ""}</div>`;
       card.append(copy);
       container.append(card);
     });
-  }
-
-  function renderPrinciples() {
-    const container = document.querySelector("#principle-grid");
-    if (!container) return;
-    container.innerHTML = principles.map(([number, title, text, examples]) => `<article class="principle-card"><span>${number}</span><h3>${escapeHTML(title)}</h3><p>${escapeHTML(text)}</p><small>${escapeHTML(examples)}</small></article>`).join("");
   }
 
   function renderCategories() {
@@ -171,43 +211,6 @@
       card.innerHTML = `<span>${category.label}</span><h3>${escapeHTML(category.title)}</h3><p>${escapeHTML(category.text)}</p><div class="category-games">${links || '<small>暂未匹配到已玩作品</small>'}</div>`;
       container.append(card);
     });
-  }
-
-  function renderVoices() {
-    const container = document.querySelector("#voice-list");
-    if (!container) return;
-    container.innerHTML = "";
-    voices.forEach(([id, text]) => {
-      const game = byId.get(id);
-      if (!game || game.hours <= 0) return;
-      const article = document.createElement("article");
-      article.className = "review-story";
-      const image = makeImage(game, "hero");
-      image.className = "review-story-art";
-      article.append(image);
-      const copy = document.createElement("div");
-      copy.className = "review-story-copy";
-      copy.innerHTML = `<h3>${escapeHTML(game.name)}</h3><p class="voice-text">${escapeHTML(text)}</p>`;
-      article.append(copy);
-      const meta = document.createElement("div");
-      meta.className = "review-story-meta";
-      meta.innerHTML = game.review ? `<a href="${game.review}" target="_blank" rel="noopener">完整评测 ↗</a>` : `<a href="${game.store}" target="_blank" rel="noopener">Steam ↗</a>`;
-      article.append(meta);
-      container.append(article);
-    });
-  }
-
-  function refineStaticCopy() {
-    const heroTitle = document.querySelector(".games-hero h1");
-    if (heroTitle) heroTitle.innerHTML = "留下来的不是游玩时长，<br>而是游戏改变判断的方式。";
-    const heroLead = document.querySelector(".games-lead");
-    if (heroLead) heroLead.textContent = "真正值得记住的作品未必属于同一种类型：可能是一片愿意让人慢下来的开放世界，一段不怕制造冲突的线性叙事，也可能只是五六个小时、却把一种情绪讲得足够完整的独立游戏。这里记录的是它们为什么留下。";
-    const principleTitle = document.querySelector("#principles .games-section-heading h2");
-    if (principleTitle) principleTitle.textContent = "评价游戏时，更在意这些事情";
-    const archiveNote = document.querySelector("#archive-note");
-    if (archiveNote) archiveNote.textContent = "背景循环只使用已经实际游玩过的游戏。重点作品、分类和文字判断独立维护，不会因游玩时间变化而自动改写。";
-    const closingTitle = document.querySelector(".games-closing h2");
-    if (closingTitle) closingTitle.textContent = "继续记录判断，而不只是增加清单。";
   }
 
   function setupBackdrop() {
@@ -226,6 +229,7 @@
       if (heroPool[1]) assignAsset(layers[1], heroPool[1], "hero", true);
       if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         window.gameHeroTimer = window.setInterval(() => {
+          if (document.querySelector("#game-world-backdrop")?.classList.contains("motion-paused")) return;
           index = (index + 1) % heroPool.length;
           const nextLayer = 1 - active;
           const nextGame = heroPool[index];
@@ -279,11 +283,8 @@
     }
   }
 
-  document.documentElement.dataset.gameRevision = "20260806-2315";
-  refineStaticCopy();
+  document.documentElement.dataset.gameRevision = "20260915";
   renderFeatured();
-  renderPrinciples();
   renderCategories();
-  renderVoices();
   setupBackdrop();
 })();

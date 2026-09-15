@@ -12,7 +12,7 @@ permalink: /manage/
   <section class="content-hero">
     <p class="home-kicker">SITE MANAGEMENT</p>
     <h1>网站维护入口</h1>
-    <p>这里不是公开后台，也不会保存密码。它把最常用的维护操作集中起来：登录 GitHub 后，你可以自己上传主页图片、修改注脚和新增文章。</p>
+    <p>登录 GitHub 后，可通过下面的入口上传主页图片、修改图片说明和新增文章。</p>
   </section>
 
   <section class="manage-grid">
@@ -45,7 +45,7 @@ permalink: /manage/
   alt: 用一句话客观描述图片内容
   size: standard
   visible: true</code></pre>
-    <p><code>size</code> 可以使用 <code>standard</code>、<code>wide</code> 或 <code>tall</code>。提交后 GitHub Pages 通常会在几分钟内更新。</p>
+    <p><code>size</code> 可以使用 <code>standard</code>、<code>wide</code> 或 <code>tall</code>。提交后，等 GitHub Pages 完成构建，网页就会更新。</p>
   </section>
 
   <section class="content-section manage-guide">

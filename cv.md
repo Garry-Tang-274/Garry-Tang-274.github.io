@@ -75,10 +75,10 @@ permalink: /cv/
   <section class="cv-section">
     <h2>Selected public projects</h2>
     <div class="cv-project-list">
-      <p><a href="https://github.com/Garry-Tang-274/AI-Lightroom"><strong>AI Lightroom</strong></a> — a Windows desktop editor for non-destructive traditional photo adjustments with optional natural-language AI colour-grading plans and pluggable providers. Supported edits are rendered locally rather than replacing the photograph.</p>
+      <p><a href="https://github.com/Garry-Tang-274/AI-Lightroom"><strong>AI Lightroom</strong></a> — a Windows photo editor with manual adjustments, optional AI editing suggestions, and support for local and cloud models.</p>
       <p><a href="https://github.com/Garry-Tang-274/bioinformatics-paper-reading-workflow"><strong>Bioinformatics Paper Reading Workflow</strong></a> — reading templates and methodological checklists.</p>
       <p><a href="https://github.com/Garry-Tang-274/windows-remote-research-playbook"><strong>Windows Remote Research Playbook</strong></a> — notes on remote research environments and troubleshooting.</p>
-      <p><a href="https://github.com/Garry-Tang-274/student-calendar-coordinator"><strong>Student Calendar Coordinator</strong></a> — a human-in-the-loop scheduling workflow.</p>
+      <p><a href="https://github.com/Garry-Tang-274/student-calendar-coordinator"><strong>Student Calendar Coordinator</strong></a> — a scheduling tool that lets users review a proposed schedule before applying it.</p>
       <p><a href="https://github.com/Garry-Tang-274/battlefield-web-fps-prototype"><strong>Archipelago Frontline Web FPS</strong></a> — a browser prototype built with JavaScript and Three.js.</p>
     </div>
   </section>

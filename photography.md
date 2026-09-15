@@ -12,8 +12,8 @@ permalink: /photography/
   <section class="page-hero photography-hero">
     <p class="page-kicker">PHOTOGRAPHY · 摄影</p>
     <h1>Photography</h1>
-    <p class="lead-cn">Street scenes, people, landscapes, architecture, and aerial views photographed between 2023 and 2026. I tend to look for small subjects inside larger environments, and for places where weather, distance, or scale changes how a scene feels.</p>
-    <p class="zh-secondary">2023—2026 年间拍摄的城市、人、风景、建筑与航拍作品。更常关注大环境中的小主体，以及天气、距离和尺度怎样改变一幅画面的情绪。</p>
+    <p class="lead-cn">Street scenes, portraits, landscapes, architecture, and aerial photographs from 2023–2026.</p>
+    <p class="zh-secondary">2023—2026 年拍摄的街头、人物、风景、建筑与航拍作品。</p>
     <div class="page-actions">
       <a class="button primary" href="{{ '/' | relative_url }}">Home</a>
       <a class="button secondary" href="{{ '/ai-lightroom' | relative_url }}">Software</a>
@@ -26,7 +26,7 @@ permalink: /photography/
     <a href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" target="_blank" rel="noopener">
       <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou" loading="eager">
     </a>
-    <figcaption><strong>Qianjiang Century City · 钱江世纪城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II · Updated high-resolution web edition</span></figcaption>
+    <figcaption><strong>Qianjiang Century City · 钱江世纪城</strong><span>Hangzhou, Zhejiang · 2026 · Nikon Z6 II</span></figcaption>
   </figure>
 
   <div class="photo-grid-editorial">
@@ -40,7 +40,7 @@ permalink: /photography/
     </figure>
     <figure class="photo-card">
       <img src="{{ '/assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original' | relative_url }}" alt="A lone figure walking across a tidal flat in black and white" loading="lazy">
-      <figcaption><strong>Returning Across the Tidal Flat · 滩涂归途</strong><span>Haining, Zhejiang · 2025 · Nikon Z6 II · Updated edition</span></figcaption>
+      <figcaption><strong>Returning Across the Tidal Flat · 滩涂归途</strong><span>Haining, Zhejiang · 2025 · Nikon Z6 II</span></figcaption>
     </figure>
     <figure class="photo-card photo-wide">
       <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="A figure between rock formations in Xinjiang" loading="lazy">
@@ -82,8 +82,6 @@ permalink: /photography/
 
   <section class="gallery-notes">
     <h2>Recent additions · 新增作品</h2>
-    <p>New work added from the latest archive. Existing photographs and alternate exports are omitted, so this section extends the collection without repeating it.</p>
-    <p class="zh-secondary">从最新图档中加入的新作品。已展示过的同图版本与替代导出均已排除，避免重复出现。</p>
   </section>
 
   <div class="photo-grid-editorial">
@@ -92,10 +90,10 @@ permalink: /photography/
       <a href="{{ photo.image | relative_url }}" target="_blank" rel="noopener">
         <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
       </a>
-      <figcaption><strong>{{ photo.title }}</strong><span>Photography archive · 新增作品</span></figcaption>
+      <figcaption><strong>{{ photo.title }}</strong></figcaption>
     </figure>
     {% endfor %}
   </div>
 
-  <p class="privacy-note">Selected works are published from supplied originals where available; earlier works may retain privacy edits or web compression. · 如提供原始文件，本站以原始文件发布；较早作品可能保留隐私处理或网页版压缩。</p>
+  <p class="privacy-note">Some older photographs use compressed or privacy-edited copies. · 部分早期照片为压缩版，或做过隐私处理。</p>
 </div>
