@@ -23,7 +23,7 @@ description: Played games, Steam reviews, and the full game library.
   <div class="game-world-shade"></div>
 </div>
 
-<div class="games-shell" data-game-revision="20260915">
+<div class="games-shell" data-game-revision="20260927-random">
   <section class="games-hero">
     <div class="games-hero-copy">
       <p class="games-eyebrow">PLAYED WORLDS · 游戏档案</p>
@@ -108,4 +108,4 @@ description: Played games, Steam reviews, and the full game library.
 
 <script src="{{ '/assets/js/steam-games-data.js' | relative_url }}?v=20260915"></script>
 <script src="{{ '/assets/js/games.js' | relative_url }}?v=20260915"></script>
-<script src="{{ '/assets/js/games-perspective.js' | relative_url }}?v=20260915"></script>
+<script src="{{ '/assets/js/games-perspective.js' | relative_url }}?v=20260927-random"></script>
