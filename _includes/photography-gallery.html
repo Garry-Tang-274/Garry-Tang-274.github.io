@@ -1,0 +1,70 @@
+{% assign gallery_photos = site.data.photography %}
+{% if page.gallery_tag %}
+  {% assign gallery_photos = gallery_photos | where_exp: "photo", "photo.tags contains page.gallery_tag" %}
+{% endif %}
+{% assign categories = 'portrait:人像|culture:人文|landscape:风光|minimal:极简|urban:都市|nature:自然|documentary:纪实|military:军训' | split: '|' %}
+<div class="photography-gallery" id="photography-gallery" lang="zh-CN">
+  <header class="gallery-heading">
+    <div class="gallery-heading-copy">
+      <p class="gallery-eyebrow">PHOTOGRAPHY</p>
+      <h1>{{ page.gallery_label | default: '摄影' }}</h1>
+    </div>
+    <div class="gallery-tools">
+      <span class="gallery-count">{{ gallery_photos.size }} 张</span>
+      <button class="gallery-flow-toggle" id="gallery-flow-toggle" type="button" aria-pressed="false" hidden>
+        <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M7 4.5 14 10l-7 5.5z"/></svg>
+        <span>缓缓浏览</span>
+      </button>
+    </div>
+  </header>
+  <nav class="gallery-categories" aria-label="摄影分类">
+    <a href="{{ '/photography/' | relative_url }}"{% unless page.gallery_tag %} aria-current="page"{% endunless %}>全部<span>{{ site.data.photography.size }}</span></a>
+    {% for category in categories %}
+      {% assign category_parts = category | split: ':' %}
+      {% assign category_slug = category_parts[0] %}
+      {% assign category_photos = site.data.photography | where_exp: "photo", "photo.tags contains category_slug" %}
+      {% assign category_url = '/photography/' | append: category_slug | append: '/' %}
+      <a href="{{ category_url | relative_url }}"{% if page.gallery_tag == category_slug %} aria-current="page"{% endif %}>{{ category_parts[1] }}<span>{{ category_photos.size }}</span></a>
+    {% endfor %}
+  </nav>
+  <div class="gallery-collection">
+    {% assign previous_group = '__start' %}
+    {% for photo in gallery_photos %}
+      {% assign photo_group = photo.group | default: 'general' %}
+      {% if photo_group != previous_group %}
+        {% unless forloop.first %}</div>{% endunless %}
+        <div class="gallery-grid" data-group="{{ photo_group | escape }}" role="list" aria-label="{% if photo_group == 'military' %}军训照片{% else %}摄影作品{% endif %}">
+      {% endif %}
+      {% assign original_url = photo.original %}
+      {% unless original_url contains '://' %}{% assign original_url = original_url | relative_url %}{% endunless %}
+      {% assign thumb_url = photo.thumb %}
+      {% unless thumb_url contains '://' %}{% assign thumb_url = thumb_url | relative_url %}{% endunless %}
+      {% assign preview_url = photo.preview %}
+      {% unless preview_url contains '://' %}{% assign preview_url = preview_url | relative_url %}{% endunless %}
+      <figure class="gallery-photo" role="listitem" style="--photo-ratio: {{ photo.width }} / {{ photo.height }}; --photo-color: {{ photo.color | default: '#172333' }}; --photo-placeholder: url('{{ photo.placeholder }}')">
+        <a class="gallery-photo-link" href="{{ original_url | escape }}" target="_blank" rel="noopener" data-photo-id="{{ photo.id | escape }}" data-preview="{{ preview_url | escape }}" data-width="{{ photo.width }}" data-height="{{ photo.height }}"{% if photo.rawOriginal %} data-raw-original="{{ photo.rawOriginal | escape }}"{% endif %} aria-label="{{ photo.alt | escape }}，查看原图">
+          <img class="gallery-photo-image" src="{{ thumb_url | escape }}" srcset="{{ thumb_url | escape }} {{ photo.thumbWidth | default: 640 }}w, {{ preview_url | escape }} {{ photo.previewWidth | default: 1600 }}w" sizes="(min-width: 1760px) 18vw, (min-width: 1100px) 23vw, (min-width: 700px) 31vw, 48vw" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt | escape }}" loading="{% if forloop.index <= 8 %}eager{% else %}lazy{% endif %}" decoding="async"{% if forloop.index <= 4 %} fetchpriority="high"{% endif %}>
+          <span class="gallery-open-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></span>
+        </a>
+      </figure>
+      {% assign previous_group = photo_group %}
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  <p class="gallery-footnote">点击照片看原图。部分早期作品保留已有的压缩版或隐私处理版。</p>
+  <dialog class="gallery-lightbox" id="gallery-lightbox" aria-label="照片查看器">
+    <div class="lightbox-toolbar">
+      <span class="lightbox-counter" id="lightbox-counter"></span>
+      <span class="lightbox-resolution" id="lightbox-resolution"></span>
+      <a class="lightbox-raw" id="lightbox-raw" href="#" target="_blank" rel="noopener" hidden>下载 RAW</a>
+      <a class="lightbox-original" id="lightbox-original" href="#" target="_blank" rel="noopener">打开原图 <span aria-hidden="true">↗</span></a>
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭照片（Esc）" autofocus><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="lightbox-stage" id="lightbox-stage">
+      <button class="lightbox-arrow lightbox-previous" id="lightbox-previous" type="button" aria-label="上一张照片"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></button>
+      <div class="lightbox-image-wrap" id="lightbox-image-wrap"><img id="lightbox-image" alt="" referrerpolicy="no-referrer"></div>
+      <button class="lightbox-arrow lightbox-next" id="lightbox-next" type="button" aria-label="下一张照片"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg></button>
+    </div>
+    <p class="lightbox-status" id="lightbox-status" role="status" aria-live="polite"></p>
+  </dialog>
+</div>
