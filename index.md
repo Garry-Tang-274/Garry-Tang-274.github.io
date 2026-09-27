@@ -21,8 +21,9 @@ title: Tang Zhi · 唐直
       </div>
     </div>
     <figure class="home-hero-photo">
-      <img src="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" alt="A figure standing between rock formations in Xinjiang">
-      <figcaption>Figure Between Rocks · 岩壁之间 · Xinjiang, 2023</figcaption>
+      <a href="{{ '/assets/photography/hero-rock-silhouette.webp?v=20260806-hq' | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ '/assets/photography/gallery/photo-861ac5912ac5d4f9-1600.webp' | relative_url }}" alt="A figure standing between rock formations in Xinjiang" width="2048" height="944" fetchpriority="high" decoding="async">
+      </a>
     </figure>
   </section>
 
@@ -81,12 +82,8 @@ title: Tang Zhi · 唐直
   </section>
 
   <section class="home-section home-panorama-section">
-    <div class="home-section-head">
-      <div><p class="home-kicker">FEATURED PANORAMA</p><h2>Qianjiang Century City · 钱江世纪城</h2></div>
-      <p>Hangzhou, Zhejiang · 2026 · Nikon Z6 II</p>
-    </div>
     <a class="home-panorama" href="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/photography/featured/hangzhou-qianjiang-panorama-2026-original.jpg?v=20260812-original' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou">
+      <img src="{{ '/assets/photography/gallery/photo-3953d6e4858d3e71-1600.webp' | relative_url }}" alt="Qianjiang Century City panorama in Hangzhou" width="21494" height="3663" loading="lazy" decoding="async">
     </a>
   </section>
 
@@ -99,9 +96,8 @@ title: Tang Zhi · 唐直
         {% unless photo.visible == false %}
         <figure class="home-gallery-item {{ photo.size | default: 'standard' }}">
           <a href="{{ photo.original | default: photo.image | relative_url }}" target="_blank" rel="noopener">
-            <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
+            <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" width="{{ photo.width }}" height="{{ photo.height }}" loading="lazy" decoding="async">
           </a>
-          <figcaption><strong>{{ photo.title }}</strong><span>{{ photo.caption }}</span></figcaption>
         </figure>
         {% endunless %}
       {% endfor %}

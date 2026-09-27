@@ -1,42 +1,42 @@
-# Homepage selected photography. English is primary; Chinese remains in the title where useful.
+# Homepage selected photography. Photo descriptions are accessibility text only.
 # Set visible: false to hide an item. size may be standard, wide, or tall.
 
-- image: /assets/photography/featured/guangxi-man-cormorant-2026-original.jpg?v=20260812-original
+- image: /assets/photography/gallery/photo-23eaa0f8c0f6f3bc-1600.webp
   original: /assets/photography/featured/guangxi-man-cormorant-2026-original.jpg?v=20260812-original
-  title: Man and Cormorant · 人与鸬鹚
-  caption: Guangxi · 2026 · Nikon Z6 II
   alt: A seated man in a straw hat beside a cormorant in Guangxi
+  width: 4024
+  height: 6048
   size: tall
   visible: true
 
-- image: /assets/photography/featured/yunnan-hani-terraces-village-2023-original.jpg?v=20260812-original
+- image: /assets/photography/gallery/photo-a2c38db5e1131fcf-1600.webp
   original: /assets/photography/featured/yunnan-hani-terraces-village-2023-original.jpg?v=20260812-original
-  title: Clouds over the Hani Terraces · 云上哈尼梯田
-  caption: Honghe, Yunnan · 2023 · DJI Mini 2
   alt: A mountain village and Hani rice terraces surrounded by low clouds in Honghe, Yunnan
+  width: 8062
+  height: 4536
   size: wide
   visible: true
 
-- image: /assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original
+- image: /assets/photography/gallery/photo-5eee9e3d26286cd6-1600.webp
   original: /assets/photography/featured/haining-tidal-flat-worker-2025-original.jpg?v=20260812-original
-  title: Returning Across the Tidal Flat · 滩涂归途
-  caption: Haining, Zhejiang · 2025 · Nikon Z6 II
   alt: A lone person walking across a tidal flat in a minimalist black-and-white scene
+  width: 4024
+  height: 6048
   size: tall
   visible: true
 
-- image: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
+- image: /assets/photography/gallery/photo-d330e4c827eee5ca-1600.webp
   original: /assets/photography/chengdu-rain-couple.webp?v=20260806-hq
-  title: Rain Crossing · 雨中过街
-  caption: Chengdu, Sichuan · 2026 · Nikon Z6 II
   alt: Two people crossing a rainy street under one umbrella in Chengdu
+  width: 1536
+  height: 1024
   size: standard
   visible: true
 
-- image: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
-  original: /assets/photography/yangshuo-xianggong-river.webp?v=20260806-hq
-  title: Xianggong Mountain · 相公山
-  caption: Yangshuo, Guangxi · 2025 · DJI Mini 4 Pro
+- image: /assets/photography/gallery/photo-63103f81820d87b1-1600.webp
+  original: https://github.com/Garry-Tang-274/Garry-Tang-274.github.io/releases/download/gallery-originals-20260927/photo-63103f81820d87b1.png
   alt: The Li River and karst mountains seen from Xianggong Mountain
+  width: 8242
+  height: 4600
   size: wide
   visible: true
