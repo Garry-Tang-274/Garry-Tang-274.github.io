@@ -213,6 +213,30 @@
     });
   }
 
+  function shuffledGames(pool, previousId = null) {
+    const shuffled = [...pool];
+    // Fresh randomness on every shuffle; never save or seed a repeating order.
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    if (shuffled.length > 1 && shuffled[0].id === previousId) {
+      const j = 1 + Math.floor(Math.random() * (shuffled.length - 1));
+      [shuffled[0], shuffled[j]] = [shuffled[j], shuffled[0]];
+    }
+    return shuffled;
+  }
+
+  function gameDraw(pool, previousId = null) {
+    let bag = [];
+    return () => {
+      if (!bag.length) bag = shuffledGames(pool, previousId);
+      const game = bag.shift();
+      if (game) previousId = game.id;
+      return game;
+    };
+  }
+
   function setupBackdrop() {
     const layers = [...document.querySelectorAll(".hero-art-layer")];
     const preferredIds = [1174180, 1888930, 2531310, 1811040, 683320, 609320, 2358720, 287390, 911400, 1341820, 1238810, 2483190, 812140, 582160, 750920, 753640, 1449560, 1222140, 870780, 1659420, 205100, 1057090, 367520, 1086940, 2183900, 292030];
@@ -220,45 +244,72 @@
     const remaining = playedGames.filter((game) => !preferred.some((item) => item.id === game.id)).sort((a, b) => b.hours - a.hours).slice(0, 12);
     const heroPool = [...preferred, ...remaining];
 
+    const backdrop = document.querySelector("#game-world-backdrop");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const motionPaused = () => backdrop?.classList.contains("motion-paused") || reducedMotion.matches || document.hidden;
+    const lastHeroKey = "games:last-backdrop-id";
+    let previousHeroId = null;
+    // Remember only the last image, not an order, so a reload starts elsewhere.
+    try { previousHeroId = Number(window.sessionStorage.getItem(lastHeroKey)) || null; } catch { /* Storage may be unavailable. */ }
+
     if (window.gameHeroTimer) window.clearInterval(window.gameHeroTimer);
     if (layers.length >= 2 && heroPool.length) {
-      let index = 0;
+      const drawHero = gameDraw(heroPool, previousHeroId);
       let active = 0;
-      assignAsset(layers[0], heroPool[0], "hero", true);
-      layers[0].classList.add("is-active");
-      if (heroPool[1]) assignAsset(layers[1], heroPool[1], "hero", true);
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        window.gameHeroTimer = window.setInterval(() => {
-          if (document.querySelector("#game-world-backdrop")?.classList.contains("motion-paused")) return;
-          index = (index + 1) % heroPool.length;
-          const nextLayer = 1 - active;
-          const nextGame = heroPool[index];
-          const preload = new Image();
-          const urls = assetCandidates(nextGame.id, "hero");
-          let cursor = 0;
-          const next = () => { if (cursor < urls.length) preload.src = urls[cursor++]; };
-          preload.onload = () => {
-            layers[nextLayer].src = preload.src;
-            layers[nextLayer].style.objectPosition = focalPositions.get(nextGame.id) || "50% 50%";
-            layers[nextLayer].classList.add("is-active");
-            layers[active].classList.remove("is-active");
-            active = nextLayer;
-          };
-          preload.onerror = next;
-          next();
-        }, 7600);
-      }
+      let currentId = null;
+      let loading = false;
+      let initialFailures = 0;
+      const loadHero = () => {
+        if (loading || (currentId !== null && motionPaused())) return;
+        let nextGame = drawHero();
+        if (heroPool.length > 1 && nextGame.id === currentId) nextGame = drawHero();
+        if (nextGame.id === currentId) return;
+        const preload = new Image();
+        const urls = assetCandidates(nextGame.id, "hero");
+        let cursor = 0;
+        loading = true;
+        preload.referrerPolicy = "no-referrer";
+        preload.decoding = "async";
+        const next = () => {
+          if (cursor < urls.length) {
+            preload.src = urls[cursor++];
+          } else {
+            loading = false;
+            // Keep the current image on failure; try another if none has loaded yet.
+            if (currentId === null && ++initialFailures < heroPool.length) loadHero();
+          }
+        };
+        preload.onload = () => {
+          loading = false;
+          if (currentId !== null && motionPaused()) return;
+          const nextLayer = currentId === null ? active : 1 - active;
+          layers[nextLayer].referrerPolicy = "no-referrer";
+          layers[nextLayer].src = preload.src;
+          layers[nextLayer].alt = nextGame.name;
+          layers[nextLayer].dataset.gameId = String(nextGame.id);
+          layers[nextLayer].style.objectPosition = focalPositions.get(nextGame.id) || "50% 50%";
+          if (nextLayer !== active) layers[active].classList.remove("is-active");
+          layers[nextLayer].classList.add("is-active");
+          active = nextLayer;
+          currentId = nextGame.id;
+          try { window.sessionStorage.setItem(lastHeroKey, String(currentId)); } catch { /* Random rotation works without storage. */ }
+        };
+        preload.onerror = next;
+        next();
+      };
+      loadHero();
+      if (!reducedMotion.matches && heroPool.length > 1) window.gameHeroTimer = window.setInterval(loadHero, 7600);
     }
 
     const oldTrack = document.querySelector("#game-cover-track");
     if (!oldTrack || !playedGames.length) return;
     const track = oldTrack.cloneNode(false);
     oldTrack.replaceWith(track);
-    const ordered = [...playedGames].sort((a, b) => b.hours - a.hours || a.index - b.index);
-    const batchSize = Math.min(20, ordered.length);
-    let offset = 0;
+    const batchSize = Math.min(20, playedGames.length);
+    let previousBatchStart = null;
     const renderBatch = () => {
-      const batch = Array.from({ length: batchSize }, (_, i) => ordered[(offset + i) % ordered.length]);
+      const batch = shuffledGames(playedGames, previousBatchStart).slice(0, batchSize);
+      previousBatchStart = batch[0].id;
       track.innerHTML = "";
       for (let copy = 0; copy < 2; copy += 1) {
         batch.forEach((game) => {
@@ -272,9 +323,9 @@
       }
     };
     renderBatch();
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!reducedMotion.matches) {
       track.addEventListener("animationiteration", () => {
-        offset = (offset + batchSize) % ordered.length;
+        if (motionPaused()) return;
         track.style.animation = "none";
         renderBatch();
         void track.offsetWidth;
@@ -283,7 +334,7 @@
     }
   }
 
-  document.documentElement.dataset.gameRevision = "20260915";
+  document.documentElement.dataset.gameRevision = "20260927-random";
   renderFeatured();
   renderCategories();
   setupBackdrop();
