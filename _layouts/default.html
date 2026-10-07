@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if site.migration_target %}
+  <link rel="canonical" href="{{ site.migration_target }}{{ page.url }}">
+  <meta http-equiv="refresh" content="0;url={{ site.migration_target }}{{ page.url }}">
+  <script>
+    location.replace({{ site.migration_target | jsonify }} + location.pathname + location.search + location.hash);
+  </script>
+  {% endif %}
   <meta name="theme-color" content="#07111f">
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <title>{{ page.title | default: site.title }}</title>
@@ -42,6 +49,9 @@
   {% endif %}
 </head>
 <body>
+  {% if site.migration_target %}
+  <noscript><p style="padding:20px;text-align:center">网站已迁移：<a href="{{ site.migration_target }}{{ page.url }}">前往新站</a>。</p></noscript>
+  {% endif %}
   <header class="site-header">
     <div class="site-nav">
       <a class="site-brand" href="{{ '/' | relative_url }}">
