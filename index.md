@@ -13,8 +13,8 @@ title: Tang Zhi · 唐直
     <div class="home-hero-copy">
       <p class="home-kicker">PERSONAL WEBSITE · 个人网站</p>
       <h1>Tang Zhi <span>唐直</span></h1>
-      <p class="home-lead">Biomedical Informatics undergraduate. Research projects, photographs, software, music, game reviews, and essays.</p>
-      <p class="zh-secondary">生物医学信息学本科生。这里有科研项目、摄影作品、自己做的软件，以及音乐、游戏和日常随笔。</p>
+      <p class="home-lead">Biomedical Informatics undergraduate. I work on TCR sequence analysis, build small tools, and take a lot of photographs.</p>
+      <p class="zh-secondary">生物医学信息学本科生。平时做 TCR 序列分析，也写工具、拍照，顺手把值得留下的东西放在这里。</p>
       <div class="home-actions">
         <a class="button primary" href="#rooms">Explore the site</a>
         <a class="button secondary" href="{{ '/notes' | relative_url }}">Notes · 随笔</a>
@@ -34,15 +34,15 @@ title: Tang Zhi · 唐直
       <p class="zh-secondary">目前在做什么</p>
     </div>
     <div class="home-intro-copy">
-      <p>My current research looks at TCR alpha–beta pairing. I compare sequence models, check the data for errors and leakage, and test whether the results hold under different controls.</p>
-      <p class="zh-secondary">目前在做 TCR α–β 链配对研究，比较序列模型，检查数据质量与信息泄漏，并通过不同的对照检验结果。</p>
+      <p>Most of my research time is going into TCR alpha–beta pairing. I spend a lot of it cleaning data, setting up fair comparisons, and checking whether a model is learning pairing information or something easier.</p>
+      <p class="zh-secondary">现在主要做 TCR α–β 链配对。很多时间其实花在清数据、做对照和排查泄漏上，而不只是训练模型。</p>
     </div>
   </section>
 
   <section class="home-section" id="current-build">
     <div class="home-section-head">
       <div><p class="home-kicker">CURRENT BUILD · 最近开发</p><h2>AI Lightroom</h2></div>
-      <p>A Windows photo editor with manual controls and optional AI editing suggestions.</p>
+      <p>The project I have been working on most recently.</p>
     </div>
     <div class="room-grid">
       <a class="room-card room-photo" href="{{ '/ai-lightroom' | relative_url }}">
@@ -50,10 +50,28 @@ title: Tang Zhi · 唐直
         <div>
           <small>WINDOWS · PHOTO EDITING · OPEN SOURCE</small>
           <h3>AI Lightroom</h3>
-          <p>Adjust exposure, colour, curves, and masks by hand, or describe the changes you want and let AI suggest settings. Edits can be revised without changing the original file.</p>
-          <p class="zh-secondary">可以手动调整曝光、色彩、曲线和蒙版，也可以用文字描述效果，让 AI 建议参数。调整随时可以修改，原始文件保留。</p>
+          <p>A Windows photo editor with the controls I actually use—exposure, colour, curves, HSL, masks, history and export. The prompt box is optional: it turns a description into editable settings rather than replacing the photograph.</p>
+          <p class="zh-secondary">一个自己在用的 Windows 照片编辑器。常规调色都能手动做，也可以用文字生成一组还能继续修改的参数。</p>
         </div>
         <b>Open project page ↗</b>
+      </a>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="home-section-head">
+      <div><p class="home-kicker">RECENT WORK</p><h2>A few things I keep using</h2></div>
+      <p class="zh-secondary">最近还在持续维护的几个小项目。</p>
+    </div>
+    <div class="room-grid">
+      <a class="room-card" href="https://github.com/Garry-Tang-274/bioinformatics-paper-reading-workflow">
+        <span>01</span><div><small>RESEARCH</small><h3>Paper Reading Workflow</h3><p>Checklists for reading methods papers, checking baselines and deciding what is worth reproducing.</p></div><b>GitHub ↗</b>
+      </a>
+      <a class="room-card" href="https://github.com/Garry-Tang-274/windows-remote-research-playbook">
+        <span>02</span><div><small>TOOLS</small><h3>Remote Research Playbook</h3><p>Notes from SSH, VPN, TUN, proxy and remote-development problems I have actually run into.</p></div><b>GitHub ↗</b>
+      </a>
+      <a class="room-card" href="https://github.com/Garry-Tang-274/student-calendar-coordinator">
+        <span>03</span><div><small>WORKFLOW</small><h3>Calendar Coordinator</h3><p>Rules for keeping mail, Blackboard updates, meetings and deadlines in one cleaner schedule.</p></div><b>GitHub ↗</b>
       </a>
     </div>
   </section>
