@@ -41,19 +41,18 @@ title: Tang Zhi · 唐直
 
   <section class="home-section" id="current-build">
     <div class="home-section-head">
-      <div><p class="home-kicker">CURRENT BUILD · 最近开发</p><h2>AI Lightroom</h2></div>
-      <p>The project I have been working on most recently.</p>
+      <div><p class="home-kicker">RECENT BUILDS · 最近开发</p><h2>Photographs, tools, and a small daily list</h2></div>
+      <p class="zh-secondary">把最近做成、也在使用的东西放在这里。</p>
     </div>
     <div class="room-grid">
-      <a class="room-card room-photo" href="{{ '/ai-lightroom' | relative_url }}">
-        <span>AI</span>
-        <div>
-          <small>WINDOWS · PHOTO EDITING · OPEN SOURCE</small>
-          <h3>AI Lightroom</h3>
-          <p>A Windows photo editor with the controls I actually use—exposure, colour, curves, HSL, masks, history and export. The prompt box is optional: it turns a description into editable settings rather than replacing the photograph.</p>
-          <p class="zh-secondary">一个自己在用的 Windows 照片编辑器。常规调色都能手动做，也可以用文字生成一组还能继续修改的参数。</p>
-        </div>
-        <b>Open project page ↗</b>
+      <a class="room-card room-photo" href="https://garry-tang-274.github.io/light-between-gallery/">
+        <span>01</span><div><small>PHOTOGRAPHY · THREE.JS</small><h3>光隙 · LIGHT BETWEEN</h3><p>A continuous 3D photography exhibition, with an image atlas and contact sheet. Three previously published photographs make up this open-source demo.</p><p class="zh-secondary">把照片放进可以漫游的空间。公开演示附带三张作品，也可以换成自己的照片。</p></div><b>Enter the exhibition ↗</b>
+      </a>
+      <a class="room-card" href="https://garry-tang-274.github.io/today-task-board/">
+        <span>02</span><div><small>OFFLINE · SINGLE HTML FILE</small><h3>一页 · Today Task Board</h3><p>A browser-local list for today’s tasks, with priorities, dates and JSON backup. Download one HTML file to use it offline.</p><p class="zh-secondary">先看今天要做的事。没有账号，任务保存在当前浏览器里。</p></div><b>Open the task board ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/ai-lightroom' | relative_url }}">
+        <span>03</span><div><small>WINDOWS · PHOTO EDITING</small><h3>AI Lightroom</h3><p>Exposure, colour, curves, HSL, masks, history and full-resolution export. Text instructions are an optional starting point for edits.</p><p class="zh-secondary">常规调色都能手动做，也可以用文字生成一组还能继续修改的参数。</p></div><b>Open project page ↗</b>
       </a>
     </div>
   </section>
@@ -64,14 +63,23 @@ title: Tang Zhi · 唐直
       <p class="zh-secondary">最近还在持续维护的几个小项目。</p>
     </div>
     <div class="room-grid">
+      <a class="room-card" href="https://github.com/Garry-Tang-274/Blackboard-AutoSync">
+        <span>01</span><div><small>COURSE MATERIALS · WINDOWS</small><h3>Blackboard AutoSync</h3><p>Incremental downloads and course selection, now with an optional class-date window and study-material queue.</p></div><b>GitHub ↗</b>
+      </a>
+      <a class="room-card" href="https://garry-tang-274.github.io/battlefield-web-fps-prototype/">
+        <span>02</span><div><small>BROWSER GAME</small><h3>Archipelago Frontline</h3><p>A single-player island-conquest FPS with computer-controlled teams, five weapons and a scout vehicle.</p></div><b>Play ↗</b>
+      </a>
+      <a class="room-card" href="{{ '/toybox/' | relative_url }}">
+        <span>03</span><div><small>INTERACTIVE EXPERIMENTS</small><h3>怪玩具盒 · Toybox</h3><p>Eighteen small games, drawing tools, puzzles and simulations in one page.</p></div><b>Open Toybox ↗</b>
+      </a>
       <a class="room-card" href="https://github.com/Garry-Tang-274/bioinformatics-paper-reading-workflow">
-        <span>01</span><div><small>RESEARCH</small><h3>Paper Reading Workflow</h3><p>Checklists for reading methods papers, checking baselines and deciding what is worth reproducing.</p></div><b>GitHub ↗</b>
+        <span>04</span><div><small>RESEARCH</small><h3>Paper Reading Workflow</h3><p>Checklists for reading methods papers, checking baselines and deciding what is worth reproducing.</p></div><b>GitHub ↗</b>
       </a>
       <a class="room-card" href="https://github.com/Garry-Tang-274/windows-remote-research-playbook">
-        <span>02</span><div><small>TOOLS</small><h3>Remote Research Playbook</h3><p>Notes from SSH, VPN, TUN, proxy and remote-development problems I have actually run into.</p></div><b>GitHub ↗</b>
+        <span>05</span><div><small>TOOLS</small><h3>Remote Research Playbook</h3><p>Notes from SSH, VPN, TUN, proxy and remote-development problems I have actually run into.</p></div><b>GitHub ↗</b>
       </a>
       <a class="room-card" href="https://github.com/Garry-Tang-274/student-calendar-coordinator">
-        <span>03</span><div><small>WORKFLOW</small><h3>Calendar Coordinator</h3><p>Rules for keeping mail, Blackboard updates, meetings and deadlines in one cleaner schedule.</p></div><b>GitHub ↗</b>
+        <span>06</span><div><small>WORKFLOW</small><h3>Calendar Coordinator</h3><p>Rules for keeping mail, Blackboard updates, meetings and deadlines in one cleaner schedule.</p></div><b>GitHub ↗</b>
       </a>
     </div>
   </section>

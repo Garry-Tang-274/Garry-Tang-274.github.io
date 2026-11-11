@@ -1,11 +1,12 @@
 # Tang Zhi Personal Website
 
-This repository powers the public website at `https://garry-tang-274.github.io`.
+This repository contains the GitHub Pages source at https://garry-tang-274.github.io. Its default layout currently redirects visitors to the existing personal site configured by `migration_target` in `_config.yml`; that destination is maintained separately. Updating these sources does not update that separately hosted site.
 
 ## Site structure
 
 - `/` — personal homepage and selected work
 - `/ai-lightroom/` — AI Lightroom project page
+- `/toybox/` — eighteen interactive browser experiments
 - `/photography/` — photography gallery
 - `/music/` — music interests
 - `/games/` — game records
@@ -52,3 +53,7 @@ The newest three posts appear on the homepage; all posts appear under `/notes/`.
 ## Public-content boundary
 
 The site may link to public repositories and a public academic CV, but it should not expose private application records, unpublished research data, credentials, server details, private calendar identifiers, or raw personal contact information beyond addresses intentionally published for contact.
+
+## Other public builds
+
+The homepage links to [Light Between](https://github.com/Garry-Tang-274/light-between-gallery), [Today Task Board](https://github.com/Garry-Tang-274/today-task-board), [Blackboard AutoSync](https://github.com/Garry-Tang-274/Blackboard-AutoSync) and [Archipelago Frontline](https://github.com/Garry-Tang-274/battlefield-web-fps-prototype). These have separate repositories; the gallery, board and FPS demos are served from their own GitHub Pages paths.
